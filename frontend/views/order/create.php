@@ -1,11 +1,11 @@
 <?php
 
-    $this->title = 'Create Ledger';
-    $this->params['breadcrumbs'][] = ['label' => 'Ledger', 'url' => ['index']];
+    $this->title = 'Create Order';
+    $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="ledger-create">
+<div class="order-create">
 
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
 
