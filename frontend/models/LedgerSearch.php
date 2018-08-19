@@ -27,9 +27,9 @@ class LedgerSearch extends Ledger {
 
         $this->load($params);
 
-        if(!$this->validate()) {
-            return $dataProvider;
-        }
+        // if(!$this->validate()) {
+        //     return $dataProvider;
+        // }
 
         return $dataProvider;
     }
