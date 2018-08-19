@@ -1,11 +1,11 @@
 <?php
 
-namespace app\models;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Ledger;
+use frontend\models\Ledger;
 
 class LedgerSearch extends Ledger {
 

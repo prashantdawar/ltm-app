@@ -1,7 +1,11 @@
 
-<?= $this->title = $model->name; ?>
+<?php
+    $this->title = $model->id;
+    $this->params['breadcrumbs'][] = ['label' => 'Ledger', 'url' => [' ']];
+    $this->params['breadcrumbs'][] = $this->title;
+?>
 <div class="items-view">
-    <h1><?= Html::encode($this->title); ?></h1>
+    <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
     <p>
         <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
         <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->id], [

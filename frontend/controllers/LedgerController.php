@@ -3,8 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\Ledger;
-use app\models\LedgerSearch;
+use frontend\models\Ledger;
+use frontend\models\LedgerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
