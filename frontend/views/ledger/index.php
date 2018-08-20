@@ -18,17 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
                 'party_id',
                 'order_id',
                 'amount',
                 'mode_of_payment',
                 'created_at',
-                'status'
+                'status',
+
+                ['class' => 'yii\grid\ActionColumn'],
             ]
         ]);
     

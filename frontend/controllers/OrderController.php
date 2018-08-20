@@ -90,6 +90,7 @@ class OrderController extends \yii\web\Controller
              return $this->redirect(['view', 'id' => $orderModel->id]);
          }
 
+        // var_dump($orderModel->errors); die;
          return $this->render('create',[
              'model' => $orderModel,
              'data' => $this->dataAllItems()

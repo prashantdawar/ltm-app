@@ -21,6 +21,7 @@
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
             'attributes' => [
+                'party_id',
                 [
                     'attribute' => 'id',
                     'label' => 'Item name',

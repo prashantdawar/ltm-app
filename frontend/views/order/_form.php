@@ -1,6 +1,8 @@
 
 <div class="order-form">
     <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'party_id')->textInput(); ?>
         <?php
             echo $form->field($model, 'item_id')->label('Item Name')->widget(\kartik\select2\Select2::classname(), [
             'data' => $data,
