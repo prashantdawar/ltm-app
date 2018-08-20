@@ -53,6 +53,22 @@ class LedgerController extends Controller
       }
 
       /**
+       * Find the ledger model based on its primary key value.
+       * If the model is not found, a 404 HTTP exception will be thrown.
+       * 
+       */
+
+      protected function findModel($id){
+
+        if(($model = Ledger::findOne($id)) !== null){
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requestes page does not exist.');
+
+        }
+
+      /**
        * Creates a new ledger entry.
        * Redirects if saved succesfully.
        */
@@ -69,19 +85,21 @@ class LedgerController extends Controller
         ]);
       }
 
-      
       /**
-       * Find the ledger model based on its primary key value.
-       * If the model is not found, a 404 HTTP exception will be thrown.
+       * Updates an existing ledger model.
        * 
        */
 
-       protected function findModel($id){
+       public function actionUpdate($id){
 
-            if(($model = Ledger::findOne($id)) !== null){
-                return $model;
+            $model = $this->findModel($id);
+
+            if(($model->load(Yii::$app->request->post())) && $model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
             }
 
-            throw new NotFoundHttpException('The requestes page does not exist.');
+            return $this->render('update',[
+                'model' => $model
+            ]);
        }
 }
