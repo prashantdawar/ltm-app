@@ -1,5 +1,4 @@
-<?php `git pull origin master`;
-    `composer update`;
-?>
+<?php `git pull origin master`; ?>
+<?php  `composer update`; ?>
 
 "Pulling from git"
