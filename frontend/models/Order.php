@@ -34,8 +34,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id', 'amount', 'mrp', 'created_at', 'updated_at'], 'required'],
+            [[ 'amount', 'mrp', 'created_at', 'updated_at'], 'required'],
+            ['item_id', 'required','message' => 'Item Name cannot be blank'],
             [['item_id', 'amount', 'mrp', 'tax_rate', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            
         ];
     }
 
