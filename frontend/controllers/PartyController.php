@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
-class OrderController extends \yii\web\Controller
-{
+class PartyController extends \yii\web\Controller {
+
     /**
      * {@inheritdoc}
      */
@@ -21,23 +21,23 @@ class OrderController extends \yii\web\Controller
 
     /**
      * 
-     * List all orders
+     * List all parties
      */
-    public function actionIndex()
-    {
-        $query = \frontend\models\Order::find();
+    public function actionIndex(){
+
+        $query = \frontend\models\Party::find();
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query
         ]);
-        
-        return $this->render('index',[
+
+        return $this->render('index', [
             'dataProvider' => $dataProvider
         ]);
     }
 
     /**
-     * Display single order entry
+     * Display a single party entry.
      */
     public function actionView($id){
         
@@ -47,7 +47,8 @@ class OrderController extends \yii\web\Controller
     }
 
     protected function findModel($id){
-        if(($model = \frontend\models\Order::findOne($id)) !== null){
+
+        if(($model = \frontend\models\Party::findOne($id)) !== null){
             return $model;
         }
 
@@ -55,27 +56,24 @@ class OrderController extends \yii\web\Controller
     }
 
     /**
-     * Create new order entry.
-     * Redirects if saved succesfully
+     * Create a new party entry
      */
 
      public function actionCreate(){
-         $model = new \frontend\models\Order();
+         $model = new \frontend\models\Party();
 
-         if($model->load(\Yii::$app->request->post()) && $model->save()){
+         if(($model->load(\Yii::$app->request->post())) && $model->save()){
              return $this->redirect(['view', 'id' => $model->id]);
          }
 
          return $this->render('create',[
-             'model' => $model
+            'model' => $model
          ]);
      }
 
      /**
-       * Updates an existing order model.
-       * 
-       */
-
+      * Update and existing party model
+      */
       public function actionUpdate($id){
 
         $model = $this->findModel($id);
@@ -87,5 +85,5 @@ class OrderController extends \yii\web\Controller
         return $this->render('update',[
             'model' => $model
         ]);
-   }
+      }
 }
