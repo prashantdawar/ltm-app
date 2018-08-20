@@ -40,9 +40,12 @@ class OrderController extends \yii\web\Controller
      * Display single order entry
      */
     public function actionView($id){
-        
+
+        $model = $this->findModel($id);
+
         return $this->render('view',[
-            'model' => $this->findModel($id)
+            'model' => $model,
+            'data' => $this->findItem($model->item_id)
         ]);
     }
 
@@ -54,20 +57,42 @@ class OrderController extends \yii\web\Controller
         throw new \yii\web\NotFoundHttpException('The requested page does not exist.');
     }
 
+    protected function findItem($item_id){
+
+        if(($itemData = \frontend\models\Items::find()->where(['id' => $item_id])->asArray()->one()) !== null){
+            
+            return $itemData;
+        }
+
+        throw new \yii\web\NotFoundHttpException('The requested page does not exist.');        
+    }
+
+   //
+    protected function dataAllItems(){
+        $itemsData = \frontend\models\Items::find()->select('id ,name')->asArray()->all();
+
+        foreach ($itemsData as $key => $value) {
+            $data[$value['id']] = $value['name'];
+        }
+
+        return $data;
+    }
+
     /**
      * Create new order entry.
      * Redirects if saved succesfully
      */
 
-     public function actionCreate(){
-         $model = new \frontend\models\Order();
+     public function actionCreate(){        
+         $orderModel = new \frontend\models\Order();
 
-         if($model->load(\Yii::$app->request->post()) && $model->save()){
-             return $this->redirect(['view', 'id' => $model->id]);
+         if($orderModel->load(\Yii::$app->request->post()) && $orderModel->save()){
+             return $this->redirect(['view', 'id' => $orderModel->id]);
          }
 
          return $this->render('create',[
-             'model' => $model
+             'model' => $orderModel,
+             'data' => $this->dataAllItems()
          ]);
      }
 
@@ -85,7 +110,8 @@ class OrderController extends \yii\web\Controller
         }
 
         return $this->render('update',[
-            'model' => $model
+            'model' => $model,
+            'data' => $this->dataAllItems()
         ]);
    }
 }

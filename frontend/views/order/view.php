@@ -20,6 +20,20 @@
 
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
+            'attributes' => [
+                [
+                    'attribute' => 'id',
+                    'label' => 'Item name',
+                    'value' => $data['name'],
+
+                ],
+                'amount',
+                'mrp',
+                'tax_rate',
+                'status',
+                'created_at',
+                'updated_at'
+            ]
         ]);    
     ?>
 </div>

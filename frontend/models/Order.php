@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "order".
  *
  * @property int $id
+ * @property int $party_id 
  * @property int $item_id
  * @property int $amount
  * @property int $mrp
@@ -34,8 +35,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id', 'amount', 'mrp', 'created_at', 'updated_at'], 'required'],
+            [[ 'party_id','amount', 'mrp', 'created_at', 'updated_at'], 'required'],
+            ['item_id', 'required','message' => 'Item Name cannot be blank'],
             [['item_id', 'amount', 'mrp', 'tax_rate', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            
         ];
     }
 
@@ -46,6 +49,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'party_id' => 'Party ID', 
             'item_id' => 'Item ID',
             'amount' => 'Amount',
             'mrp' => 'Mrp',

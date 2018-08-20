@@ -10,6 +10,7 @@
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
 
     <?= $this->render('_form',[
-        'model' => $model
+        'model' => $model,
+        'data' => $data
     ])?>
 </div>
