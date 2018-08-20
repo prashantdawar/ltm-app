@@ -5,7 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Items;
+use frontend\models\Items;
 
 /**
  * ItemsSearch represents the model behind the search form of `app\models\Items`.
