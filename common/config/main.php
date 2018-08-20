@@ -9,5 +9,12 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=ltm',
+            'username' => 'root',
+            'password' => 'q123',
+            'charset' => 'utf8',
+        ],
     ],
 ];
