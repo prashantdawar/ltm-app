@@ -20,6 +20,21 @@
 
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
+            'attributes' => [
+                'name',
+                'contact_name',
+                'phone',
+                'email',
+                'street_address',
+                'city',
+                'location',
+                'state',
+                'pincode',
+                'gst',
+                'pan',
+                'status',
+                'created_at'
+            ]
         ]);    
     ?>
 </div>

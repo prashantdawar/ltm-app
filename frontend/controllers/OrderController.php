@@ -78,6 +78,16 @@ class OrderController extends \yii\web\Controller
         return $data;
     }
 
+    protected function dataAllParties(){
+        $partiesData = \frontend\models\Party::find()->select('id,name')->asArray()->all();
+
+        foreach ($partiesData as $key => $value) {
+            $data[$value['id']] = $value['name'];
+        }
+
+        return $data;
+    }
+
     /**
      * Create new order entry.
      * Redirects if saved succesfully
@@ -90,10 +100,12 @@ class OrderController extends \yii\web\Controller
              return $this->redirect(['view', 'id' => $orderModel->id]);
          }
 
+         $data['allItems'] = $this->dataAllItems();
+         $data['allParties'] = $this->dataAllParties();
         // var_dump($orderModel->errors); die;
          return $this->render('create',[
              'model' => $orderModel,
-             'data' => $this->dataAllItems()
+             'data' => $data
          ]);
      }
 
@@ -110,9 +122,12 @@ class OrderController extends \yii\web\Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $data['allItems'] = $this->dataAllItems();
+        $data['allParties'] = $this->dataAllParties();
+
         return $this->render('update',[
             'model' => $model,
-            'data' => $this->dataAllItems()
+            'data' => $data
         ]);
    }
 }
