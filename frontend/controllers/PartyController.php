@@ -67,7 +67,7 @@ class PartyController extends \yii\web\Controller {
          }
 
          return $this->render('create',[
-            'model' => $model
+            'model' => $model,
          ]);
      }
 

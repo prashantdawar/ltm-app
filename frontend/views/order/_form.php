@@ -2,10 +2,17 @@
 <div class="order-form">
     <?php $form = \yii\widgets\ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'party_id')->textInput(); ?>
+        <?php
+            echo $form->field($model, 'party_id')->label('Party Name')->widget(\kartik\select2\Select2::classname(), [
+            'data' => $data['allParties'],
+            'options' => ['placeholder' => 'Select a party ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
         <?php
             echo $form->field($model, 'item_id')->label('Item Name')->widget(\kartik\select2\Select2::classname(), [
-            'data' => $data,
+            'data' => $data['allItems'],
             'options' => ['placeholder' => 'Select an Item ...'],
             'pluginOptions' => [
                 'allowClear' => true
