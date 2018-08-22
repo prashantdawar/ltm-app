@@ -61,4 +61,20 @@ class Order extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    protected function getParty(){
+        return $this->hasOne(Party::className(), ['id' => 'party_id']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    protected function getItems(){
+        return $this->hasOne(Items::className(), ['id' => 'item_id']);
+    }
+    
 }

@@ -27,9 +27,18 @@ class OrderController extends \yii\web\Controller
     {
         $query = \frontend\models\Order::find();
 
+        // $partyModel = new \frontend\models\Party();
+
+        // $query->joinWith(['party']);
+        // $query->andFilterWhere([
+        //     'LIKE',
+        //     'party.name',
+        //     $partyModel->getAttribute('party.name')
+        // ]);
+
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query
-        ]);
+        ]);        
         
         return $this->render('index',[
             'dataProvider' => $dataProvider

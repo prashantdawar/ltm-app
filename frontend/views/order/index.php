@@ -21,8 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'party_id',
-                'item_id',
+                [
+                    'label' => 'Party Name',
+                    'value' => 'party.name'
+                ],
+                [
+                    'label' => 'Item Name',
+                    'value' => 'items.name'
+                ],
                 'amount',
                 'mrp',
                 'tax_rate',
