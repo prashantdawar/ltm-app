@@ -1,3 +1,3 @@
-<?php `git pull origin master`; ?>
+<?php `git pull origin master` ?>
 
 "Pulling from git"
