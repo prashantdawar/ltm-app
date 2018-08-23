@@ -31,7 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'location',
                 'state',
                 'pincode',
-                'last_order_id',
+                [
+                    'attribute' => 'last_order_id',
+                    'label' => 'Last Order',
+                    'format' => 'raw',
+                    'value' => function($model) {                                
+                                return \yii\helpers\Html::a(
+                                    'Show Details',
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->last_order_id]),
+                                    ['target' => '_blank']);
+                                }
+                ],
                 'gst',
                 'pan',
                 'status',
