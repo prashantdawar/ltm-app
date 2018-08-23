@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'email',
                 // 'street_address',
                 'city',
-                'location',
-                'state',
+                // 'location',
+                // 'state',
                 // 'pincode',
                 [
                     'attribute' => 'last_order_id',
