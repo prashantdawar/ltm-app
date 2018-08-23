@@ -25,13 +25,11 @@ class PartyController extends \yii\web\Controller {
      */
     public function actionIndex(){
 
-        $query = \frontend\models\Party::find();
-
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query
-        ]);
-
+        $searchModel = new \frontend\models\PartySearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
     }
