@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'amount',
                 'mrp',
-                'tax_rate',
-                'status',
+                // 'tax_rate',
+                // 'status',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ]
