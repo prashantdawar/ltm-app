@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Items';
+$this->title = 'Stock';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="items-index">
@@ -25,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'name',
+            // 'name',
+            [
+                'attribute' => 'name',
+                'label' => 'Item Name',
+                'format' => 'raw',
+                // 'value' => 'name' (default fetch from attribute name)
+            ],
             'amount',
             'mrp',
             'in_stock',
