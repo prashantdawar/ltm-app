@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'city',
                 'location',
                 'state',
-                'pincode',
+                // 'pincode',
                 [
                     'attribute' => 'last_order_id',
                     'label' => 'Last Order',
