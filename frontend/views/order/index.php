@@ -20,7 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
+                // ['class' => 'yii\grid\SerialColumn'],
+                // 'id',
+                [
+                    'attribute' => 'id',
+                    'headerOptions' => ['style' => 'width:15%; text-align:center;'],
+                    'contentOptions' =>['style' => 'text-align: center'],
+                    'label' => 'Invoice Id',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                                
+                                return \yii\helpers\Html::a(
+                                    $model->id,
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]));
+                                }                    
+                ],
                 // 'party_id','item_id',
                 [
                     'attribute' => 'party_name',

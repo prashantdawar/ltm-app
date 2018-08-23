@@ -1,6 +1,6 @@
 
 <?php
-    $this->title = $model->id;
+    $this->title = 'Order Number: ' . $model->id;
     $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -21,13 +21,21 @@
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'party_id',
+                // 'party_id',
                 [
-                    'attribute' => 'id',
-                    'label' => 'Item name',
-                    'value' => $data['name'],
-
+                    'attribute' => 'party.name',
+                    'label' => 'Party Name'
                 ],
+                // [
+                //     'attribute' => 'id',
+                //     'label' => 'Item name',
+                //     'value' => $data['name'],
+
+                // ],
+                [
+                    'attribute' => 'items.name',
+                    'label' => 'Item Name',
+                ],                
                 'amount',
                 'mrp',
                 'tax_rate',
