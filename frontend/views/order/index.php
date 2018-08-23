@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'party_id','item_id',
                 [
                     'attribute' => 'party_name',
+                    'headerOptions' => ['style' => 'width:35%'],
                     'label' => 'Party Name',
                     'format' => 'raw',
                     // 'value' => 'party.name',
