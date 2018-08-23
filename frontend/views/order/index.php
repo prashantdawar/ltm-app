@@ -23,11 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'label' => 'Party Name',
-                    'value' => 'party.name'
+                    'format' => 'raw',
+                    'value' => function($model) {
+                                
+                                return \yii\helpers\Html::a(
+                                    $model->party->name,
+                                    \yii\helpers\Url::to(['party/view', 'id' => $model->party->id]),
+                                    ['target' => '_blank']);
+                                }
                 ],
                 [
+                    'attribute' => 'items.name',
                     'label' => 'Item Name',
-                    'value' => 'items.name'
+                    'format' => 'raw',
+                    'value' => function($model) {
+                                
+                                return \yii\helpers\Html::a(
+                                    $model->items->name,
+                                    \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
+                                    ['target' => '_blank']);
+                                }
                 ],
                 'amount',
                 'mrp',
