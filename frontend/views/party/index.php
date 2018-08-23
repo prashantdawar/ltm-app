@@ -43,8 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                 ],
                 'gst',
-                'pan',
-                'status',
+                // 'pan',
+                // 'status',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ]
