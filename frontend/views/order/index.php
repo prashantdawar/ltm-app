@@ -31,8 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 
                                 return \yii\helpers\Html::a(
                                     $model->party->name,
-                                    \yii\helpers\Url::to(['party/view', 'id' => $model->party->id]),
-                                    ['target' => '_blank']);
+                                    \yii\helpers\Url::to(['.', 'OrderSearch[party_name]' => $model->party->name]));
+                                    
+                                    // \yii\helpers\Url::to(['party/view', 'id' => $model->party->id]),
+                                    // ['target' => '_blank']);
                                 }
                 ],
                 [
