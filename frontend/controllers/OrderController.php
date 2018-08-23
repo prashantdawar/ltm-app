@@ -25,22 +25,11 @@ class OrderController extends \yii\web\Controller
      */
     public function actionIndex()
     {
-        $query = \frontend\models\Order::find();
-
-        // $partyModel = new \frontend\models\Party();
-
-        // $query->joinWith(['party']);
-        // $query->andFilterWhere([
-        //     'LIKE',
-        //     'party.name',
-        //     $partyModel->getAttribute('party.name')
-        // ]);
-
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query
-        ]);        
-        
+        $searchModel = new \frontend\models\OrderSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+      
         return $this->render('index',[
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
     }

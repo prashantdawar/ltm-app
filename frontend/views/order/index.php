@@ -18,12 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= \yii\grid\GridView::widget([
             'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
+                // 'party_id','item_id',
                 [
+                    'attribute' => 'party_name',
                     'label' => 'Party Name',
                     'format' => 'raw',
+                    // 'value' => 'party.name',
                     'value' => function($model) {
                                 
                                 return \yii\helpers\Html::a(
@@ -33,9 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                 ],
                 [
-                    'attribute' => 'items.name',
+                    'attribute' => 'item_name',
                     'label' => 'Item Name',
                     'format' => 'raw',
+                    // 'value' => 'items.name',
                     'value' => function($model) {
                                 
                                 return \yii\helpers\Html::a(

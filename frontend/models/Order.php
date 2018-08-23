@@ -73,8 +73,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    protected function getItems(){
+    protected function getItems(){        
         return $this->hasOne(Items::className(), ['id' => 'item_id']);
-    }
-    
+    }    
 }
