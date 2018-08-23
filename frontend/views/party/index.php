@@ -7,7 +7,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="party-index">
 
-    <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
+    <h1><?=  \yii\helpers\Html::a($this->title, ['/party']); ?></h1>
 
     <p>
         <?= \yii\helpers\Html::a('Create party', ['create'],[

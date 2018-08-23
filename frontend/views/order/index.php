@@ -7,7 +7,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="order-index">
 
-    <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
+    <h1><?= \yii\helpers\Html::a($this->title, ['/order']); ?></h1>
 
     <p>
         <?= \yii\helpers\Html::a('Create Order', ['create'],[
