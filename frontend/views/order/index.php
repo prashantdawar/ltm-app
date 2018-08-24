@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'id',
                 [
                     'attribute' => 'id',
-                    'headerOptions' => ['style' => 'width:15%; text-align:center;'],
+                    'headerOptions' => ['style' => 'width:11%; text-align:center;'],
                     'contentOptions' =>['style' => 'text-align: center'],
-                    'label' => 'Invoice Id',
+                    'label' => 'Invoice No.',
                     'format' => 'raw',
                     'value' => function($model) {
                                 
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'party_id','item_id',
                 [
                     'attribute' => 'party_name',
-                    'headerOptions' => ['style' => 'width:35%'],
+                    'headerOptions' => ['style' => 'width:30%'],
                     'label' => 'Party Name',
                     'format' => 'raw',
                     // 'value' => 'party.name',
@@ -52,23 +52,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                     // ['target' => '_blank']);
                                 }
                 ],
-                [
-                    'attribute' => 'item_name',
-                    'label' => 'Item Name',
-                    'format' => 'raw',
-                    // 'value' => 'items.name',
-                    'value' => function($model) {
+                // [
+                //     'attribute' => 'item_name',
+                //     'label' => 'Item Name',
+                //     'format' => 'raw',
+                //     // 'value' => 'items.name',
+                //     'value' => function($model) {
                                 
-                                return \yii\helpers\Html::a(
-                                    $model->items->name,
-                                    \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
-                                    ['target' => '_blank']);
-                                }
-                ],
+                //                 return \yii\helpers\Html::a(
+                //                     $model->items->name,
+                //                     \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
+                //                     ['target' => '_blank']);
+                //                 }
+                // ],
                 'amount',
-                'mrp',
+                // 'mrp',
                 // 'tax_rate',
                 // 'status',
+                'created_at',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ]
