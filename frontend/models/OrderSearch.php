@@ -14,7 +14,7 @@ class OrderSearch extends \frontend\models\Order {
     public function rules()
     {   
         return [
-            [['amount', 'mrp', 'tax_rate', 'status','created_at'], 'integer'],
+            [['id', 'amount', 'mrp', 'tax_rate', 'status','created_at'], 'integer'],
             [['party_name','item_name'], 'safe']
         ];
     }
@@ -53,12 +53,9 @@ class OrderSearch extends \frontend\models\Order {
         }
 
             $query->andFilterWhere([
-                'id' => $this->id,
-                'amount' => $this->amount,
-                'mrp' => $this->mrp,
-                'tax_rate' => $this->tax_rate,
-                'status' => $this->status,
-                'created_at' => $this->created_at 
+                '`order`.`id`' => $this->id,
+                '`order`.`amount`' => $this->amount,
+                '`order`.`created_at`' => $this->created_at 
             ]);
 
             $query->andFilterWhere(['like', 'party.name', $this->party_name])

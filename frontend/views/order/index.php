@@ -20,21 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                // ['class' => 'yii\grid\SerialColumn'],
-                // 'id',
-                [
-                    'attribute' => 'id',
-                    'headerOptions' => ['style' => 'width:11%; text-align:center;'],
-                    'contentOptions' =>['style' => 'text-align: center'],
-                    'label' => 'Invoice No.',
-                    'format' => 'raw',
-                    'value' => function($model) {
-                                
-                                return \yii\helpers\Html::a(
-                                    $model->id,
-                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]));
-                                }                    
-                ],
+                ['class' => 'yii\grid\SerialColumn'],
                 // 'party_id','item_id',
                 [
                     'attribute' => 'party_name',
@@ -51,6 +37,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                     // \yii\helpers\Url::to(['party/view', 'id' => $model->party->id]),
                                     // ['target' => '_blank']);
                                 }
+                ],
+                // 'id',
+                [
+                    'attribute' => 'id',
+                    'headerOptions' => ['style' => 'width:11%; text-align:center;'],
+                    'contentOptions' =>['style' => 'text-align: center'],
+                    'label' => 'Invoice No.',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                                
+                                return \yii\helpers\Html::a(
+                                    $model->id,
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]));
+                                }                    
                 ],
                 // [
                 //     'attribute' => 'item_name',
