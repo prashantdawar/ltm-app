@@ -8,13 +8,13 @@
         <?= $form->field($model,'city')->textInput();?>
         <?= $form->field($model,'location')->textInput();?>
         <?= $form->field($model,'state')->textInput();?>
-        <?= $form->field($model,'pincode')->textInput();?>
-        <?= $form->field($model,'last_order_id')->textInput();?>
-        <?= $form->field($model,'gst')->textInput();?>
-        <?= $form->field($model,'pan')->textInput();?>
-        <?= $form->field($model,'status')->textInput();?>
-        <?= $form->field($model,'created_at')->textInput();?>
-        <?= $form->field($model,'updated_at')->textInput();?>
+        <?= $form->field($model,'pincode')->hiddenInput(['value'=> 10])->label(false);?>
+        <?= $form->field($model,'last_order_id')->hiddenInput(['value'=> 10])->label(false);?>
+        <?= $form->field($model,'gst')->textInput()->label('GSTIN Number');?>
+        <?= $form->field($model,'pan')->hiddenInput(['value'=> 10])->label(false);?>
+        <?= $form->field($model,'status')->hiddenInput(['value'=> 10])->label(false);?>
+        <?= $form->field($model,'created_at')->hiddenInput(['value'=> 10])->label(false);?>
+        <?= $form->field($model,'updated_at')->hiddenInput(['value'=> 10])->label(false);?>
 
         <div class="form-group">
             <?= \yii\helpers\Html::submitButton('Save',[

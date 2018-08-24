@@ -25,16 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'name',
-            [
-                'attribute' => 'name',
-                'label' => 'Item Name',
-                'format' => 'raw',
-                // 'value' => 'name' (default fetch from attribute name)
-            ],
-            'amount',
+            'name:raw:Item Name',
+            // [
+            //     'attribute' => 'name',
+            //     'label' => 'Item Name',
+            //     'format' => 'raw',
+            //     // 'value' => 'name' (default fetch from attribute name)
+            // ],
+            'amount:raw:Selling Price',
             'mrp',
-            'in_stock',
+            // 'in_stock',
             // 'status',
             //'created_at',
             'updated_at',
