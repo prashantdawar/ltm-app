@@ -19,7 +19,7 @@
             ],
         ]); ?>
         
-        <?=$form->field($model,'amount')->textInput(); ?>
+        <?=$form->field($model,'amount')->textInput()->label('Selling Price'); ?>
         <?=$form->field($model,'mrp')->textInput(); ?>
         <?=$form->field($model,'tax_rate')->textInput(); ?>
         <?=$form->field($model,'status')->hiddenInput(['value'=> 10])->label(false); ?>
