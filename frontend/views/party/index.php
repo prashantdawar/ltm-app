@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'name',
+                'name:raw:Party Name',
                 // 'contact_name',
                 // 'phone',
                 // 'email',
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ['target' => '_blank']);
                                 }
                 ],
-                'gst',
+                'gst:raw:GSTIN Number',
                 // 'pan',
                 // 'status',
 
