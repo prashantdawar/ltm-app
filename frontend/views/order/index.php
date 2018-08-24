@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'party_id','item_id',
                 [
                     'attribute' => 'party_name',
-                    'headerOptions' => ['style' => 'width:30%'],
+                    'headerOptions' => ['style' => 'width:20%'],
                     'label' => 'Party Name',
                     'format' => 'raw',
                     // 'value' => 'party.name',
@@ -52,19 +52,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                     \yii\helpers\Url::to(['order/view', 'id' => $model->id]));
                                 }                    
                 ],
-                // [
-                //     'attribute' => 'item_name',
-                //     'label' => 'Item Name',
-                //     'format' => 'raw',
-                //     // 'value' => 'items.name',
-                //     'value' => function($model) {
+                [
+                    'attribute' => 'item_name',
+                    'label' => 'Item Name',
+                    'format' => 'raw',
+                    'value' => 'items.name',
+                    // 'value' => function($model) {
                                 
-                //                 return \yii\helpers\Html::a(
-                //                     $model->items->name,
-                //                     \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
-                //                     ['target' => '_blank']);
-                //                 }
-                // ],
+                    //             return \yii\helpers\Html::a(
+                    //                 $model->items->name,
+                    //                 \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
+                    //                 ['target' => '_blank']);
+                    //             }
+                ],
                 'amount:raw:Net Amount Payable',
                 // 'mrp',
                 // 'tax_rate',
