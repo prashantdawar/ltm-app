@@ -41,15 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'id',
                 [
                     'attribute' => 'id',
-                    'headerOptions' => ['style' => 'width:11%; text-align:center;'],
-                    'contentOptions' =>['style' => 'text-align: center'],
+                    'headerOptions' => ['style' => 'width:11%;'],
+                    'contentOptions' =>['style' => 'text-align: center;'],
                     'label' => 'Invoice No.',
                     'format' => 'raw',
                     'value' => function($model) {
                                 
                                 return \yii\helpers\Html::a(
                                     $model->id,
-                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]));
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]),
+                                    ['style' => 'display:block; width: 100%; height: 100%;']);
                                 }                    
                 ],
                 [
@@ -65,9 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //                 ['target' => '_blank']);
                     //             }
                 ],
-                'amount:raw:Net Amount Payable',
-                // 'mrp',
-                // 'tax_rate',
+                'amount:raw:Net Amount Payable',                
                 // 'status',
                 'created_at',
 

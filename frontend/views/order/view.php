@@ -37,8 +37,6 @@
                     'label' => 'Item Name',
                 ],                
                 'amount',
-                'mrp',
-                'tax_rate',
                 'status',
                 'created_at',
                 'updated_at'
