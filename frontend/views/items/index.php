@@ -37,7 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'in_stock',
             // 'status',
             //'created_at',
-            'updated_at',
+            [
+                'attribute' => 'updated_at',
+                'format' =>['DateTime', 'php:Y-m-d']
+            ],
             //'created_by',
             //'updated_by',
 
