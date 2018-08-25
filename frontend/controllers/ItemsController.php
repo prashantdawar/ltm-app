@@ -66,9 +66,8 @@ class ItemsController extends Controller
     {
         $model = new Items();
 
-        $date = date('Y-m-d H:i:s');
-        $model->created_at = $date;
-        $model->updated_at = $date;
+        $model->created_at = date('Y-m-d H:i:s');
+        $model->updated_at = date('Y-m-d H:i:s');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
