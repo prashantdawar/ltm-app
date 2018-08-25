@@ -1,6 +1,6 @@
 
 <?php
-    $this->title = $model->id;
+    $this->title = $model->name;
     $this->params['breadcrumbs'][] = ['label' => 'Party', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,9 +31,8 @@
                 'state',
                 'pincode',
                 'gst',
-                'pan',
-                'status',
-                'created_at'
+                'created_at',
+                'updated_at'
             ]
         ]);    
     ?>

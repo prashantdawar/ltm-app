@@ -19,7 +19,6 @@ use Yii;
  * @property int $pincode
  * @property int $last_order_id
  * @property string $gst
- * @property string $pan
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
@@ -40,10 +39,11 @@ class Party extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'contact_name', 'phone', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'last_order_id', 'gst', 'pan', 'created_at', 'updated_at'], 'required'],
-            [['phone', 'pincode', 'last_order_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'contact_name', 'phone', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'last_order_id','gst', 'created_at', 'updated_at'], 'required'],
+            [['phone', 'pincode', 'last_order_id', 'status',], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
             ['phone', 'string', 'min' => 10, 'max' => 10 ],
-            [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst', 'pan'], 'string', 'max' => 255],
+            [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -60,13 +60,12 @@ class Party extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'email' => 'Email',
             'street_address' => 'Street Address',
-            'city' => 'City',
-            'location' => 'Location',
+            'city' => 'City and Village',
+            'location' => 'District',
             'state' => 'State',
             'pincode' => 'Pincode',
             'last_order_id' => 'Last Order ID',
-            'gst' => 'Gst',
-            'pan' => 'Pan',
+            'gst' => 'GSTIN Number',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
