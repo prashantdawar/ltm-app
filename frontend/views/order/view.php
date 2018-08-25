@@ -1,6 +1,6 @@
 
 <?php
-    $this->title = 'Order Number: ' . $model->id;
+    $this->title = 'Invoice Number: ' . $model->id;
     $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
