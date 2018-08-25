@@ -38,8 +38,14 @@
                 ],                
                 'amount',
                 'status',
-                'created_at',
-                'updated_at'
+                [
+                    'attribute' => 'created_at',
+                    'format' =>['DateTime', 'php:Y-m-d']
+                ],
+                [
+                    'attribute' => 'updated_at',
+                    'format' =>['DateTime', 'php:Y-m-d']
+                ],
             ]
         ]);    
     ?>

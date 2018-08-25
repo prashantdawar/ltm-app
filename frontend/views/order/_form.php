@@ -19,10 +19,8 @@
             ],
         ]); ?>
         
-        <?=$form->field($model,'amount')->textInput()->label('Selling Price'); ?>
+        <?=$form->field($model,'amount')->textInput(); ?>
         <?=$form->field($model,'status')->hiddenInput(['value'=> 10])->label(false); ?>
-        <?=$form->field($model,'created_at')->hiddenInput(['value'=> 10])->label(false); ?>
-        <?=$form->field($model,'updated_at')->hiddenInput(['value'=> 10])->label(false); ?>
         <?=$form->field($model,'created_by')->hiddenInput(['value'=> 10])->label(false); ?>
         <?=$form->field($model,'updated_by')->hiddenInput(['value'=> 10])->label(false); ?>
         

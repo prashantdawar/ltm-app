@@ -14,8 +14,8 @@ class OrderSearch extends \frontend\models\Order {
     public function rules()
     {   
         return [
-            [['id', 'amount', 'status','created_at'], 'integer'],
-            [['party_name','item_name'], 'safe']
+            [['id', 'amount', 'status'], 'integer'],
+            [['party_name','item_name', 'created_at'], 'safe']
         ];
     }
         

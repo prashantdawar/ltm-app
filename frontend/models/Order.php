@@ -12,8 +12,8 @@ use Yii;
  * @property int $item_id
  * @property int $amount
  * @property int $status
- * @property int $created_at
- * @property int $updated_at
+ * @property string $created_at
+ * @property string $updated_at
  * @property int $created_by
  * @property int $updated_by
  */
@@ -33,9 +33,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'party_id','amount', 'created_at', 'updated_at'], 'required'],
+            [[ 'party_id','amount'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
-            [['item_id', 'amount', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['item_id', 'amount', 'status',  'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at'], 'safe']
             
         ];
     }
@@ -49,7 +50,7 @@ class Order extends \yii\db\ActiveRecord
             'id' => 'ID',
             'party_id' => 'Party ID', 
             'item_id' => 'Item ID',
-            'amount' => 'Amount',
+            'amount' => 'Net Amount Payable',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

@@ -94,6 +94,8 @@ class OrderController extends \yii\web\Controller
      public function actionCreate(){        
          $orderModel = new \frontend\models\Order();
 
+         $model->created_at = date('Y-m-d H:i:s');
+
          if($orderModel->load(\Yii::$app->request->post()) && $orderModel->save()){
              return $this->redirect(['view', 'id' => $orderModel->id]);
          }
@@ -115,7 +117,9 @@ class OrderController extends \yii\web\Controller
       public function actionUpdate($id){
 
         $model = $this->findModel($id);
-
+        
+        $model->updated_at = date('Y-m-d H:i:s');
+        
         if(($model->load(\Yii::$app->request->post())) && $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
         }

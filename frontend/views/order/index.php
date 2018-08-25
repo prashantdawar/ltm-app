@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //                 ['target' => '_blank']);
                     //             }
                 ],
-                'amount:raw:Net Amount Payable',                
+                'amount',                
                 // 'status',
                 'created_at',
 
