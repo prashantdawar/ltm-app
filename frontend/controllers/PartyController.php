@@ -61,8 +61,10 @@ class PartyController extends \yii\web\Controller {
          $model = new \frontend\models\Party();
 
          $model->last_order_id = 0;
-         $model->created_at = date('Y-m-d H:i:s');
-         $model->updated_at = date('Y-m-d H:i:s');
+         
+         $date = date('Y-m-d H:i:s');
+         $model->created_at = $date;
+         $model->updated_at = $date;
 
          if(($model->load(\Yii::$app->request->post())) && $model->save()){
              return $this->redirect(['view', 'id' => $model->id]);

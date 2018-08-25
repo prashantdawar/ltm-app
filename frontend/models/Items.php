@@ -35,8 +35,9 @@ class Items extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'amount', 'mrp', 'created_at', 'updated_at'], 'required'],
-            [['amount', 'mrp', 'in_stock', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['amount', 'mrp', 'in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe']
         ];
     }
 
@@ -47,8 +48,8 @@ class Items extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'amount' => 'Amount',
+            'name' => 'Item Name',
+            'amount' => 'Selling Price',
             'mrp' => 'Mrp',
             'in_stock' => 'In Stock',
             'status' => 'Status',

@@ -33,10 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'mrp',
             'in_stock',
             'status',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_at',
+                'format' =>['DateTime', 'php:Y-m-d']
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' =>['DateTime', 'php:Y-m-d']
+            ],
         ],
     ]) ?>
 
