@@ -1,6 +1,6 @@
 <?php
 
-    $this->title = 'Create Order';
+    $this->title = 'Create Invoice';
     $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= \yii\helpers\Html::a($this->title, ['/order']); ?></h1>
 
     <p>
-        <?= \yii\helpers\Html::a('Create Order', ['create'],[
+        <?= \yii\helpers\Html::a('Create Invoice', ['create'],[
                 'class' => 'btn btn-success'
             ]);
         ?>
