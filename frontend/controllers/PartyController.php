@@ -16,6 +16,16 @@ class PartyController extends \yii\web\Controller {
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','update','create','view'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
+            ]
         ];
     }
 
