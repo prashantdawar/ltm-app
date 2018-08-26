@@ -41,9 +41,17 @@ class OrderController extends \yii\web\Controller
 
         $model = $this->findModel($id);
 
+        // var_dump($model->item_id); die;
+        $dataItems = \frontend\models\Items::find()->select('name')->where(['IN', ['id'], $model->item_id])->asArray()->all();
+        // $data = [];
+        foreach ($dataItems as $key => $value) {
+            $data[] = $value['name'];
+        }
+        $data = implode(' | ', $data);
         return $this->render('view',[
             'model' => $model,
-            'data' => $this->findItem($model->item_id)
+            // 'data' => $this->findItem($model->item_id)
+            'data' => $data
         ]);
     }
 
@@ -55,15 +63,15 @@ class OrderController extends \yii\web\Controller
         throw new \yii\web\NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function findItem($item_id){
+    // protected function findItem($item_id){
 
-        if(($itemData = \frontend\models\Items::find()->where(['id' => $item_id])->asArray()->one()) !== null){
+    //     if(($itemData = \frontend\models\Items::find()->where(['id' => $item_id])->asArray()->one()) !== null){
             
-            return $itemData;
-        }
+    //         return $itemData;
+    //     }
 
-        throw new \yii\web\NotFoundHttpException('The requested page does not exist.');        
-    }
+    //     throw new \yii\web\NotFoundHttpException('The requested page does not exist.');        
+    // }
 
    //
     protected function dataAllItems(){

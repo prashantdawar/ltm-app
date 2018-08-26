@@ -35,7 +35,12 @@
                 // [
                 //     'attribute' => 'items.name',
                 //     'label' => 'Item Name',
-                // ],                
+                // ],
+                [
+                    'attribute' => 'item_id',
+                    'label' => 'Item Name',
+                    'value' => $data
+                 ],
                 'amount',
                 'status',
                 [
