@@ -32,10 +32,10 @@
                 //     'value' => $data['name'],
 
                 // ],
-                [
-                    'attribute' => 'items.name',
-                    'label' => 'Item Name',
-                ],                
+                // [
+                //     'attribute' => 'items.name',
+                //     'label' => 'Item Name',
+                // ],                
                 'amount',
                 'status',
                 [

@@ -15,7 +15,8 @@
             'data' => $data['allItems'],
             'options' => ['placeholder' => 'Select an Item ...'],
             'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
+                'multiple'  => true
             ],
         ]); ?>
         

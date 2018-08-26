@@ -30,7 +30,7 @@ class OrderSearch extends \frontend\models\Order {
 
         $query = \frontend\models\Order::find();
 
-        $query->joinWith(['party','items']);
+        $query->joinWith(['party','items']);        
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query

@@ -97,9 +97,12 @@ class OrderController extends \yii\web\Controller
          $model->created_at = date('Y-m-d H:i:s');
          $model->updated_at = date('Y-m-d H:i:s');
 
-         if($model->load(\Yii::$app->request->post()) && $model->save()){
-             return $this->redirect(['view', 'id' => $model->id]);
-         }
+         if($model->load(\Yii::$app->request->post())){
+             
+             if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+             }
+        } 
 
          $data['allItems'] = $this->dataAllItems();
          $data['allParties'] = $this->dataAllParties();

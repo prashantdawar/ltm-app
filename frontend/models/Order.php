@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $party_id 
- * @property int $item_id
+ * @property string $item_id
  * @property int $amount
  * @property int $status
  * @property string $created_at
@@ -35,8 +35,8 @@ class Order extends \yii\db\ActiveRecord
         return [
             [[ 'party_id','amount'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
-            [['item_id', 'amount', 'status',  'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe']
+            [['amount', 'status',  'created_by', 'updated_by'], 'integer'],
+            [['item_id','created_at', 'updated_at'], 'safe']
             
         ];
     }
@@ -57,6 +57,24 @@ class Order extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    public function beforeSave($insert){
+        
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        $this->item_id = implode(',', $this->item_id);
+
+        return true;
+    }
+
+    public function afterFind(){
+        
+        $this->item_id = explode(',', $this->item_id);
+
+        return true;
     }
 
     /**

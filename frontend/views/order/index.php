@@ -53,19 +53,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ['style' => 'display:block; width: 100%; height: 100%;']);
                                 }                    
                 ],
-                [
-                    'attribute' => 'item_name',
-                    'label' => 'Item Name',
-                    'format' => 'raw',
-                    'value' => 'items.name',
-                    // 'value' => function($model) {
+                // [
+                //     'attribute' => 'item_name',
+                //     'label' => 'Item Name',
+                //     'format' => 'raw',
+                //     'value' => 'items.name',
+                //     // 'value' => function($model) {
                                 
-                    //             return \yii\helpers\Html::a(
-                    //                 $model->items->name,
-                    //                 \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
-                    //                 ['target' => '_blank']);
-                    //             }
-                ],
+                //     //             return \yii\helpers\Html::a(
+                //     //                 $model->items->name,
+                //     //                 \yii\helpers\Url::to(['items/view', 'id' => $model->items->id]),
+                //     //                 ['target' => '_blank']);
+                //     //             }
+                // ],
                 'amount',                
                 // 'status',
                 [
