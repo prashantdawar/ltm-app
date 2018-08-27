@@ -73,6 +73,8 @@ class Order extends \yii\db\ActiveRecord
     public function afterFind(){
         
         $this->item_id = explode(',', $this->item_id);
+        $this->created_at = date('d-m-Y', strtotime($this->created_at));
+        $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
 
         return true;
     }

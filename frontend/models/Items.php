@@ -59,4 +59,12 @@ class Items extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
+
+    public function afterFind(){
+        
+        $this->created_at = date('d-m-Y', strtotime($this->created_at));
+        $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
+
+        return true;
+    }
 }

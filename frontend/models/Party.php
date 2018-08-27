@@ -71,4 +71,12 @@ class Party extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function afterFind(){
+        
+        $this->created_at = date('d-m-Y', strtotime($this->created_at));
+        $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
+
+        return true;
+    }
 }

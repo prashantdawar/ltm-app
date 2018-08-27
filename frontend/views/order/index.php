@@ -68,10 +68,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 // ],
                 'amount',                
                 // 'status',
-                [
-                    'attribute' => 'created_at',
-                    'format' =>['DateTime', 'php:Y-m-d']
-                ],
+                'created_at', //managed in model
+                // [
+                //     'attribute' => 'created_at',
+                //     'format' =>['DateTime', 'php:Y-m-d']
+                // ],
 
                 ['class' => 'yii\grid\ActionColumn'],
             ]
