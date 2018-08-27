@@ -42,7 +42,7 @@
                     'value' => $data
                  ],
                 'amount',
-                'status',
+                // 'status',
                 'created_at', //managed in model
                 // [
                 //     'attribute' => 'created_at',
