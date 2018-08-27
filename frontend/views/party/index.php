@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'name:raw:Party Name',
+                'name',
                 // 'contact_name',
                 // 'phone',
                 // 'email',
@@ -32,17 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'state',
                 // 'pincode',
                 [
-                    'attribute' => 'last_order_id',
-                    'label' => 'Last Order',
+                    'label' => 'Orders',
                     'format' => 'raw',
                     'value' => function($model) {                                
                                 return \yii\helpers\Html::a(
                                     'Show Details',
-                                    \yii\helpers\Url::to(['order/view', 'id' => $model->last_order_id]),
-                                    ['target' => '_blank']);
+                                    \yii\helpers\Url::to(['order/', 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],
-                'gst:raw:GSTIN Number',
+                'gst',
                 // 'pan',
                 // 'status',
 

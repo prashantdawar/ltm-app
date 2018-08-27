@@ -33,7 +33,8 @@ class OrderSearch extends \frontend\models\Order {
         $query->joinWith(['party','items']);        
 
         $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $dataProvider->sort->attributes['party_name'] = [

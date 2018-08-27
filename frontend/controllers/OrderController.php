@@ -124,7 +124,7 @@ class OrderController extends \yii\web\Controller
 
          $data['allItems'] = $this->dataAllItems();
          $data['allParties'] = $this->dataAllParties();
-        // var_dump($orderModel->errors); die;
+
          return $this->render('create',[
              'model' => $model,
              'data' => $data

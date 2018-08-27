@@ -55,7 +55,7 @@ class Party extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Party Name',
             'contact_name' => 'Contact Name',
             'phone' => 'Phone',
             'email' => 'Email',
