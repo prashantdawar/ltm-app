@@ -66,6 +66,8 @@ class Order extends \yii\db\ActiveRecord
         }
 
         $this->item_id = implode(',', $this->item_id);
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
 
         return true;
     }

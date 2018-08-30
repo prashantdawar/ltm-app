@@ -47,16 +47,20 @@ class OrderSearch extends \frontend\models\Order {
             'desc' => ['items.name' => SORT_DESC]
         ];
 
-        $this->load($params);        
+        if (!$params) {
+            return $dataProvider;
+        }
+            
+        $this->load($params);
 
         if(!$this->validate()){
             return $dataProvider;
         }
-
+            // var_dump($this->created_at); die;
             $query->andFilterWhere([
                 '`order`.`id`' => $this->id,
                 '`order`.`amount`' => $this->amount,
-                '`order`.`created_at`' => $this->created_at 
+                '`order`.`created_at`' => date("Y-m-d",strtotime($this->created_at))
             ]);
 
             $query->andFilterWhere(['like', 'party.name', $this->party_name])

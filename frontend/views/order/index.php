@@ -68,7 +68,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 // ],
                 'amount',                
                 // 'status',
-                'created_at', //managed in model
+                // 'created_at', //managed in model
+                
+
+                // [
+                //     'attribute' => 'created_at',
+                //     'format' => 'raw',
+                //     'filter' => \kartik\date\DatePicker::widget([
+                //             'model' => $searchModel,
+                //             'name' => 'OrderSearch[created_at]',
+                //             'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                //             'attribute' => 'created_at',
+                //             'pluginOptions' => [
+                //                 'autoclose'=>true,
+                //                 'format' => 'dd-mm-yyyy',
+                //             ]
+                //     ])
+                // ],
+                [   'attribute' => 'created_at',
+                    'filter' =>  \dosamigos\datepicker\DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'created_at',
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'dd-mm-yyyy'
+                            ]
+                    ])
+                ],
                 // [
                 //     'attribute' => 'created_at',
                 //     'format' =>['DateTime', 'php:Y-m-d']
