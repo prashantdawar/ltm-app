@@ -76,8 +76,8 @@ class ItemsController extends Controller
     {
         $model = new Items();
 
-        $model->created_at = date('Y-m-d H:i:s');
-        $model->updated_at = date('Y-m-d H:i:s');
+        $model->created_at = date('Y-m-d');
+        $model->updated_at = date('Y-m-d');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -99,7 +99,7 @@ class ItemsController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->updated_at = date('Y-m-d H:i:s');
+        $model->updated_at = date('Y-m-d');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

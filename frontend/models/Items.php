@@ -13,8 +13,8 @@ use Yii;
  * @property int $mrp
  * @property int $in_stock
  * @property int $status
- * @property int $created_at
- * @property int $updated_at
+ * @property string $created_at
+ * @property string $updated_at
  * @property int $created_by
  * @property int $updated_by
  */
@@ -58,6 +58,18 @@ class Items extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    public function beforeSave($insert){
+        
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+
+        return true;
     }
 
     public function afterFind(){

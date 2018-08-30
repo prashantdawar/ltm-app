@@ -37,8 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'in_stock',
             // 'status',
             //'created_at',
-
-            'updated_at', //managed in model
+            
+            [   
+                'attribute' => 'updated_at', //managed in model
+                    'filter' =>  \dosamigos\datepicker\DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'updated_at',
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'dd-mm-yyyy'
+                            ]
+                    ])
+            ],
             // [
             //     'attribute' => 'updated_at',
             //     'format' =>['DateTime', 'php:Y-m-d']

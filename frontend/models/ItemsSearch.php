@@ -18,8 +18,8 @@ class ItemsSearch extends Items
     public function rules()
     {
         return [
-            [['id', 'amount', 'mrp', 'in_stock', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'amount', 'mrp', 'in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'updated_at'], 'safe'],            
         ];
     }
 
@@ -49,25 +49,24 @@ class ItemsSearch extends Items
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if(!$params){
             return $dataProvider;
         }
-
+        
+        $this->load($params);
+        
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');            
+            return $dataProvider;
+        }
+        
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'amount' => $this->amount,
             'mrp' => $this->mrp,
-            'in_stock' => $this->in_stock,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
+            'updated_at' => date('Y-m-d', strtotime($this->updated_at)),
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
