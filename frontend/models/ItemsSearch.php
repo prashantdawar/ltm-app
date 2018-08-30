@@ -57,16 +57,17 @@ class ItemsSearch extends Items
         
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');            
+            // $query->where('0=1');
+            // die;            
             return $dataProvider;
         }
-        
+        // var_dump($this->updated_at); die;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'amount' => $this->amount,
             'mrp' => $this->mrp,
-            'updated_at' =>  $this->created_at ? date("Y-m-d",strtotime($this->updated_at)): NULL
+            'updated_at' =>  $this->updated_at ? date("Y-m-d",strtotime($this->updated_at)): NULL
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
