@@ -47,10 +47,12 @@ class OrderSearch extends \frontend\models\Order {
             'desc' => ['items.name' => SORT_DESC]
         ];
 
-        if (!$params) {
-            return $dataProvider;
-        }
-            
+        
+        // commented because sorting of other fields depends on andfilterwhere below.
+        // if (!$params) {
+        //     return $dataProvider;
+        // }
+        // var_dump($params); die;
         $this->load($params);
 
         if(!$this->validate()){
@@ -60,7 +62,7 @@ class OrderSearch extends \frontend\models\Order {
             $query->andFilterWhere([
                 '`order`.`id`' => $this->id,
                 '`order`.`amount`' => $this->amount,
-                '`order`.`created_at`' => date("Y-m-d",strtotime($this->created_at))
+                '`order`.`created_at`' => $this->created_at ? date("Y-m-d",strtotime($this->created_at)): NULL
             ]);
 
             $query->andFilterWhere(['like', 'party.name', $this->party_name])

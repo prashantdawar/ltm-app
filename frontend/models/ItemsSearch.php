@@ -49,9 +49,9 @@ class ItemsSearch extends Items
             'query' => $query,
         ]);
 
-        if(!$params){
-            return $dataProvider;
-        }
+        // if(!$params){
+        //     return $dataProvider;
+        // } // see ordersearch for reason of commenting.
         
         $this->load($params);
         
@@ -66,7 +66,7 @@ class ItemsSearch extends Items
             'id' => $this->id,
             'amount' => $this->amount,
             'mrp' => $this->mrp,
-            'updated_at' => date('Y-m-d', strtotime($this->updated_at)),
+            'updated_at' =>  $this->created_at ? date("Y-m-d",strtotime($this->updated_at)): NULL
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
