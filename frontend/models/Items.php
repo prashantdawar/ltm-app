@@ -34,10 +34,11 @@ class Items extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'amount', 'mrp', 'created_at', 'updated_at'], 'required'],
-            [['amount', 'mrp', 'in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'amount', 'mrp', 'created_at', 'updated_at', 'tax_rate'], 'required'],
+            [['amount', 'mrp', 'tax_rate','in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['created_at', 'updated_at'], 'safe']
+            [['created_at', 'updated_at'], 'safe'],
+            [['tax_rate'], 'default', 'value' => 0]
         ];
     }
 
@@ -51,6 +52,7 @@ class Items extends \yii\db\ActiveRecord
             'name' => 'Item Name',
             'amount' => 'Selling Price',
             'mrp' => 'Mrp',
+            'tax_rate' => 'Tax Rate ( % )',
             'in_stock' => 'In Stock',
             'status' => 'Status',
             'created_at' => 'Created At',

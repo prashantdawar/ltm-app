@@ -18,8 +18,8 @@ class ItemsSearch extends Items
     public function rules()
     {
         return [
-            [['id', 'amount', 'mrp', 'in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'updated_at'], 'safe'],            
+            [['id', 'amount', 'mrp', 'tax_rate', 'in_stock', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'updated_at', ], 'safe'],            
         ];
     }
 
@@ -67,6 +67,7 @@ class ItemsSearch extends Items
             'id' => $this->id,
             'amount' => $this->amount,
             'mrp' => $this->mrp,
+            'tax_rate' => $this->tax_rate,
             'updated_at' =>  $this->updated_at ? date("Y-m-d",strtotime($this->updated_at)): NULL
         ]);
 

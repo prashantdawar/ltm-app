@@ -31,8 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'amount',
             'mrp',
-            'in_stock',
-            'status',
+            'tax_rate',
+            // [
+            //     'attribute' => 'tax_rate',
+            //     'value' => function($model){
+            //         return $model->tax_rate . ' %';
+            //     }
+            // ],
+            // 'in_stock',
+            // 'status',
             'created_at', //managed in model
             // [
             //     'attribute' => 'created_at',
