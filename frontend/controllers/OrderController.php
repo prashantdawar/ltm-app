@@ -52,12 +52,28 @@ class OrderController extends \yii\web\Controller
         $model = $this->findModel($id);
 
         // var_dump($model->item_id); die;
-        $dataItems = \frontend\models\Items::find()->select('name')->where(['IN', ['id'], $model->item_id])->asArray()->all();
+        // $dataItems = \frontend\models\Items::find()->select('name')->where(['IN', ['id'], $model->item_id])->asArray()->all();
         // $data = [];
-        foreach ($dataItems as $key => $value) {
-            $data[] = $value['name'];
+        $dataItem = [];
+        foreach($model->item_id as $key => $itemIdQuantity){
+
+            if($key%2 != 0){
+                array_push($dataItem, $itemIdQuantity);
+                continue;
+            }
+
+            $item = \frontend\models\Items::find()->select('name')->where(['id' => $itemIdQuantity])->asArray()->one();
+            array_push($dataItem, $item['name']);
+            
         }
-        $data = implode(' | ', $data);
+        // var_dump($dataItem); die;
+        // foreach ($dataItems as $key => $value) {
+        //     $data[] = $value['name'];
+        // }
+        // $data = implode(' | ', $data);
+        
+        $data = implode(' | ', $dataItem);
+
         return $this->render('view',[
             'model' => $model,
             // 'data' => $this->findItem($model->item_id)
@@ -112,21 +128,57 @@ class OrderController extends \yii\web\Controller
      public function actionCreate(){        
          $model = new \frontend\models\Order();
          
+         $modelsItem = [new \frontend\models\OrderItem()];
+        
+         $count = count(\Yii::$app->request->post('OrderItem',[]));
+        
+         if(!$count) {
+            $count = \Yii::$app->request->get('ItemCount');
+        }
+
+        for($i = 1; $i < $count; $i++){
+            $modelsItem[] =  new \frontend\models\OrderItem();
+        }
+        
+        // var_dump($count); die;
+        $itemNameQuantity = [];
+        if(\frontend\models\OrderItem::loadMultiple($modelsItem, \Yii::$app->request->post()) && 
+            \frontend\models\OrderItem::validateMultiple($modelsItem)){
+                
+                foreach($modelsItem as $modelItem){
+                    // var_dump($value);
+                    array_push($itemNameQuantity, $modelItem['name'], $modelItem['quantity']); 
+                }
+        }
+        
          $model->created_at = date('Y-m-d');
          $model->updated_at = date('Y-m-d');
 
-         if($model->load(\Yii::$app->request->post())){
+        $model->item_id = $itemNameQuantity;
              
+         if($model->load(\Yii::$app->request->post())){
              if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
              }
         } 
 
+        $data['allParties'] = $this->dataAllParties();
+        
+        // ---for storing item ids.
          $data['allItems'] = $this->dataAllItems();
-         $data['allParties'] = $this->dataAllParties();
+        // ---
+        
+        // ---for storgin item names.
+        //  $datatmp = [];
+        //  foreach($this->dataAllItems() as $allItems){ 
+        //      $datatmp[$allItems] = $allItems;
+        //  }
+        //  $data['allItems'] = $datatmp;
+        // ---
 
          return $this->render('create',[
              'model' => $model,
+             'modelsItem' => $modelsItem,
              'data' => $data
          ]);
      }
@@ -139,18 +191,60 @@ class OrderController extends \yii\web\Controller
       public function actionUpdate($id){
 
         $model = $this->findModel($id);
+       
+        $modelsItem = [new \frontend\models\OrderItem()];
         
-        $model->updated_at = date('Y-m-d');
+        $count = count(\Yii::$app->request->post('OrderItem',[]));
         
-        if(($model->load(\Yii::$app->request->post())) && $model->save()){
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(!\Yii::$app->request->post()){
+            $count = $count + count($model->item_id)/2;
+
+            $count = $count + \Yii::$app->request->get('AddItem');        
         }
+
+        for($i = 1; $i < $count; $i++){
+            $modelsItem[] =  new \frontend\models\OrderItem();
+        }
+
+        if(!\Yii::$app->request->post()){
+            foreach($model->item_id as $index => $itemIdQuantity){
+                
+                if($index%2 !=0){
+                    $modelsItem[$index/2]['quantity']= $itemIdQuantity; // here assigns item quantity.
+                    continue;
+                }
+                $modelsItem[$index/2]['name']=$itemIdQuantity; // here assigns item id.
+            }
+        } else {
+            $itemNameQuantity = [];
+            if(\frontend\models\OrderItem::loadMultiple($modelsItem, \Yii::$app->request->post()) && 
+                \frontend\models\OrderItem::validateMultiple($modelsItem)){
+                    
+                    foreach($modelsItem as $modelItem){
+                        // var_dump($value);
+                        array_push($itemNameQuantity, $modelItem['name'], $modelItem['quantity']); 
+                    }
+            }
+            
+            $model->updated_at = date('Y-m-d');
+    
+            $model->item_id = $itemNameQuantity;
+                 
+             if($model->load(\Yii::$app->request->post())){
+                 if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                 }
+            }
+        }
+
+        // $model->updated_at = date('Y-m-d');
 
         $data['allItems'] = $this->dataAllItems();
         $data['allParties'] = $this->dataAllParties();
 
         return $this->render('update',[
             'model' => $model,
+            'modelsItem' => $modelsItem,
             'data' => $data
         ]);
    }
