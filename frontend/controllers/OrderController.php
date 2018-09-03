@@ -101,10 +101,11 @@ class OrderController extends \yii\web\Controller
 
    //
     protected function dataAllItems(){
-        $itemsData = \frontend\models\Items::find()->select('id ,name')->asArray()->all();
+        $itemsData = \frontend\models\Items::find()->select('id ,name, amount')->asArray()->all();
 
         foreach ($itemsData as $key => $value) {
-            $data[$value['id']] = $value['name'];
+            $data['id_name'][$value['id']] = $value['name'];
+            $data['id_amount'][$value['id']] = $value['amount'];
         }
 
         return $data;
