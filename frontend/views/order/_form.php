@@ -1,6 +1,22 @@
 
 <div class="order-form">
     <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+    <?php
+        echo \yii\bootstrap\Dropdown::widget([
+            'items' => [
+                ['label' => '1', 'url' => '?ItemCount=1'],
+                ['label' => '2', 'url' => '?ItemCount=2'],
+                ['label' => '3', 'url' => '?ItemCount=3'],
+                ['label' => '4', 'url' => '?ItemCount=4'],
+                ['label' => '5', 'url' => '?ItemCount=5'],
+                ['label' => '6', 'url' => '?ItemCount=6'],
+                ['label' => '7', 'url' => '?ItemCount=7'],
+            ],
+            'options' => [
+                'onchange' => 'this'
+            ]
+        ]);
+    ?>
 
         <?php
             echo $form->field($model, 'party_id')->label('Party Name')->widget(\kartik\select2\Select2::classname(), [
@@ -23,10 +39,10 @@
 
 
         <?php
-            $dataItems = [];
-            foreach($data['allItems'] as $key => $value){
-                array_push($dataItems,$value); 
-            }
+            // $dataItems = [];
+            // foreach($data['allItems'] as $key => $value){
+            //     array_push($dataItems,$value); 
+            // }
             
             foreach($modelsItem as $index => $modelItem){ ?>
 
@@ -87,9 +103,9 @@
                 ]); 
             ?>
             </div>
-            <div class="col-md-2" style="">
-
-                <?= \yii\helpers\Html::hiddenInput('ah', null, ['id' => strtolower($modelItem->formName()).'-'.$index.'-amount-hidden']) ?>
+            <div class="col-md-2" style="">                
+                
+                <?= \yii\helpers\Html::hiddenInput('ah', ($modelItem->name) ? $data['allItems']['id_amount'][$modelItem->name] : null, ['id' => strtolower($modelItem->formName()).'-'.$index.'-amount-hidden']) ?>
                 <?= $form->field($modelItem,'['.$index.']'.'quantity')
                         ->textInput(['onchange' => ' 
                                             // var modelIdAmount = '.$modelIdAmount.';
@@ -114,8 +130,14 @@
             </div>             
             <div class="col-md-3" style="">
                 <div class="form-group">
-                    <?= \yii\helpers\Html::label('Amount', 'xxx', ['class' => 'control-label']) ?>
-                    <?= \yii\helpers\Html::textInput('xxx', null,['id' => strtolower($modelItem->formName()).'-'.$index.'-amount', 'class' => 'form-control amount', 'disabled' => true]); ?>
+                    <?= \yii\helpers\Html::label('Amount', 'amount', ['class' => 'control-label']) ?>
+                    <?= \yii\helpers\Html::textInput(
+                                            'amount', 
+                                            ($modelItem->name) ? $data['allItems']['id_amount'][$modelItem->name] * $modelItem->quantity : null,
+                                            [
+                                                'id' => strtolower($modelItem->formName()).'-'.$index.'-amount',
+                                                'class' => 'form-control amount', 'disabled' => true
+                                            ]); ?>
                     <?php //= $form->field($modelItem,'['.$index.']'.'quantity')->textInput(); ?>
                 </div>
             </div>
