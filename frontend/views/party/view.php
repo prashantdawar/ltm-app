@@ -5,6 +5,7 @@
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="party-view">
+    <div class="col-md-6">
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
     <p>
         <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
@@ -17,7 +18,21 @@
             ]);
         ?>
     </p>
+    </div>
 
+
+    <div class="col-md-6">
+    <h1> 
+        <p>
+            <div class="alert alert-success" role="alert">
+                <span> Trade Total: </span>
+                <span><?= ($netAmount) ? $netAmount : 0; ?></span>
+                <span> &#x20B9;</span>
+                <!-- <a href="#" class="alert-link">...</a> -->
+            </div>
+        </p>
+    </h1>
+    </div>
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
             'attributes' => [

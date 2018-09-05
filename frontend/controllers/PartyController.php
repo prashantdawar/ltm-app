@@ -48,9 +48,12 @@ class PartyController extends \yii\web\Controller {
      * Display a single party entry.
      */
     public function actionView($id){
-        
+
+        $netAmount = \frontend\models\Order::find()->where(['party_id' => $id])->sum('amount');
+        // var_dump($netAmount); die;
         return $this->render('view',[
-            'model' => $this->findModel($id)
+            'model' => $this->findModel($id),
+            'netAmount' => $netAmount
         ]);
     }
 
