@@ -1,22 +1,6 @@
 
 <div class="order-form">
     <?php $form = \yii\widgets\ActiveForm::begin(); ?>
-    <?php
-        echo \yii\bootstrap\Dropdown::widget([
-            'items' => [
-                ['label' => '1', 'url' => '?ItemCount=1'],
-                ['label' => '2', 'url' => '?ItemCount=2'],
-                ['label' => '3', 'url' => '?ItemCount=3'],
-                ['label' => '4', 'url' => '?ItemCount=4'],
-                ['label' => '5', 'url' => '?ItemCount=5'],
-                ['label' => '6', 'url' => '?ItemCount=6'],
-                ['label' => '7', 'url' => '?ItemCount=7'],
-            ],
-            'options' => [
-                'onchange' => 'this'
-            ]
-        ]);
-    ?>
 
         <?php
             echo $form->field($model, 'party_id')->label('Party Name')->widget(\kartik\select2\Select2::classname(), [
