@@ -252,6 +252,7 @@
             <th class="w5"></th>
             <th>Gross Amount</th>
         </tr>
+        <?php $subTotal = 0; ?>
         <?php foreach($dataAmount as $index => $amount) { ?>
             <tr>
             <td class="w10"><?= $index+1;  ?></td>
@@ -260,6 +261,7 @@
             <td class="w10">18.0%</td>
             <td class="w5"></td>
             <td><?= $dataItem[$index*2+1]* $amount; ?></td>
+            <?php $subTotal += $dataItem[$index*2+1]* $amount; ?>
         </tr>
          <?php } ?>
         
@@ -278,7 +280,7 @@
             <td class="w10"></td>
             <td class="w10 left-line"></td>
             <td class="w5"></td>
-            <td><?= $model->amount; ?></td>
+            <td>&#x20B9; <?= $subTotal; ?></td>
         </tr>
     </table>
     
@@ -304,13 +306,15 @@
                         <td><br></td>
                         <td><br></td>
                     </tr>
+                    <?php if($subTotal-$model->amount) {?>
                     <tr>
-                        <td class="w50">Round Off</td>
-                        <td class="w50">0.00</td>
+                        <td class="w50">Discount</td>
+                        <td class="w50">- &#x20B9; <?= $subTotal-$model->amount ;?></td>
                     </tr>
+                    <?php } ?>
                     <tr>
                         <td class="w50"><h3>Invoice Total</h3></td>
-                        <td class="w50"><h3><?= $model->amount; ?></h3></td>
+                        <td class="w50"><h3>&#x20B9;<?= $model->amount; ?></h3></td>
                     </tr>
                 </table>
             </td>
