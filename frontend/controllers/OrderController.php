@@ -61,9 +61,11 @@ class OrderController extends \yii\web\Controller
                 continue;
             }
 
-            $item = \frontend\models\Items::find()->select('name')->where(['id' => $itemIdQuantity])->asArray()->one();
+            $item = \frontend\models\Items::find()->select('name, amount')->where(['id' => $itemIdQuantity])->asArray()->one();
+            // var_dump($item); die;
             array_push($dataItem, $item['name']);
-            array_push($dataAmount,(\frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one())['amount']);
+            // $amount = \frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one();
+            array_push($dataAmount,$item['amount']);
         }
         
         return $this->renderPartial('orderpdf',[
