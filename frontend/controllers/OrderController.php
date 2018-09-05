@@ -45,6 +45,46 @@ class OrderController extends \yii\web\Controller
     }
 
     /**
+     * Prints pdf
+     */
+    public function actionPdf($id){
+
+        $model = $this->findModel($id);
+        $partyModel = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+
+        $dataItem = [];
+        $dataAmount = [];
+        foreach($model->item_id as $key => $itemIdQuantity){
+
+            if($key%2 != 0){
+                array_push($dataItem, $itemIdQuantity);
+                continue;
+            }
+
+            $item = \frontend\models\Items::find()->select('name')->where(['id' => $itemIdQuantity])->asArray()->one();
+            array_push($dataItem, $item['name']);
+            array_push($dataAmount,(\frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one())['amount']);
+        }
+        
+        return $this->renderPartial('orderpdf',[
+            'model' => $model,
+            'partyModel' => $partyModel,
+            'dataItem' => $dataItem,
+            'dataAmount' => $dataAmount
+        ]);
+        
+        // $mpdf = new \Mpdf\Mpdf();
+        // $mpdf->WriteHTML(
+        //     $this->renderPartial('orderpdf',[
+        //         'model' => $model,
+        //         'partyModel' => $partyModel,
+        //         'dataItem' => $dataItem,
+        //         'dataAmount' => $dataAmount
+        //     ]));
+        // $mpdf->Output();
+    }
+
+    /**
      * Display single order entry
      */
     public function actionView($id){

@@ -16,8 +16,9 @@
                 ]
             ]);
         ?>
+        <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
     </p>
-
+    
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
             'attributes' => [
