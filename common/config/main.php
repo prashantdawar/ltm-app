@@ -21,7 +21,7 @@ return [
             'transport' => [
                 'class'      => 'Swift_SmtpTransport',
                 'host'       => 'smtp.datapacks.in',
-                'username'   => 'support@datapacks.in',
+                'username'   => 'sales@datapacks.in',
                 'password'   => 'Qwertydp#123', // your password
                 'port'       => '25',
             //    'encryption' => 'tls',
