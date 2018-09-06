@@ -52,6 +52,10 @@
     .brand-location {
         float: right;   
     }
+
+    .brand-header, .brand-location {
+        margin-top: 0;
+    }
 </style>
 
 <body onload="window.print()">
