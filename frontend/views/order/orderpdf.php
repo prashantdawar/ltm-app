@@ -54,7 +54,7 @@
     }
 </style>
 
-<body>
+<body onload="window.print()">
     <div>
         <h1 class="brand-header">Saugat Computers</h1>
         <h1 class="brand-location">Hansi</h1>
