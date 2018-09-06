@@ -1,8 +1,11 @@
+<html>
+<head>
 <style>
     body {
         width: 210mm;
-        height: 297mm;
+        /* height: 297mm;         */
     }
+
     table {
         width: 100%;
         /* border: 1px solid black; */
@@ -57,7 +60,7 @@
         margin-top: 0;
     }
 </style>
-
+</head>
 <body onload="window.print()">
     <div>
         <h1 class="brand-header">Saugat Computers</h1>
@@ -284,3 +287,4 @@
         </tr>
     </table>
 </body>
+</html>
