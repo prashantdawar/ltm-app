@@ -66,7 +66,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 //     //                 ['target' => '_blank']);
                 //     //             }
                 // ],
-                'amount',                
+                'amount',
+                [   'attribute' => 'status',
+                    'filter' =>  \kartik\select2\Select2::widget([
+                        'model' => $searchModel,
+                        'data' => $searchModel->orderStatus,
+                        'attribute' => 'status',
+                        'options' => ['placeholder' => 'Select Status'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]),
+                    'value' => function($model){
+                        return $model->orderStatus[$model->status];
+                    }
+                ],                
                 // 'status',
                 // 'created_at', //managed in model
                 

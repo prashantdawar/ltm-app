@@ -62,6 +62,7 @@ class OrderSearch extends \frontend\models\Order {
             $query->andFilterWhere([
                 '`order`.`id`' => $this->id,
                 '`order`.`amount`' => $this->amount,
+                '`order`.`status`' => $this->status,
                 '`order`.`created_at`' => $this->created_at ? date("Y-m-d",strtotime($this->created_at)): NULL
             ]);
 
