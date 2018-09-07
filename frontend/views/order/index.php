@@ -72,16 +72,32 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $searchModel,
                         'data' => $searchModel->orderStatus,
                         'attribute' => 'status',
-                        'options' => ['placeholder' => 'Select Status'],
+                        'options' => ['placeholder' => ''],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ]),
                     'value' => function($model){
                         return $model->orderStatus[$model->status];
-                    }
+                    },
+                    'headerOptions' => ['style' => ' min-width:150px;  '],
                 ],                
                 // 'status',
+                [   'attribute' => 'payment_mode',
+                    'filter' =>  \kartik\select2\Select2::widget([
+                        'model' => $searchModel,
+                        'data' => $searchModel->paymentMode,
+                        'attribute' => 'payment_mode',
+                        'options' => ['placeholder' => ''],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]),
+                    'value' => function($model){
+                        return $model->paymentMode[$model->payment_mode];
+                    },
+                    'headerOptions' => ['style' => ' min-width:180px;  '],
+                ],
                 // 'created_at', //managed in model
                 
 

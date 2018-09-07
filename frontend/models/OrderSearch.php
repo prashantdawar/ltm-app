@@ -14,7 +14,7 @@ class OrderSearch extends \frontend\models\Order {
     public function rules()
     {   
         return [
-            [['id', 'amount', 'status'], 'integer'],
+            [['id', 'amount', 'status', 'payment_mode'], 'integer'],
             [['party_name','item_name', 'created_at'], 'safe']
         ];
     }
@@ -63,6 +63,7 @@ class OrderSearch extends \frontend\models\Order {
                 '`order`.`id`' => $this->id,
                 '`order`.`amount`' => $this->amount,
                 '`order`.`status`' => $this->status,
+                'payment_mode' => $this->payment_mode,
                 '`order`.`created_at`' => $this->created_at ? date("Y-m-d",strtotime($this->created_at)): NULL
             ]);
 
