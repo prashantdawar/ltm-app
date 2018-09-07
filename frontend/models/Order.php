@@ -19,6 +19,13 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+    
+    
+    
+    public $paymentMode =  ['0'=> 'Cash','1' => 'Credit', '2' => 'UPI', '3' => 'Paytm', '4' => 'Cheque', '5' => 'Online Transfer', '6' => 'Bank Transfer'];
+    public $orderStatus =  ['0' => 'Completed', '1' => 'Pending', '2' => 'Processing', '3' => 'Cancelled', '4' => 'Halt'];
+    public $currencySymbol = '&#x20B9;';
+
     /**
      * {@inheritdoc}
      */
@@ -33,7 +40,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'party_id','amount'], 'required'],
+            [[ 'party_id','amount', 'payment_mode'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
             [['amount', 'status',  'created_by', 'updated_by'], 'integer'],
             [['item_id','created_at', 'updated_at'], 'safe']
@@ -52,6 +59,7 @@ class Order extends \yii\db\ActiveRecord
             'item_id' => 'Item ID',
             'amount' => 'Net Amount Payable',
             'status' => 'Status',
+            'payment_mode' => 'Mode of Payment',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',

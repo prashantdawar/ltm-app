@@ -42,8 +42,20 @@
                     'label' => 'Item Name',
                     'value' => $data
                  ],
-                'amount',
-                // 'status',
+                [
+                    'attribute' => 'amount',
+                    'format'=> 'raw',
+                    'value' => $model->currencySymbol.' '.$model->amount,
+                ],
+                [
+                    'attribute' => 'payment_mode',
+                    'value' => $model->paymentMode[$model->payment_mode],
+                ],
+                [
+                    'attribute' => 'status',
+                    'value' => $model->orderStatus[$model->status],
+
+                ],                
                 'created_at', //managed in model
                 // [
                 //     'attribute' => 'created_at',

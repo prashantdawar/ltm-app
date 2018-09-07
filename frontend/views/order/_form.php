@@ -133,9 +133,28 @@
                 <div class="help-block"></div>
                 </div>            </div> -->
             <br>
-        <?php } ?> 
-        
+        <?php } ?>
+       
         <?=$form->field($model,'amount')->textInput(); ?>
+
+        <?php if(!$model->payment_mode) $model->payment_mode = 0; // see order model $paymentMode[]?>
+        <?= $form->field($model,'payment_mode')->widget(\kartik\select2\Select2::classname(), [
+                'data' =>$model->paymentMode,
+                'options' => ['placeholder' => 'Select Payment Mode'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]); 
+        ?>
+        <?php if(!$model->status) $model->status = 0; // set default to completed for kartik-v select2 widget // see order model $orderStatus[] for value?>
+        <?= $form->field($model,'status')->widget(\kartik\select2\Select2::classname(), [
+                'data' =>$model->orderStatus,
+                'options' => ['placeholder' => 'Select order status'],
+                'pluginOptions' => [
+                    'allowClear' => true,                    
+                ],
+            ]); 
+        ?>
         
         <div class="form-group">
             <?= \yii\helpers\Html::submitButton('Save', [

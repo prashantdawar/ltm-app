@@ -105,7 +105,7 @@
                     </tr>
                     <tr>
                         <td class="w50">Payment Mode:</td>
-                        <td>CASH</td>
+                        <td><?= $model->paymentMode[$model->payment_mode] ?></td>
                     </tr>
                 </table>
             </td>
@@ -249,12 +249,12 @@
                     <?php if($subTotal-$model->amount) {?>
                     <tr>
                         <td class="w50">Discount</td>
-                        <td class="w50">- &#x20B9; <?= $subTotal-$model->amount ;?></td>
+                        <td class="w50">- <?= $model->currencySymbol; ?> <?= $subTotal-$model->amount ;?></td>
                     </tr>
                     <?php } ?>
                     <tr>
                         <td class="w50"><h3>Invoice Total</h3></td>
-                        <td class="w50"><h3>&#x20B9;<?= $model->amount; ?></h3></td>
+                        <td class="w50"><h3><?= $model->currencySymbol; ?> <?= $model->amount; ?></h3></td>
                     </tr>
                 </table>
             </td>
