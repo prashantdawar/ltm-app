@@ -58,7 +58,7 @@
         margin-top: 0;
     }
 </style>
-<body onload="window.print()">
+<body>
     <div>
         <h1 class="brand-header">Saugat Computers</h1>
         <h1 class="brand-location">Hansi</h1>
@@ -243,18 +243,18 @@
             <td class="left-line">
                 <table>
                     <tr>
-                        <td><br></td>
-                        <td><br></td>
+                        <td class="w70"><br></td>
+                        <td class="w30"><br></td>
                     </tr>
                     <?php if($subTotal-$model->amount) {?>
                     <tr>
-                        <td class="w50">Discount</td>
-                        <td class="w50">- <?= $model->currencySymbol; ?> <?= $subTotal-$model->amount ;?></td>
+                        <td class="w70"><span>Discount</span></td>
+                        <td class="w30"><span>- <?= $model->currencySymbol; ?> <?= $subTotal-$model->amount ;?></span></td>
                     </tr>
                     <?php } ?>
                     <tr>
-                        <td class="w50"><h3>Invoice Total</h3></td>
-                        <td class="w50"><h3><?= $model->currencySymbol; ?> <?= $model->amount; ?></h3></td>
+                        <td class="w70"><h3>Invoice Total</h3></td>
+                        <td class="w30"><h3><?= $model->currencySymbol; ?> <?= $model->amount; ?></h3></td>
                     </tr>
                 </table>
             </td>

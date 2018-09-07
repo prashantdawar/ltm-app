@@ -59,7 +59,7 @@ class Order extends \yii\db\ActiveRecord
             'item_id' => 'Item ID',
             'amount' => 'Net Amount Payable',
             'status' => 'Status',
-            'payment_mode' => 'Payment Type',
+            'payment_mode' => 'Payment Mode',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
