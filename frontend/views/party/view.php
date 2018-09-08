@@ -11,7 +11,7 @@
 <?php
   $creditBalance = ($netAmount['credit']) ? $netAmount['credit'] : 0;
   $debitBalance = ($netAmount['debit']) ? $netAmount['debit'] : 0;
-  $netBalance = ($netAmount['debit']) ? (($netAmount['credit']) ? $netAmount['debit']-$netAmount['credit'] : 0) : 0;
+  $netBalance = $debitBalance - $creditBalance;
 ?>
 <div class="party-view">
     <div class="col-md-6">
@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                         <th>
-                            <span>Net <?= ($netBalance > 0) ? 'Debit': 'Credit'?> Balance:</span>
+                            <span>Net <?= ($netBalance >= 0) ? 'Debit': 'Credit'?> Balance:</span>
                         </th>
                         <td>
                             <span> &#x20B9;</span>
