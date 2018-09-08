@@ -55,11 +55,11 @@
                     </tr>
                     <tr>
                         <th>
-                            <span>Due <?= ($netBalance >= 0) ? 'Debit': 'Credit'?> Balance:</span>
+                            <span>Due Credit Balance:</span>
                         </th>
                         <td>
                             <span> &#x20B9;</span>
-                            <span><?=  ($netBalance >= 0) ? $netBalance : -$netBalance ?></span>
+                            <span><?=  $creditBalance ?></span>
                         </td>
                     </tr>
                 </tbody>
