@@ -4,6 +4,15 @@
     $this->params['breadcrumbs'][] = ['label' => 'Party', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
+
+
+<?php
+  $creditBalance = ($netAmount['credit']) ? $netAmount['credit'] : 0;
+  $debitBalance = ($netAmount['debit']) ? $netAmount['debit'] : 0;
+  $netBalance = ($netAmount['debit']) ? (($netAmount['credit']) ? $netAmount['debit']-$netAmount['credit'] : 0) : 0;
+?>
 <div class="party-view">
     <div class="col-md-6">
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
@@ -22,16 +31,45 @@
 
 
     <div class="col-md-6">
-    <h1> 
         <p>
             <div class="alert alert-success" role="alert">
-                <span> Trade Total: </span>
-                <span><?= ($netAmount) ? $netAmount : 0; ?></span>
-                <span> &#x20B9;</span>
-                <!-- <a href="#" class="alert-link">...</a> -->
+                <table style="display: inline;">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Net Debit:</span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?= $debitBalance?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span> Net Credit: </span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?= $creditBalance?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Net <?= ($netBalance > 0) ? 'Debit': 'Credit'?> Balance:</span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?=  $netBalance ?></span>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+                <div style="display:inline; float: right;">
+                    <?= \yii\helpers\Html::a('See Orders', ['order/', 'OrderSearch[party_name]' => $model->name], ['class' => 'btn btn-primary']); ?>
+                </div>
             </div>
         </p>
-    </h1>
+    
     </div>
     <?= \yii\widgets\DetailView::widget([
             'model' => $model,
