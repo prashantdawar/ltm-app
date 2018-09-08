@@ -49,8 +49,11 @@ class PartyController extends \yii\web\Controller {
      */
     public function actionView($id){
 
-        $netAmount = \frontend\models\Order::find()->where(['party_id' => $id])->sum('amount');
-        // var_dump($netAmount); die;
+        $query = \frontend\models\Order::find()->where(['party_id' => $id]);
+        $creditAmount = (float)($query->Where(['payment_mode' => '1'])->sum('amount'));
+        $debitAmount = (float)($query->Where(['not',['payment_mode' => '1']])->sum('amount'));
+        $netAmount = $debitAmount - $creditAmount;
+        
         return $this->render('view',[
             'model' => $this->findModel($id),
             'netAmount' => $netAmount
