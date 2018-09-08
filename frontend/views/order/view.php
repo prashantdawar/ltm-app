@@ -17,6 +17,7 @@
             ]);
         ?>
         <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
+        <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right;']); ?>
     </p>
     
     <?= \yii\widgets\DetailView::widget([
