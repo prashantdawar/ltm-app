@@ -59,7 +59,7 @@
                         </th>
                         <td>
                             <span> &#x20B9;</span>
-                            <span><?=  $netBalance ?></span>
+                            <span><?=  ($netBalance >= 0) ? $netBalance : -$netBalance ?></span>
                         </td>
                     </tr>
                 </tbody>
