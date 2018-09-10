@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 // 'party_id','item_id',
+                
                 [
                     'attribute' => 'party_name',
                     'headerOptions' => ['style' => 'width:20%'],
