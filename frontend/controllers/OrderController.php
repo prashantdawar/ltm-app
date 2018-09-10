@@ -200,19 +200,25 @@ class OrderController extends \yii\web\Controller
         $model->item_id = $itemNameQuantity;
              
          if($model->load(\Yii::$app->request->post())){
-             if($model->save()){
-                 $modelPaymentsCredit = new \frontend\models\Payments();
-                 $modelPaymentsCredit->attributes = $_POST[$model->formName()];
+             if($model->save()){                 
+                 $modelPaymentsCredit = new \frontend\models\Payments();                 
+                 $modelPaymentsCredit->setAttributes($model->attributes);
                  $modelPaymentsCredit->payment_mode = 1;
-                 $modelPaymentsCredit->created_at = $model->created_at;
-                 $modelPaymentsCredit->updated_at = $model->updated_at;
+                 unset($modelPaymentsCredit->created_by);
+                 unset($modelPaymentsCredit->updated_by);
+                //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
+                //  $modelPaymentsCredit->created_at = $model->created_at;
+                //  $modelPaymentsCredit->updated_at = $model->updated_at;
                  $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->id;
                 if($modelPaymentsCredit->save()){
                     if($model->payment_mode != 1){
                         $modelPaymentsDebit = new \frontend\models\Payments();
-                        $modelPaymentsDebit->attributes = $_POST[$model->formName()];
-                        $modelPaymentsDebit->created_at = $model->created_at;
-                        $modelPaymentsDebit->updated_at = $model->updated_at;
+                        $modelPaymentsDebit->setAttributes($model->attributes);
+                        unset($modelPaymentsDebit->created_by);
+                        unset($modelPaymentsDebit->updated_by);
+                        // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
+                        // $modelPaymentsDebit->created_at = $model->created_at;
+                        // $modelPaymentsDebit->updated_at = $model->updated_at;
                         $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->id;
                         $modelPaymentsDebit->save();
                     }
