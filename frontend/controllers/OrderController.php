@@ -205,6 +205,7 @@ class OrderController extends \yii\web\Controller
                  $modelPayments->attributes = $_POST[$model->formName()];
                  $modelPayments->created_at = $model->created_at;
                  $modelPayments->updated_at = $model->updated_at;
+                 $modelPayments->notes = 'Updated from Order No. : ' . $model->id;
                 if($modelPayments->save()){
                     return $this->redirect(['view', 'id' => $model->id]);
                 }                
