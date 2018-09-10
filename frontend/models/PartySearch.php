@@ -39,7 +39,8 @@ class PartySearch extends Party{
         $query = Party::find();
 
         $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);

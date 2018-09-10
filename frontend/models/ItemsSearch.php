@@ -45,8 +45,9 @@ class ItemsSearch extends Items
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         // if(!$params){
