@@ -13,8 +13,10 @@ class OrderSearch extends \frontend\models\Order {
      */
     public function rules()
     {   
+        // var_dump(isset(\Yii::$app->request->get('OrderSearch')['party_name']) ? '0': 'party_id','integer'); die;
         return [
-            [['id', 'amount', 'status', 'payment_mode'], 'integer'],
+            [['id', 'party_id', 'amount', 'status', 'payment_mode'], 'integer'],
+            // [isset(\Yii::$app->request->get('OrderSearch')['party_name']) ? 'id': 'party_id','integer'],
             [['party_name','item_name', 'created_at'], 'safe']
         ];
     }
@@ -58,17 +60,18 @@ class OrderSearch extends \frontend\models\Order {
         if(!$this->validate()){
             return $dataProvider;
         }
-            // var_dump($this->created_at); die;
+            // var_dump($this->party_id); die;
             $query->andFilterWhere([
                 '`order`.`id`' => $this->id,
+                '`order`.`party_id`' => $this->party_id,
                 '`order`.`amount`' => $this->amount,
                 '`order`.`status`' => $this->status,
                 'payment_mode' => $this->payment_mode,
                 '`order`.`created_at`' => $this->created_at ? date("Y-m-d",strtotime($this->created_at)): NULL
             ]);
 
-            $query->andFilterWhere(['like', 'party.name', $this->party_name])
-                ->andFilterWhere(['like', 'items.name', $this->item_name]);
+            $query->andFilterWhere(['like', 'party.name', $this->party_name]);
+                // ->andFilterWhere(['like', 'items.name', $this->item_name]);
 
         return $dataProvider;
     }

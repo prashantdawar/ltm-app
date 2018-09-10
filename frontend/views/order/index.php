@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                // 'party_id','item_id',
+                // 'party_id','item_id',                
                 [
                     'attribute' => 'party_name',
                     'headerOptions' => ['style' => 'width:20%'],
@@ -32,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 
                                 return \yii\helpers\Html::a(
                                     $model->party->name,
-                                    \yii\helpers\Url::to(['.', 'OrderSearch[party_name]' => $model->party->name]));
+                                    \yii\helpers\Url::to(['/order', 'OrderSearch[party_id]' => $model->party_id, 'OrderSearch[party_name]' => $model->party->name]));
+                                    // \yii\helpers\Url::to(['.', 'OrderSearch[party_name]' => $model->party->name]));
                                     
                                     // \yii\helpers\Url::to(['party/view', 'id' => $model->party->id]),
                                     // ['target' => '_blank']);
