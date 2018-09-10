@@ -201,7 +201,13 @@ class OrderController extends \yii\web\Controller
              
          if($model->load(\Yii::$app->request->post())){
              if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
+                 $modelPayments = new \frontend\models\Payments();
+                 $modelPayments->attributes = $_POST[$model->formName()];
+                 $modelPayments->created_at = $model->created_at;
+                 $modelPayments->updated_at = $model->updated_at;
+                if($modelPayments->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }                
              }
         } 
 

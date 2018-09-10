@@ -65,7 +65,14 @@
                 </tbody>
                 </table>
                 <div style="display:inline; float: right;">
-                    <?= \yii\helpers\Html::a('See Orders', ['order/', 'OrderSearch[party_name]' => $model->name], ['class' => 'btn btn-primary']); ?>
+                    <?= \yii\helpers\Html::a('See Orders', 
+                                            [
+                                                'order/', 'OrderSearch[party_id]' => $model->id, 
+                                                'OrderSearch[party_name]' => $model->name,
+                                            ],
+                                            [
+                                                'class' => 'btn btn-primary'
+                                            ]); ?>
                 </div>
             </div>
         </p>
