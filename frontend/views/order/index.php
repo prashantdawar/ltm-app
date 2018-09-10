@@ -21,8 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                // 'party_id','item_id',
-                
+                // 'party_id','item_id',                
                 [
                     'attribute' => 'party_name',
                     'headerOptions' => ['style' => 'width:20%'],
