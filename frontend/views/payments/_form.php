@@ -32,6 +32,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'amount')->textInput() ?>
 
+    <?= $form->field($model, 'notes')->textArea() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

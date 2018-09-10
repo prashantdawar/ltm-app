@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=> 'raw',
                 'value' => $model->currencySymbol.' '.$model->amount,
             ],
+            [
+                'attribute' => 'notes',
+                'format'=> 'raw',
+                'value' => (strlen($model->notes) > 0) ? $model->notes : '--- Click Update to enter notes. ---'
+            ],
             'created_at',
             'updated_at',
             // 'created_by',

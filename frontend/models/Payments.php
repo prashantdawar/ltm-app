@@ -36,7 +36,7 @@ class Payments extends \yii\db\ActiveRecord
         return [
             [['party_id', 'payment_mode', 'amount', 'created_at', 'updated_at'], 'required'],
             [['party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'notes'], 'safe'],
         ];
     }
 
@@ -50,6 +50,7 @@ class Payments extends \yii\db\ActiveRecord
             'party_id' => 'Party Name',
             'payment_mode' => 'Payment Mode',
             'amount' => 'Amount',
+            'notes' => 'Notes',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',

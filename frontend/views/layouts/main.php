@@ -41,6 +41,7 @@ AppAsset::register($this);
         // ['label' => 'Contact', 'url' => ['/site/contact']],
         ['label' => 'Order', 'url' => ['/order']],
         ['label' => 'Party', 'url' => ['/party']],
+        ['label' => 'Payments', 'url' => ['/payments']],
         ['label' => 'Stock', 'url' => ['/items']],
     ];
     if (Yii::$app->user->isGuest) {

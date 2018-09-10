@@ -55,11 +55,11 @@
                     </tr>
                     <tr>
                         <th>
-                            <span>Due Credit Balance:</span>
+                            <span>Due Balance:</span>
                         </th>
                         <td>
                             <span> &#x20B9;</span>
-                            <span><?=  $creditBalance ?></span>
+                            <span><?=  $netBalance ?></span>
                         </td>
                     </tr>
                 </tbody>

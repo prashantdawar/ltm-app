@@ -51,7 +51,7 @@ class PaymentsSearch extends \frontend\models\Payments
         // grid filtering conditions
         $query->andFilterWhere([
             // 'id' => $this->id,
-            // 'party_id' => $this->party_id,
+            '`payments`.`party_id`' => $this->party_id,
             '`payments`.`payment_mode`' => $this->payment_mode,
             '`payments`.`amount`' => $this->amount,
             '`payments`.`created_at`' => $this->created_at ? date("Y-m-d",strtotime($this->created_at)): NULL

@@ -28,9 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {                            
                         return \yii\helpers\Html::a(
                             $model->party->name,
-                            \yii\helpers\Url::to(['.', 'PaymentsSearch[party_name]' => $model->party->name]));
+                            \yii\helpers\Url::to(['/payments', 'PaymentsSearch[party_id]' => $model->party_id, 'PaymentsSearch[party_name]' => $model->party->name]));
                         }
             ],
+            'amount',
             [   'attribute' => 'payment_mode',
                 'filter' =>  \kartik\select2\Select2::widget([
                     'model' => $searchModel,
@@ -45,8 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->paymentMode[$model->payment_mode];
                 },
                 'headerOptions' => ['style' => ' min-width:180px;  '],
-            ],
-            'amount',
+            ],            
             [   'attribute' => 'created_at',
                 'filter' =>  \dosamigos\datepicker\DatePicker::widget([
                     'model' => $searchModel,
