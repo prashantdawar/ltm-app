@@ -201,12 +201,21 @@ class OrderController extends \yii\web\Controller
              
          if($model->load(\Yii::$app->request->post())){
              if($model->save()){
-                 $modelPayments = new \frontend\models\Payments();
-                 $modelPayments->attributes = $_POST[$model->formName()];
-                 $modelPayments->created_at = $model->created_at;
-                 $modelPayments->updated_at = $model->updated_at;
-                 $modelPayments->notes = 'Updated from Order No. : ' . $model->id;
-                if($modelPayments->save()){
+                 $modelPaymentsCredit = new \frontend\models\Payments();
+                 $modelPaymentsCredit->attributes = $_POST[$model->formName()];
+                 $modelPaymentsCredit->payment_mode = 1;
+                 $modelPaymentsCredit->created_at = $model->created_at;
+                 $modelPaymentsCredit->updated_at = $model->updated_at;
+                 $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->id;
+                if($modelPaymentsCredit->save()){
+                    if($model->payment_mode != 1){
+                        $modelPaymentsDebit = new \frontend\models\Payments();
+                        $modelPaymentsDebit->attributes = $_POST[$model->formName()];
+                        $modelPaymentsDebit->created_at = $model->created_at;
+                        $modelPaymentsDebit->updated_at = $model->updated_at;
+                        $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->id;
+                        $modelPaymentsDebit->save();
+                    }
                     return $this->redirect(['view', 'id' => $model->id]);
                 }                
              }
