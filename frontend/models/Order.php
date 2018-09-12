@@ -111,9 +111,6 @@ class Order extends \yii\db\ActiveRecord
      */
     public function sendEmail($model, $partyModel, $dataItem, $dataAmount)
     {
-        $email = ($this->getParty()->select('email')->asArray()->one())['email'];
-        if(strlen($email) <= 6) { return false; }
-
         return Yii::$app
             ->mailer
             ->compose(
@@ -125,7 +122,7 @@ class Order extends \yii\db\ActiveRecord
                     'dataAmount' => $dataAmount                            
                 ])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($email)
+            ->setTo($partyModel->email)
             ->setSubject('Order Details for: ' . $this->id . ' from ltm web app')
             ->send();
     }

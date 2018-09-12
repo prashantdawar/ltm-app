@@ -109,7 +109,9 @@ class OrderController extends \yii\web\Controller
             // $amount = \frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one();
             array_push($dataAmount,$item['amount']);
         }
-        $model->sendEmail($model, $partyModel, $dataItem, $dataAmount);
+        if(strlen($partyModel->email) > 11) { 
+            $model->sendEmail($model, $partyModel, $dataItem, $dataAmount);
+        }
         return '<script>window.close();</script>';
     }
 
