@@ -18,6 +18,7 @@
         ?>
         <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?= \yii\helpers\Html::a('Send Email', ['send-email', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
+        <a class="btn btn-primary" href="sms:+91<?= $model->party->phone; ?>" target="_blank">Send Sms</a>        
         <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right;']); ?>
     </p>
     
