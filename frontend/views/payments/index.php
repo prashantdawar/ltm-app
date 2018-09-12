@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->paymentMode[$model->payment_mode];
                 },
                 'headerOptions' => ['style' => ' min-width:180px;  '],
-            ],            
+            ],
             [   'attribute' => 'created_at',
                 'filter' =>  \dosamigos\datepicker\DatePicker::widget([
                     'model' => $searchModel,
