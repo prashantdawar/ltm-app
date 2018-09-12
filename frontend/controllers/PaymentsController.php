@@ -38,9 +38,13 @@ class PaymentsController extends Controller
         $searchModel = new PaymentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $netAmount['credit'] = (float)(PaymentsSearch::find()->where(['payment_mode' => '1'])->sum('amount'));
+        $netAmount['debit'] = (float)(PaymentsSearch::find()->where(['not',['payment_mode' => '1']])->sum('amount'));
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'netAmount' => $netAmount
         ]);
     }
 
