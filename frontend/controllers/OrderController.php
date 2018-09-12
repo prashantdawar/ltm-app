@@ -87,6 +87,33 @@ class OrderController extends \yii\web\Controller
     }
 
     /**
+     * Prints pdf
+     */
+    public function actionSendEmail($id){
+
+        $model = $this->findModel($id);
+        $partyModel = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+
+        $dataItem = [];
+        $dataAmount = [];
+        foreach($model->item_id as $key => $itemIdQuantity){
+
+            if($key%2 != 0){
+                array_push($dataItem, $itemIdQuantity);
+                continue;
+            }
+
+            $item = \frontend\models\Items::find()->select('name, amount')->where(['id' => $itemIdQuantity])->asArray()->one();
+            // var_dump($item); die;
+            array_push($dataItem, $item['name']);
+            // $amount = \frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one();
+            array_push($dataAmount,$item['amount']);
+        }
+        $model->sendEmail($model, $partyModel, $dataItem, $dataAmount);
+        return '<script>window.close();</script>';
+    }
+
+    /**
      * Display single order entry
      */
     public function actionView($id){
