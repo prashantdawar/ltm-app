@@ -102,5 +102,31 @@ class Order extends \yii\db\ActiveRecord
      */
     protected function getItems(){        
         return $this->hasOne(Items::className(), ['id' => 'item_id']);
-    }    
+    }
+    
+    /**
+     * Sends an email with a link, for resetting the password.
+     *
+     * @return bool whether the email was send
+     */
+    public function sendEmail($model, $partyModel, $dataItem, $dataAmount)
+    {
+        $email = ($this->getParty()->select('email')->asArray()->one())['email'];
+        if(strlen($email) <= 6) { return false; }
+
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => '/order/orderpdf'],
+                [
+                    'model' => $model,
+                    'partyModel' => $partyModel,
+                    'dataItem' => $dataItem,
+                    'dataAmount' => $dataAmount                            
+                ])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($email)
+            ->setSubject('Order Details for: ' . $this->id . ' from ltm web app')
+            ->send();
+    }
 }
