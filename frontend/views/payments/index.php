@@ -5,14 +5,62 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+
+
+
+<?php
+  $creditBalance = ($netAmount['credit']) ? $netAmount['credit'] : 0;
+  $debitBalance = ($netAmount['debit']) ? $netAmount['debit'] : 0;
+  $netBalance = $debitBalance - $creditBalance;
+?>
+
 <div class="payments-index">
 
+    <div class="col-md-6">
     <h1><?= \yii\helpers\Html::a($this->title, ['/payments']); ?></h1>
 
     <p>
         <?= \yii\helpers\Html::a('Create Payments', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    </div>
+    <div class="col-md-6">
+        <p>
+            <div class="alert alert-success" role="alert">
+                <table style="display: inline;">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Net Debit:</span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?= $debitBalance?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span> Net Credit: </span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?= $creditBalance?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Due Balance:</span>
+                        </th>
+                        <td>
+                            <span> &#x20B9;</span>
+                            <span><?=  $netBalance ?></span>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </p>
+    
+    </div>
     <?= \yii\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
