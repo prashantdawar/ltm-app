@@ -26,7 +26,7 @@
             <a class="btn btn-primary" href="sms:+91<?= $model->party->phone; ?>?body=Your order no.<?= $model->id?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Sms</a>        
         <?php } ?>
         
-        <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right;']); ?>
+        <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right; clear: both']); ?>
     </p>
     
     <?= \yii\widgets\DetailView::widget([
