@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     \yii\helpers\Url::to(['order/', 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],
+                
                 'DueBalance',
                 [
                     'attribute' => 'phone',

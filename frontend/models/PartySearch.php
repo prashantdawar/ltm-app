@@ -11,7 +11,7 @@ class PartySearch extends Party{
     {
         return [
             [['phone', 'pincode', 'last_order_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            ['phone', 'string', 'min' => 10, 'max' => 10 ],
+            // ['phone', 'string', 'min' => 10, 'max' => 10 ],
             [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
@@ -54,7 +54,7 @@ class PartySearch extends Party{
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'phone' => $this->phone,
+            // 'phone' => $this->phone,
             'pincode' => $this->pincode,
             'last_order_is' => $this->last_order_id,
             'status' => $this->status,
@@ -64,6 +64,7 @@ class PartySearch extends Party{
         
         $query->andFilterWhere(['like','name', $this->name])
             ->andFilterWhere(['like','contact_name',$this->contact_name])
+            ->andFilterWhere(['like','phone',$this->phone])
             ->andFilterWhere(['like','email',$this->email])
             ->andFilterWhere(['like','street_address', $this->street_address])
             ->andFilterWhere(['like','city', $this->city])
