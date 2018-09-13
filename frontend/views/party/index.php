@@ -23,8 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'name',
-                // 'contact_name',
-                // 'phone',
+                // 'contact_name',                
                 // 'email',
                 // 'street_address',
                 'city',
@@ -40,7 +39,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                     \yii\helpers\Url::to(['order/', 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],
-                'gst',
+                [
+                    'label' => 'Due Balance',
+                    'format' => 'raw',
+                    'value' => function($model){
+
+                        $debit =0; $credit =0;
+                        foreach($model->payments as $payments){
+                            ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+                        }                        
+                        return $debit-$credit;
+                    }
+                ],
+                [
+                    'attribute' => 'phone',
+                    'format' => 'raw',
+                    'value' => function($model){
+                        return (strlen($model->phone) == 10) ? '<a class="btn btn-primary" href="tel:+91'.$model->phone.'" target="_blank" style="margin-right: 0.5em;">Call</a>'.$model->phone : $model->phone;
+                    }
+                ],
+                // 'gst',
                 // 'pan',
                 // 'status',
 

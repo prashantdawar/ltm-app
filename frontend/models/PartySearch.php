@@ -38,6 +38,8 @@ class PartySearch extends Party{
         
         $query = Party::find();
 
+        $query->joinWith(['payments']);
+
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
             'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
@@ -68,8 +70,6 @@ class PartySearch extends Party{
             ->andFilterWhere(['like','location', $this->location])
             ->andFilterWhere(['like','state', $this->state])
             ->andFilterWhere(['like','gst', $this->gst]);
-
-        
 
         return $dataProvider;
     }

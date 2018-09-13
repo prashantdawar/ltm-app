@@ -79,4 +79,13 @@ class Party extends \yii\db\ActiveRecord
 
         return true;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    protected function getPayments(){
+        // var_dump($this->id);
+        // var_dump($this->hasMany(Order::className(), ['party_id' => 'id'])->asArray()->all());
+        return $this->hasMany(Payments::className(), ['party_id' => 'id'])->select('amount, payment_mode, party_id')->asArray();        
+    }
 }
