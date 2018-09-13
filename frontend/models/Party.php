@@ -83,9 +83,17 @@ class Party extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    // protected function getPayments(){
-    //     // var_dump($this->id);
-    //     // var_dump($this->hasMany(Order::className(), ['party_id' => 'id'])->asArray()->all());
-    //     return $this->hasMany(Payments::className(), ['party_id' => 'id'])->select('amount, payment_mode, party_id')->asArray();        
-    // }
+    protected function getDueBalance(){
+        // var_dump($this->id);
+        // var_dump($this->hasMany(Order::className(), ['party_id' => 'id'])->asArray()->all());
+        $party_payments = Payments::find()->select('amount,payment_mode')->where(['party_id' => $this->id])->asArray()->all();
+
+        $credit =0; $debit = 0;
+        foreach($party_payments as $payments){
+            ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+        } 
+
+        return $debit - $credit;
+        // return $this->hasMany(Payments::className(), ['party_id' => 'id'])->select('amount, payment_mode, party_id')->asArray();        
+    }
 }
