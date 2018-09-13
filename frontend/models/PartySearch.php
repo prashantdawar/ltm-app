@@ -38,7 +38,7 @@ class PartySearch extends Party{
         
         $query = Party::find();
 
-        $query->joinWith(['payments']);
+        // $query->joinWith(['payments']);
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
