@@ -39,18 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     \yii\helpers\Url::to(['order/', 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],
-                [
-                    'label' => 'Due Balance',
-                    'format' => 'raw',
-                    'value' => function($model){
+                // [
+                //     'label' => 'Due Balance',
+                //     'format' => 'raw',
+                //     'value' => function($model){
 
-                        $debit =0; $credit =0;
-                        foreach($model->payments as $payments){
-                            ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
-                        }                        
-                        return $debit-$credit;
-                    }
-                ],
+                //         $debit =0; $credit =0;
+                //         foreach($model->payments as $payments){
+                //             ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+                //         }                        
+                //         return $debit-$credit;
+                //     }
+                // ],
                 [
                     'attribute' => 'phone',
                     'format' => 'raw',
