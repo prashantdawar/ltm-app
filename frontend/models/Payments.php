@@ -65,6 +65,21 @@ class Payments extends \yii\db\ActiveRecord
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
         return true;
     }
+
+    public function afterSave($insert, $changedAttributes){
+
+        $modelParty = \frontend\models\Party::find()->where(['id' => $this->party_id])->one();
+        $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $this->party_id])->asArray()->all();;
+        
+        $credit =0; $debit = 0;
+        foreach($modelPayments as $payments){
+            ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+        }
+        
+        $modelParty->due = $debit - $credit;
+        $modelParty->save();
+    }
+
     public function afterFind(){        
         $this->created_at = date('d-m-Y', strtotime($this->created_at));
         $this->updated_at = date('d-m-Y', strtotime($this->updated_at));

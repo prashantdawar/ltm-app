@@ -17,7 +17,7 @@ use Yii;
  * @property string $location
  * @property string $state
  * @property int $pincode
- * @property int $last_order_id
+ * @property int $due
  * @property string $gst
  * @property int $status
  * @property int $created_at
@@ -39,8 +39,8 @@ class Party extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'contact_name', 'phone', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'last_order_id','gst', 'created_at', 'updated_at'], 'required'],
-            [['phone', 'pincode', 'last_order_id', 'status',], 'integer'],
+            [['name', 'contact_name', 'phone', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'created_at', 'updated_at'], 'required'],
+            [['phone', 'pincode', 'due', 'status',], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             ['phone', 'string', 'min' => 10, 'max' => 10 ],
             [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
@@ -64,7 +64,7 @@ class Party extends \yii\db\ActiveRecord
             'location' => 'District',
             'state' => 'State',
             'pincode' => 'Pincode',
-            'last_order_id' => 'Last Order ID',
+            'due' => 'Net Due Balance',
             'gst' => 'GSTIN Number',
             'status' => 'Status',
             'created_at' => 'Created At',

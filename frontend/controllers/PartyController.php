@@ -74,8 +74,6 @@ class PartyController extends \yii\web\Controller {
 
      public function actionCreate(){
          $model = new \frontend\models\Party();
-
-         $model->last_order_id = 0;
          
          $model->created_at = date('Y-m-d H:i:s');
          $model->updated_at = date('Y-m-d H:i:s');

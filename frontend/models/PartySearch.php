@@ -4,15 +4,18 @@ namespace frontend\models;
 
 class PartySearch extends Party{
 
+    public $due_condition;
+    public $due_condition_options = ['>' => 'Debit', '<' => 'Credit', '=' => 'Balanced'];
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['phone', 'pincode', 'last_order_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['phone', 'pincode', 'due', 'status', 'created_at', 'updated_at'], 'integer'],
             // ['phone', 'string', 'min' => 10, 'max' => 10 ],
-            [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
+            [['name', 'due_condition','contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -55,8 +58,7 @@ class PartySearch extends Party{
         $query->andFilterWhere([
             'id' => $this->id,
             // 'phone' => $this->phone,
-            'pincode' => $this->pincode,
-            'last_order_is' => $this->last_order_id,
+            'pincode' => $this->pincode,            
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
@@ -72,6 +74,26 @@ class PartySearch extends Party{
             ->andFilterWhere(['like','state', $this->state])
             ->andFilterWhere(['like','gst', $this->gst]);
 
+        $operator = 'like';
+        $comparator = $this->due;
+        // because https://stackoverflow.com/a/7091714/3690154
+        // var_dump($this->due_condition); die;
+        if(isset($this->due_condition) && strlen($this->due_condition) > 0){
+            
+            $queryString = $this->due_condition;
+            switch($queryString){
+                case strpos($queryString,'>') === 0:
+                    $operator = '>'; $comparator = 0;break;
+                case strpos($queryString,'<') === 0:
+                    $operator = '<'; $comparator = 0;break;
+                case strpos($queryString,'=') === 0:
+                    $operator = '='; $comparator = 0;break;
+                default:
+                    $operator = 'like'; $comparator = $this->due; break;
+            }
+        }
+        // var_dump($comparator); die;
+        $query->andFilterWhere([$operator, 'due', $comparator]);
         return $dataProvider;
     }
 }

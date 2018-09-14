@@ -250,10 +250,21 @@ class OrderController extends \yii\web\Controller
                         // $modelPaymentsDebit->updated_at = $model->updated_at;
                         $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->id;
                         $modelPaymentsDebit->save();
-                    }
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }                
-             }
+                        // if($modelPaymentsDebit->save()){
+                        //     $modelParty = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+                        //     $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $model->party_id])->asArray()->all();;
+                            
+                        //     $credit =0; $debit = 0;
+                        //     foreach($modelPayments as $payments){
+                        //         ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+                        //     }
+                        //     $modelParty->due = $debit - $credit;
+                        //     $modelParty->save();
+                        // }
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }                
+                }
+            }
         } 
 
         $data['allParties'] = $this->dataAllParties();
