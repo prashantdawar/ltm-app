@@ -155,7 +155,7 @@
                 ],
             ]); 
         ?>
-        <?= $model->attributes; ?>
+        <?= json_encode($model->attributes); ?>
         <?php //= $form->field($model, 'notes')->textarea(); ?>
         
         <div class="form-group">
