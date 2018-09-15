@@ -260,9 +260,9 @@ class OrderController extends \yii\web\Controller
                         //     }
                         //     $modelParty->due = $debit - $credit;
                         //     $modelParty->save();
-                        // }
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }                
+                        // }                        
+                    }
+                    return $this->redirect(['view', 'id' => $model->id]);         
                 }
             }
         } 
