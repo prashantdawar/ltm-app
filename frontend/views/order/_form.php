@@ -155,8 +155,8 @@
                 ],
             ]); 
         ?>
-        <?= json_encode($model->attributes); ?>
-        <?php //= $form->field($model, 'notes')->textarea(); ?>
+        
+        <?= $form->field($model, 'notes')->textarea(); ?>
         
         <div class="form-group">
             <?= \yii\helpers\Html::submitButton('Save', [
