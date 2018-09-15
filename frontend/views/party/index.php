@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function($model) {                                
                                 return \yii\helpers\Html::a(
                                     'Show Details',
-                                    \yii\helpers\Url::to(['order/', 'OrderSearch[party_name]' => $model->name]));
+                                    \yii\helpers\Url::to(['order/', 'OrderSearch[party_id]' => $model->id, 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],
                 
