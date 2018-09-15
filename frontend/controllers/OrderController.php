@@ -273,8 +273,7 @@ class OrderController extends \yii\web\Controller
         
         // ---for storing item ids.
          $data['allItems'] = $this->dataAllItems();
-        // ---
-        
+        // ---        
         // ---for storgin item names.
         //  $datatmp = [];
         //  foreach($this->dataAllItems() as $allItems){ 
