@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 // 'id',
                 [
-                    'attribute' => 'id',
+                    'attribute' => 'oid',
                     'headerOptions' => ['style' => 'width:11%;'],
                     'contentOptions' =>['style' => 'text-align: center;'],
                     'label' => 'Invoice No.',
@@ -49,8 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function($model) {
                                 
                                 return \yii\helpers\Html::a(
-                                    $model->id,
-                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]),
+                                    $model->oid,
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->oid]),
                                     ['style' => 'display:block; width: 100%; height: 100%;']);
                                 }                    
                 ],

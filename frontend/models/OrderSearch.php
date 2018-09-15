@@ -15,7 +15,7 @@ class OrderSearch extends \frontend\models\Order {
     {   
         // var_dump(isset(\Yii::$app->request->get('OrderSearch')['party_name']) ? '0': 'party_id','integer'); die;
         return [
-            [['id', 'party_id', 'amount', 'status', 'payment_mode'], 'integer'],
+            [['oid','party_id', 'amount', 'status', 'payment_mode'], 'integer'],
             // [isset(\Yii::$app->request->get('OrderSearch')['party_name']) ? 'id': 'party_id','integer'],
             [['party_name','item_name', 'created_at'], 'safe']
         ];
@@ -36,7 +36,7 @@ class OrderSearch extends \frontend\models\Order {
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
+            'sort'=> ['defaultOrder' => ['oid' => SORT_DESC]]
         ]);
 
         $dataProvider->sort->attributes['party_name'] = [
@@ -62,7 +62,7 @@ class OrderSearch extends \frontend\models\Order {
         }
             // var_dump($this->party_id); die;
             $query->andFilterWhere([
-                '`order`.`id`' => $this->id,
+                '`order`.`oid`' => $this->oid,
                 '`order`.`party_id`' => $this->party_id,
                 '`order`.`amount`' => $this->amount,
                 '`order`.`status`' => $this->status,

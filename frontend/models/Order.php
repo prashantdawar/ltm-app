@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "order".
  *
  * @property int $id
+ * @property int $oid
  * @property int $party_id 
  * @property string $item_id
  * @property int $amount
@@ -41,7 +42,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [[ 'party_id','amount', 'status', 'payment_mode'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
-            [['amount', 'status',  'created_by', 'updated_by'], 'integer'],
+            [['oid','amount', 'status',  'created_by', 'updated_by'], 'integer'],
             [['item_id','created_at', 'updated_at', 'notes'], 'safe']
             
         ];
@@ -76,7 +77,7 @@ class Order extends \yii\db\ActiveRecord
         if (!parent::beforeSave($insert)) {
             return false;
         }
-
+        
         $this->item_id = implode(',', $this->item_id);
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));

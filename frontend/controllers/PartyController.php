@@ -97,7 +97,7 @@ class PartyController extends \yii\web\Controller {
         $model = $this->findModel($id);
         
         $model->updated_at = date('Y-m-d H:i:s');
-        $model->updated_by = \Yii::$app->user-id;
+        $model->updated_by = \Yii::$app->user->id;
 
         if(($model->load(\Yii::$app->request->post())) && $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
