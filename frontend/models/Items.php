@@ -62,6 +62,10 @@ class Items extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function find(){
+        return parent::find()->andWhere(['`'.strtolower((new \ReflectionClass(self::class))->getShortName()).'`.`created_by`' => \Yii::$app->user->id]);
+    }
+
     public function beforeSave($insert){
         
         if (!parent::beforeSave($insert)) {

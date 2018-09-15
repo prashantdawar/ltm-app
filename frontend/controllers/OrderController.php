@@ -174,6 +174,7 @@ class OrderController extends \yii\web\Controller
     protected function dataAllItems(){
         $itemsData = \frontend\models\Items::find()->select('id ,name, amount')->asArray()->all();
 
+        $data = [];
         foreach ($itemsData as $key => $value) {
             $data['id_name'][$value['id']] = $value['name'];
             $data['id_amount'][$value['id']] = $value['amount'];
@@ -185,6 +186,7 @@ class OrderController extends \yii\web\Controller
     protected function dataAllParties(){
         $partiesData = \frontend\models\Party::find()->select('id,name')->asArray()->all();
 
+        $data = [];
         foreach ($partiesData as $key => $value) {
             $data[$value['id']] = $value['name'];
         }
@@ -226,6 +228,9 @@ class OrderController extends \yii\web\Controller
          $model->created_at = date('Y-m-d');
          $model->updated_at = date('Y-m-d');
 
+         $model->created_by = \Yii::$app->user->id;
+         $model->updated_by = \Yii::$app->user->id;
+
         $model->item_id = $itemNameQuantity;
              
          if($model->load(\Yii::$app->request->post())){
@@ -234,8 +239,6 @@ class OrderController extends \yii\web\Controller
                  $modelPaymentsCredit->setAttributes($model->attributes);
                  $modelPaymentsCredit->payment_mode = 1;
                  unset($modelPaymentsCredit->notes);
-                 unset($modelPaymentsCredit->created_by);
-                 unset($modelPaymentsCredit->updated_by);
                 //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
                 //  $modelPaymentsCredit->created_at = $model->created_at;
                 //  $modelPaymentsCredit->updated_at = $model->updated_at;
@@ -245,8 +248,6 @@ class OrderController extends \yii\web\Controller
                         $modelPaymentsDebit = new \frontend\models\Payments();
                         $modelPaymentsDebit->setAttributes($model->attributes);
                         unset($modelPaymentsDebit->notes);
-                        unset($modelPaymentsDebit->created_by);
-                        unset($modelPaymentsDebit->updated_by);
                         // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
                         // $modelPaymentsDebit->created_at = $model->created_at;
                         // $modelPaymentsDebit->updated_at = $model->updated_at;
@@ -333,6 +334,7 @@ class OrderController extends \yii\web\Controller
             }
             
             $model->updated_at = date('Y-m-d');
+            $model->updated_by = \Yii::$app->user->id;
     
             $model->item_id = $itemNameQuantity;
                  

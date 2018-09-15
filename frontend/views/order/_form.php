@@ -32,11 +32,14 @@
 
             <?php 
                 $modelName = strtolower($modelItem->formName());
-                $modelIdAmount = json_encode($data['allItems']['id_amount']); 
+                $modelIdAmount = json_encode([]);
+                if(!empty($data['allItems']['id_amount'])){
+                    $modelIdAmount = json_encode($data['allItems']['id_amount']);
+                }
             ?>
             <div class="col-md-6" style="clear:left;">
                 <?php   echo $form->field($modelItem, '['.$index.']'.'name')->widget(\kartik\select2\Select2::classname(), [
-                    'data' => $data['allItems']['id_name'],
+                    'data' => empty($data['allItems']['id_name']) ? []:$data['allItems']['id_name'],
                     'options' => ['placeholder' => 'Select an Item ...'],
                     'pluginOptions' => [
                         'allowClear' => true,

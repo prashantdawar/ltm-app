@@ -38,8 +38,8 @@ class PaymentsController extends Controller
         $searchModel = new PaymentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $netAmount['credit'] = (float)(PaymentsSearch::find()->where(['payment_mode' => '1'])->sum('amount'));
-        $netAmount['debit'] = (float)(PaymentsSearch::find()->where(['not',['payment_mode' => '1']])->sum('amount'));
+        $netAmount['credit'] = (float)(PaymentsSearch::find()->andWhere(['payment_mode' => '1'])->sum('amount'));
+        $netAmount['debit'] = (float)(PaymentsSearch::find()->andWhere(['not',['payment_mode' => '1']])->sum('amount'));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -63,7 +63,7 @@ class PaymentsController extends Controller
 
     protected function dataAllParties(){
         $partiesData = \frontend\models\Party::find()->select('id,name')->asArray()->all();
-
+        $data = [];
         foreach ($partiesData as $key => $value) {
             $data[$value['id']] = $value['name'];
         }

@@ -30,6 +30,10 @@ class OrderItem extends \yii\base\Model {
         ];
     }
 
+    public static function find(){
+        return parent::find()->andWhere(['`'.strtolower((new \ReflectionClass(static::class))->getShortName()).'`.`created_by`' => \Yii::$app->user->id]);
+    }
+
         /**
      * Creates and populates a set of models.
      *

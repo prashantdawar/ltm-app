@@ -22,6 +22,8 @@ use Yii;
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
+ * @property int $created_by
+ * @property int $updated_by
  */
 class Party extends \yii\db\ActiveRecord
 {
@@ -70,6 +72,20 @@ class Party extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public static function find(){
+        return parent::find()->andWhere(['`'.strtolower((new \ReflectionClass(self::class))->getShortName()).'`.`created_by`' => \Yii::$app->user->id]);
+    }
+
+    public function beforeSave($insert){        
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+      
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+        return true;
     }
 
     public function afterFind(){
