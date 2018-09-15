@@ -12,6 +12,7 @@ use Yii;
  * @property string $item_id
  * @property int $amount
  * @property int $status
+ * @property string $notes
  * @property string $created_at
  * @property string $updated_at
  * @property int $created_by
@@ -43,7 +44,7 @@ class Order extends \yii\db\ActiveRecord
             [[ 'party_id','amount', 'status', 'payment_mode'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
             [['amount', 'status',  'created_by', 'updated_by'], 'integer'],
-            [['item_id','created_at', 'updated_at'], 'safe']
+            [['item_id','created_at', 'updated_at', 'notes'], 'safe']
             
         ];
     }
@@ -59,6 +60,7 @@ class Order extends \yii\db\ActiveRecord
             'item_id' => 'Item ID',
             'amount' => 'Net Amount Payable',
             'status' => 'Status',
+            'notes' => 'Notes',
             'payment_mode' => 'Payment Mode',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

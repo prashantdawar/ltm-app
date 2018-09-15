@@ -233,6 +233,7 @@ class OrderController extends \yii\web\Controller
                  $modelPaymentsCredit = new \frontend\models\Payments();                 
                  $modelPaymentsCredit->setAttributes($model->attributes);
                  $modelPaymentsCredit->payment_mode = 1;
+                 unset($modelPaymentsCredit->notes);
                  unset($modelPaymentsCredit->created_by);
                  unset($modelPaymentsCredit->updated_by);
                 //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
@@ -243,6 +244,7 @@ class OrderController extends \yii\web\Controller
                     if($model->payment_mode != 1){
                         $modelPaymentsDebit = new \frontend\models\Payments();
                         $modelPaymentsDebit->setAttributes($model->attributes);
+                        unset($modelPaymentsDebit->notes);
                         unset($modelPaymentsDebit->created_by);
                         unset($modelPaymentsDebit->updated_by);
                         // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
