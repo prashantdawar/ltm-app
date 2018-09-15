@@ -156,7 +156,7 @@
             ]); 
         ?>
         
-        <?php //= $form->field($model, 'notes')->textarea(); ?>
+        <?= $form->field($model, 'notes')->textInput(); ?>
         
         <div class="form-group">
             <?= \yii\helpers\Html::submitButton('Save', [
