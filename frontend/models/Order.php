@@ -19,9 +19,7 @@ use Yii;
  * @property int $updated_by
  */
 class Order extends \yii\db\ActiveRecord
-{
-    
-    
+{   
     
     public $paymentMode =  ['0'=> 'Cash','1' => 'Credit', '2' => 'UPI', '3' => 'Paytm', '4' => 'Cheque', '5' => 'Online Transfer', '6' => 'Bank Transfer'];
     public $orderStatus =  ['0' => 'Completed', '1' => 'Pending', '2' => 'Processing', '3' => 'Cancelled', '4' => 'Halt'];
