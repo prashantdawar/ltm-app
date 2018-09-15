@@ -1,14 +1,14 @@
 
 <?php
-    $this->title = 'Invoice Number: ' . $model->id;
+    $this->title = 'Invoice Number: ' . $model->oid;
     $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-view">
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
     <p>
-        <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
-        <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->oid], ['class' => 'btn btn-primary']); ?>
+        <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->oid], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Are you sure you want to delete this order?',
@@ -16,7 +16,7 @@
                 ]
             ]);
         ?>
-        <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
+        <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->oid], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php if(strlen($model->party->email) > 11) {?>
             <?= \yii\helpers\Html::a('Send Email', ['send-email', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php } ?>

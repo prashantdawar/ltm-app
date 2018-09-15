@@ -153,7 +153,7 @@ class OrderController extends \yii\web\Controller
     }
 
     protected function findModel($id){
-        if(($model = \frontend\models\Order::findOne($id)) !== null){
+        if(($model = \frontend\models\Order::findOne(['oid' =>$id])) !== null){
             return $model;
         }
 
