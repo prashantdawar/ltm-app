@@ -27,7 +27,10 @@
                 ]);
             ?>
             <?php if(strlen($model->phone) == 10) {?>
-                <a class="btn btn-primary" href="tel:+91<?= $model->phone; ?>" target="_blank"> Call Party</a>        
+                <a class="btn btn-primary" href="tel:+91<?= $model->phone; ?>" target="_blank"> Call</a>        
+            <?php } ?>
+            <?php if(strlen($model->whatsapp) == 10) {?>
+                <a class="btn btn-success" href="https://wa.me/91<?= $model->whatsapp; ?>" target="_blank"> Whatsapp</a>
             <?php } ?>
         </p>
     </div>
@@ -87,6 +90,7 @@
                 'name',
                 'contact_name',
                 'phone',
+                'whatsapp',
                 'email',
                 'street_address',
                 'city',

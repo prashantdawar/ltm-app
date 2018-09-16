@@ -25,6 +25,9 @@
         <?php if(strlen($model->party->phone) == 10) {?>
             <a class="btn btn-success" href="sms:+91<?= $model->party->phone; ?>?body=Your order no.<?= $model->oid?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Sms</a>
         <?php } ?>
+        <?php if(strlen($model->party->whatsapp) == 10) {?>
+            <a class="btn btn-success" href="https://wa.me/91<?= $model->party->whatsapp; ?>?text=Your order no.<?= $model->id?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Whatsapp</a>        
+        <?php } ?>
         
         <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right; clear: both']); ?>
     </p>
