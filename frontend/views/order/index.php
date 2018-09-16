@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 
                                 return \yii\helpers\Html::a(
                                     $model->oid,
-                                    \yii\helpers\Url::to(['order/view', 'id' => $model->oid]),
+                                    \yii\helpers\Url::to(['order/view', 'id' => $model->id]),
                                     ['style' => 'display:block; width: 100%; height: 100%;']);
                                 }                    
                 ],

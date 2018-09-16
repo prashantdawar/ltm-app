@@ -7,8 +7,8 @@
 <div class="order-view">
     <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
     <p>
-        <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->oid], ['class' => 'btn btn-primary']); ?>
-        <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->oid], [
+        <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+        <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Are you sure you want to delete this order?',
@@ -16,14 +16,14 @@
                 ]
             ]);
         ?>
-        <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->oid], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
+        <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php if(strlen($model->party->email) > 11) {?>
             <?= \yii\helpers\Html::a('Send Email', ['send-email', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php } ?>
         
                 
         <?php if(strlen($model->party->phone) == 10) {?>
-            <a class="btn btn-success" href="sms:+91<?= $model->party->phone; ?>?body=Your order no.<?= $model->id?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Sms</a>        
+            <a class="btn btn-success" href="sms:+91<?= $model->party->phone; ?>?body=Your order no.<?= $model->oid?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Sms</a>
         <?php } ?>
         
         <?= \yii\helpers\Html::a('See Party Details', ['party/view', 'id' => $model->party_id], ['class' => 'btn btn-primary', 'style' => 'float: right; clear: both']); ?>
