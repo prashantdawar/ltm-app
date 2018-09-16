@@ -3,6 +3,7 @@
         <?= $form->field($model,'name')->textInput();?>
         <?= $form->field($model,'contact_name')->textInput();?>
         <?= $form->field($model,'phone')->textInput();?>
+        <?= $form->field($model,'whatsapp')->textInput();?>
         <?= $form->field($model,'email')->textInput();?>
         <?= $form->field($model,'street_address')->textInput();?>
         <?= $form->field($model,'city')->textInput();?>

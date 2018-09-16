@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $contact_name
  * @property int $phone
+ * @property int $whatsapp
  * @property string $email
  * @property string $street_address
  * @property string $city
@@ -39,10 +40,10 @@ class Party extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'contact_name', 'phone', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'created_at', 'updated_at'], 'required'],
-            [['phone', 'pincode', 'due', 'status',], 'integer'],
+            [['name', 'contact_name', 'phone','whatsapp', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'created_at', 'updated_at'], 'required'],
+            [['whatsapp','phone', 'pincode', 'due', 'status',], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            ['phone', 'string', 'min' => 10, 'max' => 10 ],
+            [['phone','whatsapp'], 'string', 'min' => 10, 'max' => 10 ],
             [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
@@ -78,6 +79,7 @@ class Party extends \yii\db\ActiveRecord
             return false;
         }
         $this->phone = (int)$this->phone;
+        $this->whatsapp = (int)$this->whatsapp;
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
 
