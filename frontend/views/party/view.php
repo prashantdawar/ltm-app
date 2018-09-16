@@ -15,18 +15,21 @@
 ?>
 <div class="party-view">
     <div class="col-md-6">
-    <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
-    <p>
-        <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
-        <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Are you sure you want to delete this party?',
-                    'method' => 'post'
-                ]
-            ]);
-        ?>
-    </p>
+        <h1><?= \yii\helpers\Html::encode($this->title); ?></h1>
+        <p>
+            <?= \yii\helpers\Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+            <?= \yii\helpers\Html::a('Delete', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this party?',
+                        'method' => 'post'
+                    ]
+                ]);
+            ?>
+            <?php if(strlen($model->phone) == 10) {?>
+                <a class="btn btn-primary" href="tel:+91<?= $model->phone; ?>" target="_blank"> Call Party</a>        
+            <?php } ?>
+        </p>
     </div>
 
 
