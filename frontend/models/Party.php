@@ -72,6 +72,18 @@ class Party extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert){
+        
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        $this->phone = (int)$this->phone;
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+
+        return true;
+    }
+
     public function afterFind(){
         
         $this->created_at = date('d-m-Y', strtotime($this->created_at));

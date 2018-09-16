@@ -65,7 +65,8 @@
                     'attribute' => 'status',
                     'value' => $model->orderStatus[$model->status],
 
-                ],                
+                ],  
+                'notes',              
                 'created_at', //managed in model
                 // [
                 //     'attribute' => 'created_at',
