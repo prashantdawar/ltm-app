@@ -60,8 +60,8 @@
 </style>
 <body onload="window.print()">
     <div>
-        <h1 class="brand-header">Saugat Computers</h1>
-        <h1 class="brand-location">Hansi</h1>
+        <h1 class="brand-header"><?= ucwords($firmModel->name);  ?></h1>
+        <h1 class="brand-location"><?= ucwords($firmModel->city); ?></h1>
     </div>
     <table>
         <tr>
@@ -72,19 +72,19 @@
     </table>
     <table>
         <tr>
-            <td>Shipped From: 3, Ganesh Market, Near Chopta Bazzar, Inside badsi gate, Hansi, Hisar - 125033, Haryana </td>
+        <td>Shipped From: <?= $firmModel->address . ',' . ucwords($firmModel->city) . ',' . ucwords($firmModel->location) . ' - ' . $firmModel->pincode .','. ucwords($firmModel->state);?> </td>
         </tr>
     </table>
     <table>        
         <tr>
-            <td class="w33">State: Haryana</td>
-            <td class="w33 left-line">State Code: 06</td>
+            <td class="w33">State: <?= ucwords($firmModel->state); ?></td>
+            <td class="w33 left-line">Pin Code: <?= $firmModel->pincode; ?></td>
             <td class="w33 left-line">GSTIN Number: ----</td>
         </tr>
     </table>
     <table>
         <tr>
-            <th class="w33">Invoice No. <?= $model->id; ?></th>
+            <th class="w33">Invoice No. <?= $model->oid; ?></th>
             <th class="w70 left-line"></th>
             <!-- <th class="w33 left-line"></th> -->
         </tr>
@@ -146,10 +146,10 @@
                             <table>
                                 <tr>
                                 <td>Address: <?= 
-                                    $partyModel->street_address .','. 
-                                    $partyModel->city.','. 
-                                    $partyModel->location.','.
-                                    $partyModel->state.','?>
+                                    $partyModel->street_address .', '. 
+                                    $partyModel->city.', '. 
+                                    $partyModel->location.', '.
+                                    $partyModel->state.', '?>
                                     Pincode: <?= $partyModel->pincode ?>
                                 </td>  
                                 </tr>
@@ -263,7 +263,7 @@
     <table>
         <tr>
             <td class="w70">
-                Customer Care: 9996807592, Email: sales@mokarte.in
+                Customer Care: <?= $firmModel->phone; ?>, Email: <?= $firmModel->email; ?>
                 <br>
                 Good Shipped / sold under this invoice are for personal use and for resale..
                 <br>

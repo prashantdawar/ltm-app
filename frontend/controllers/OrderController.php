@@ -51,6 +51,7 @@ class OrderController extends \yii\web\Controller
 
         $model = $this->findModel($id);
         $partyModel = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+        $firmModel = \frontend\models\PrimaryIds::find()->one();
 
         $dataItem = [];
         $dataAmount = [];
@@ -70,6 +71,7 @@ class OrderController extends \yii\web\Controller
         
         return $this->renderPartial('orderpdf',[
             'model' => $model,
+            'firmModel' => $firmModel,
             'partyModel' => $partyModel,
             'dataItem' => $dataItem,
             'dataAmount' => $dataAmount
@@ -93,6 +95,7 @@ class OrderController extends \yii\web\Controller
 
         $model = $this->findModel($id);
         $partyModel = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+        $firmModel = \frontend\models\PrimaryIds::find()->one();
 
         $dataItem = [];
         $dataAmount = [];
@@ -110,7 +113,7 @@ class OrderController extends \yii\web\Controller
             array_push($dataAmount,$item['amount']);
         }
         if(strlen($partyModel->email) > 11) { 
-            $model->sendEmail($model, $partyModel, $dataItem, $dataAmount);
+             $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
         }
         return '<script>window.close();</script>';
     }
@@ -242,7 +245,7 @@ class OrderController extends \yii\web\Controller
                 //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
                 //  $modelPaymentsCredit->created_at = $model->created_at;
                 //  $modelPaymentsCredit->updated_at = $model->updated_at;
-                 $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->id;
+                $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->oid;
                 if($modelPaymentsCredit->save()){
                     if($model->payment_mode != 1){
                         $modelPaymentsDebit = new \frontend\models\Payments();
@@ -251,7 +254,7 @@ class OrderController extends \yii\web\Controller
                         // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
                         // $modelPaymentsDebit->created_at = $model->created_at;
                         // $modelPaymentsDebit->updated_at = $model->updated_at;
-                        $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->id;
+                        $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->oid;
                         $modelPaymentsDebit->save();
                         // if($modelPaymentsDebit->save()){
                         //     $modelParty = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();

@@ -1,6 +1,6 @@
 
 <?php
-    $this->title = $model->name;
+    $this->title = ucwords($model->name);
     $this->params['breadcrumbs'][] = ['label' => 'Party', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>

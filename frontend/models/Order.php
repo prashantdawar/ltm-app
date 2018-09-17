@@ -78,11 +78,31 @@ class Order extends \yii\db\ActiveRecord
             return false;
         }
         
+        // $insert is true when model entry is new!
+       if($insert){
+            // var_dump(\frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one()); die;
+            $primary_ids = \frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one();
+            $this->oid =  $primary_ids['order_id'] + 1;
+        }
+
         $this->item_id = implode(',', $this->item_id);
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
 
         return true;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        // $insert is true when model entry is new!
+        // $changedAttributes are empty when model entry is new!
+        /*
+        var_dump($insert);
+        var_dump($changedAttributes); die;
+        bool(true) array(12) { ["created_at"]=> NULL ["updated_at"]=> NULL ["created_by"]=> NULL ["updated_by"]=> NULL ["item_id"]=> NULL ["party_id"]=> NULL ["amount"]=> NULL ["payment_mode"]=> NULL ["status"]=> NULL ["notes"]=> NULL ["oid"]=> NULL ["id"]=> NULL }
+        */
+        $primary_ids = \frontend\models\PrimaryIds::find()->one();
+        $primary_ids->order_id = $primary_ids->order_id +1;
+        $primary_ids->save();
     }
 
     public function afterFind(){
@@ -114,7 +134,7 @@ class Order extends \yii\db\ActiveRecord
      *
      * @return bool whether the email was send
      */
-    public function sendEmail($model, $partyModel, $dataItem, $dataAmount)
+    public function sendEmail($model, $firmModel, $partyModel, $dataItem, $dataAmount)
     {
         return Yii::$app
             ->mailer
@@ -122,6 +142,7 @@ class Order extends \yii\db\ActiveRecord
                 ['html' => '/order/orderpdf'],
                 [
                     'model' => $model,
+                    'firmModel' => $firmModel,
                     'partyModel' => $partyModel,
                     'dataItem' => $dataItem,
                     'dataAmount' => $dataAmount                            
@@ -129,7 +150,7 @@ class Order extends \yii\db\ActiveRecord
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($partyModel->email)
             ->setBcc('sales@datapacks.in')
-            ->setSubject('Order Details for: ' . $this->id . ' from ltm web app')
+            ->setSubject('Order Details for: ' . $this->oid . ' from ltm web app')
             ->send();
     }
 }
