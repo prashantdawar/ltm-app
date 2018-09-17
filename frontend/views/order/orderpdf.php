@@ -84,7 +84,7 @@
     </table>
     <table>
         <tr>
-            <th class="w33">Invoice No. <?= $model->id; ?></th>
+            <th class="w33">Invoice No. SC-<?= $model->id; ?></th>
             <th class="w70 left-line"></th>
             <!-- <th class="w33 left-line"></th> -->
         </tr>
