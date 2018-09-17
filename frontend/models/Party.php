@@ -78,8 +78,8 @@ class Party extends \yii\db\ActiveRecord
         if (!parent::beforeSave($insert)) {
             return false;
         }
-        $this->phone = (int)$this->phone;
-        $this->whatsapp = (int)$this->whatsapp;
+        $this->phone = (float)$this->phone;
+        $this->whatsapp = (float)$this->whatsapp;
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
 
