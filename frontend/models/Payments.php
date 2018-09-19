@@ -81,7 +81,7 @@ class Payments extends \yii\db\ActiveRecord
             ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
         }
         
-        $modelParty->due = $debit - $credit;
+        $modelParty->due = $debit - $credit;        
         $modelParty->save();
     }
 
