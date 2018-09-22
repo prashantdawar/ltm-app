@@ -66,6 +66,11 @@ class Payments extends \yii\db\ActiveRecord
         if (!parent::beforeSave($insert)) {
             return false;
         }
+        if($insert){
+            $this->created_by = \Yii::$app->user->id;
+        }
+        
+        $this->updated_by = \Yii::$app->user->id;
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
         return true;
