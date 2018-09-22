@@ -8,7 +8,7 @@ return [
             'password' => 'q123',
             'charset' => 'utf8',
             'on afterOpen' => function($event) { 
-                $event->sender->createCommand("SET time_zone='Asia/Calcutta")->execute(); 
+                $event->sender->createCommand("SET time_zone='+05:30';")->execute(); 
               },
         ],
     ],
