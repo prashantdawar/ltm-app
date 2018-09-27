@@ -136,6 +136,8 @@ class Order extends \yii\db\ActiveRecord
      */
     public function sendEmail($model, $firmModel, $partyModel, $dataItem, $dataAmount)
     {
+        $userModel = \frontend\models\PrimaryIds::find()->select('email')->where(['created_by' => \Yii::$app->user->id])->asArray()->one();
+        // var_dump($userModel['email']); die;
         return Yii::$app
             ->mailer
             ->compose(
@@ -149,7 +151,7 @@ class Order extends \yii\db\ActiveRecord
                 ])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($partyModel->email)
-            ->setBcc('sales@datapacks.in')
+            ->setBcc(['sales@datapacks.in', $userModel['email']])
             ->setSubject('Order Details for: ' . $this->oid . ' from ltm web app')
             ->send();
     }
