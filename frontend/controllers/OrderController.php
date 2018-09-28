@@ -235,7 +235,8 @@ class OrderController extends \yii\web\Controller
          $model->updated_by = \Yii::$app->user->id;
 
         $model->item_id = $itemNameQuantity;
-             
+        $model->payment_id = [];
+
          if($model->load(\Yii::$app->request->post())){
              if($model->save()){                 
                  $modelPaymentsCredit = new \frontend\models\Payments();                 
@@ -268,6 +269,15 @@ class OrderController extends \yii\web\Controller
                         //     $modelParty->save();
                         // }                        
                     }
+                    $payment_id = [];
+                    if(!isset($modelPaymentsDebit)){
+                        array_push($payment_id, $modelPaymentsCredit->id);
+                    } else {
+                        array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
+                    }
+                    $model->payment_id = $payment_id;
+                    // var_dump($model->item_id);die;
+                    $model->save();
                     return $this->redirect(['view', 'id' => $model->id]);         
                 }
             }

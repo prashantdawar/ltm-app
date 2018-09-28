@@ -43,7 +43,7 @@ class Order extends \yii\db\ActiveRecord
             [[ 'party_id','amount', 'status', 'payment_mode'], 'required'],
             ['item_id', 'required','message' => 'Item Name cannot be blank'],
             [['oid','amount', 'status',  'created_by', 'updated_by'], 'integer'],
-            [['item_id','created_at', 'updated_at', 'notes'], 'safe']
+            [['item_id', 'payment_id', 'created_at', 'updated_at', 'notes'], 'safe']
             
         ];
     }
@@ -58,6 +58,7 @@ class Order extends \yii\db\ActiveRecord
             'party_id' => 'Party ID', 
             'item_id' => 'Item ID',
             'amount' => 'Net Amount Payable',
+            'payment_id' => 'Payment Id',
             'status' => 'Status',
             'notes' => 'Notes',
             'payment_mode' => 'Payment Mode',
@@ -84,11 +85,12 @@ class Order extends \yii\db\ActiveRecord
             $primary_ids = \frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one();
             $this->oid =  $primary_ids['order_id'] + 1;
         }
-
+        // var_dump($this->payment_id); die;
+        $this->payment_id = implode(',', $this->payment_id);
         $this->item_id = implode(',', $this->item_id);
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
-
+        
         return true;
     }
 
@@ -99,7 +101,25 @@ class Order extends \yii\db\ActiveRecord
         var_dump($insert);
         var_dump($changedAttributes); die;
         bool(true) array(12) { ["created_at"]=> NULL ["updated_at"]=> NULL ["created_by"]=> NULL ["updated_by"]=> NULL ["item_id"]=> NULL ["party_id"]=> NULL ["amount"]=> NULL ["payment_mode"]=> NULL ["status"]=> NULL ["notes"]=> NULL ["oid"]=> NULL ["id"]=> NULL }
-        */
+        */        
+
+        $this->item_id = explode(',', $this->item_id);
+        $this->payment_id = explode(',', $this->payment_id);
+        
+        if(!$insert){
+            if(((int)$this->payment_id[0] != 0)){            
+                $modelPaymentsCredit = \frontend\models\Payments::find()->where(['id' => $this->payment_id[0]])->one();
+                // var_dump($this->party_id);die;
+                $modelPaymentsCredit->party_id = $this->party_id;
+                $modelPaymentsCredit->save();
+                if(count($this->payment_id) == 2 ){
+                    $modelPaymentsDebit = \frontend\models\Payments::find()->where(['id' => $this->payment_id[1]])->one();
+                    $modelPaymentsDebit->party_id = $this->party_id;
+                    $modelPaymentsDebit->save();
+                }
+            }
+        }
+
         $primary_ids = \frontend\models\PrimaryIds::find()->one();
         $primary_ids->order_id = $primary_ids->order_id +1;
         $primary_ids->save();
@@ -108,6 +128,7 @@ class Order extends \yii\db\ActiveRecord
     public function afterFind(){
         
         $this->item_id = explode(',', $this->item_id);
+        $this->payment_id = explode(',', $this->payment_id);
         $this->created_at = date('d-m-Y', strtotime($this->created_at));
         $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
 
