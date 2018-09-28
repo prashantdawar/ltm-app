@@ -84,3 +84,4 @@
         ]);    
     ?>
 </div>
+<?php $this->registerJs('$(document).ready(function(){ window.open("/order/pdf?id='.$model->id.'","_blank");});'); ?>
