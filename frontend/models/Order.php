@@ -83,7 +83,7 @@ class Order extends \yii\db\ActiveRecord
        if($insert){
             // var_dump(\frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one()); die;
             $primary_ids = \frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one();
-            $this->oid =  $primary_ids['order_id'] + 1;
+            $this->oid =  $primary_ids['order_id'];
         }
         // var_dump($this->payment_id); die;
         $this->payment_id = implode(',', $this->payment_id);
@@ -102,27 +102,54 @@ class Order extends \yii\db\ActiveRecord
         var_dump($changedAttributes); die;
         bool(true) array(12) { ["created_at"]=> NULL ["updated_at"]=> NULL ["created_by"]=> NULL ["updated_by"]=> NULL ["item_id"]=> NULL ["party_id"]=> NULL ["amount"]=> NULL ["payment_mode"]=> NULL ["status"]=> NULL ["notes"]=> NULL ["oid"]=> NULL ["id"]=> NULL }
         */        
-
+        // die;
         $this->item_id = explode(',', $this->item_id);
         $this->payment_id = explode(',', $this->payment_id);
         
+        if($insert){
+            $modelPaymentsCredit = new Payments();
+            $modelPaymentsCredit->setAttributes($this->attributes);
+            $modelPaymentsCredit->payment_mode = 1;
+            $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $this->oid;
+            if($modelPaymentsCredit->save()){
+                if($this->payment_mode != 1){
+                    $modelPaymentsDebit = new Payments();
+                    $modelPaymentsDebit->setAttributes($this->attributes);
+                    $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
+                    $modelPaymentsDebit->save();
+                }
+                $payment_id = [];
+                if(!isset($modelPaymentsDebit)){
+                    array_push($payment_id, $modelPaymentsCredit->id);
+                } else {
+                    array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
+                }
+                $this->payment_id = $payment_id;
+                // $this->save();
+            }
+            $primary_ids = PrimaryIds::find()->one();
+            $primary_ids->order_id = $primary_ids->order_id +1;
+            $primary_ids->save();
+            $this->save();
+        }
+
+        /*
+        * Runs on update.
+        * Here party is updated in payments , if it is changed in order.
+        */
         if(!$insert){
             if(((int)$this->payment_id[0] != 0)){            
-                $modelPaymentsCredit = \frontend\models\Payments::find()->where(['id' => $this->payment_id[0]])->one();
+                $modelPaymentsCredit = Payments::find()->where(['id' => $this->payment_id[0]])->one();
                 // var_dump($this->party_id);die;
                 $modelPaymentsCredit->party_id = $this->party_id;
                 $modelPaymentsCredit->save();
                 if(count($this->payment_id) == 2 ){
-                    $modelPaymentsDebit = \frontend\models\Payments::find()->where(['id' => $this->payment_id[1]])->one();
+                    $modelPaymentsDebit = Payments::find()->where(['id' => $this->payment_id[1]])->one();
                     $modelPaymentsDebit->party_id = $this->party_id;
                     $modelPaymentsDebit->save();
                 }
             }
-        }
-
-        $primary_ids = \frontend\models\PrimaryIds::find()->one();
-        $primary_ids->order_id = $primary_ids->order_id +1;
-        $primary_ids->save();
+        }        
     }
 
     public function afterFind(){

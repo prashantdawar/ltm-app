@@ -238,48 +238,50 @@ class OrderController extends \yii\web\Controller
         $model->payment_id = [];
 
          if($model->load(\Yii::$app->request->post())){
-             if($model->save()){                 
-                 $modelPaymentsCredit = new \frontend\models\Payments();                 
-                 $modelPaymentsCredit->setAttributes($model->attributes);
-                 $modelPaymentsCredit->payment_mode = 1;
-                 unset($modelPaymentsCredit->notes);
-                //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
-                //  $modelPaymentsCredit->created_at = $model->created_at;
-                //  $modelPaymentsCredit->updated_at = $model->updated_at;
-                $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->oid;
-                if($modelPaymentsCredit->save()){
-                    if($model->payment_mode != 1){
-                        $modelPaymentsDebit = new \frontend\models\Payments();
-                        $modelPaymentsDebit->setAttributes($model->attributes);
-                        unset($modelPaymentsDebit->notes);
-                        // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
-                        // $modelPaymentsDebit->created_at = $model->created_at;
-                        // $modelPaymentsDebit->updated_at = $model->updated_at;
-                        $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->oid;
-                        $modelPaymentsDebit->save();
-                        // if($modelPaymentsDebit->save()){
-                        //     $modelParty = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
-                        //     $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $model->party_id])->asArray()->all();;
+             if($model->save()){ 
+                //  $model->save();                
+                //  $modelPaymentsCredit = new \frontend\models\Payments();                 
+                //  $modelPaymentsCredit->setAttributes($model->attributes);
+                //  $modelPaymentsCredit->payment_mode = 1;
+                //  unset($modelPaymentsCredit->notes);
+                // //  $modelPaymentsCredit->attributes = $_POST[$model->formName()];
+                // //  $modelPaymentsCredit->created_at = $model->created_at;
+                // //  $modelPaymentsCredit->updated_at = $model->updated_at;
+                // $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $model->oid;
+                // if($modelPaymentsCredit->save()){
+                //     if($model->payment_mode != 1){
+                //         $modelPaymentsDebit = new \frontend\models\Payments();
+                //         $modelPaymentsDebit->setAttributes($model->attributes);
+                //         unset($modelPaymentsDebit->notes);
+                //         // $modelPaymentsDebit->attributes = $_POST[$model->formName()];
+                //         // $modelPaymentsDebit->created_at = $model->created_at;
+                //         // $modelPaymentsDebit->updated_at = $model->updated_at;
+                //         $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $model->oid;
+                //         $modelPaymentsDebit->save();
+                //         // if($modelPaymentsDebit->save()){
+                //         //     $modelParty = \frontend\models\Party::find()->where(['id' => $model->party_id])->one();
+                //         //     $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $model->party_id])->asArray()->all();;
                             
-                        //     $credit =0; $debit = 0;
-                        //     foreach($modelPayments as $payments){
-                        //         ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
-                        //     }
-                        //     $modelParty->due = $debit - $credit;
-                        //     $modelParty->save();
-                        // }                        
-                    }
-                    $payment_id = [];
-                    if(!isset($modelPaymentsDebit)){
-                        array_push($payment_id, $modelPaymentsCredit->id);
-                    } else {
-                        array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
-                    }
-                    $model->payment_id = $payment_id;
-                    // var_dump($model->item_id);die;
-                    $model->save();
-                    return $this->redirect(['view', 'id' => $model->id]);         
-                }
+                //         //     $credit =0; $debit = 0;
+                //         //     foreach($modelPayments as $payments){
+                //         //         ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+                //         //     }
+                //         //     $modelParty->due = $debit - $credit;
+                //         //     $modelParty->save();
+                //         // }                        
+                //     }
+                //     $payment_id = [];
+                //     if(!isset($modelPaymentsDebit)){
+                //         array_push($payment_id, $modelPaymentsCredit->id);
+                //     } else {
+                //         array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
+                //     }
+                //     $model->payment_id = $payment_id;
+                //     // var_dump($model->item_id);die;
+                //     $model->save();
+                //     return $this->redirect(['view', 'id' => $model->id]);         
+                // }
+                return $this->redirect(['view', 'id' => $model->id]); 
             }
         } 
 
