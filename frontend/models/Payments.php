@@ -78,6 +78,7 @@ class Payments extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes){
 
+        // var_dump($changedAttributes); die;
         $modelParty = \frontend\models\Party::find()->where(['id' => $this->party_id])->one();
         $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $this->party_id])->asArray()->all();;
         
@@ -88,6 +89,21 @@ class Payments extends \yii\db\ActiveRecord
         
         $modelParty->due = $debit - $credit;        
         $modelParty->save();
+        unset($modelParty);
+        unset($modelPayments);
+        //reset due for changed party again
+        if($changedAttributes['party_id'] != $this->party_id){
+            $modelParty = Party::find()->where(['id' => $changedAttributes['party_id']])->one();
+            $modelPayments = Payments::find()->select('amount, payment_mode')->where(['party_id' => $changedAttributes['party_id']])->asArray()->all();;
+        
+            $credit =0; $debit = 0;
+            foreach($modelPayments as $payments){
+                ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
+            }
+            
+            $modelParty->due = $debit - $credit;        
+            $modelParty->save();
+        }
     }
 
     public function afterFind(){        
