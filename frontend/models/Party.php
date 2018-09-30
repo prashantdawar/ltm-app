@@ -79,21 +79,23 @@ class Party extends \yii\db\ActiveRecord
         return parent::find()->andWhere(['`'.strtolower((new \ReflectionClass(self::class))->getShortName()).'`.`created_by`' => \Yii::$app->user->id]);
     }
 
-    public function beforeValidate(){
-        if(!parent::beforeValidate()){
-            return false;
-        }
+    // https://stackoverflow.com/q/42021165 // the GridView Filter calls beforeValidate() and the uses these values for a filter...
+    // https://stackoverflow.com/a/42021681 // in gridview $this->validate() is called, so updated_at and updated_by fields are auto updated for each row.
+    // public function beforeValidate(){
+    //     if(!parent::beforeValidate()){
+    //         return false;
+    //     }
         
-        if($this->isNewRecord){
-            $this->created_at = date('Y-m-d');
-            $this->created_by = \Yii::$app->user->id;
-        }
+    //     if($this->isNewRecord){
+    //         $this->created_at = date('Y-m-d');
+    //         $this->created_by = \Yii::$app->user->id;
+    //     }
 
-        $this->updated_at = date('Y-m-d'); 
-        $this->updated_by = \Yii::$app->user->id;
+    //     $this->updated_at = date('Y-m-d'); 
+    //     $this->updated_by = \Yii::$app->user->id;
         
-        return true;
-    }
+    //     return true;
+    // }
 
     public function beforeSave($insert){        
         if (!parent::beforeSave($insert)) {

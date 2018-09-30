@@ -75,10 +75,10 @@ class PartyController extends \yii\web\Controller {
      public function actionCreate(){
          $model = new \frontend\models\Party();
          
-        //  $model->created_at = date('Y-m-d');
-        //  $model->updated_at = date('Y-m-d');
-        //  $model->created_by = \Yii::$app->user->id;
-        //  $model->updated_by = \Yii::$app->user->id;
+         $model->created_at = date('Y-m-d');
+         $model->updated_at = date('Y-m-d');
+         $model->created_by = \Yii::$app->user->id;
+         $model->updated_by = \Yii::$app->user->id;
 
          if(($model->load(\Yii::$app->request->post())) && $model->save()){
              return $this->redirect(['view', 'id' => $model->id]);
@@ -96,8 +96,8 @@ class PartyController extends \yii\web\Controller {
 
         $model = $this->findModel($id);
         
-        // $model->updated_at = date('Y-m-d');
-        // $model->updated_by = \Yii::$app->user->id;
+        $model->updated_at = date('Y-m-d');
+        $model->updated_by = \Yii::$app->user->id;
 
         if(($model->load(\Yii::$app->request->post())) && $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
