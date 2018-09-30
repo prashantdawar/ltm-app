@@ -79,6 +79,22 @@ class Party extends \yii\db\ActiveRecord
         return parent::find()->andWhere(['`'.strtolower((new \ReflectionClass(self::class))->getShortName()).'`.`created_by`' => \Yii::$app->user->id]);
     }
 
+    public function beforeValidate(){
+        if(!parent::beforeValidate()){
+            return false;
+        }
+        
+        if($this->isNewRecord){
+            $this->created_at = date('Y-m-d');
+            $this->created_by = \Yii::$app->user->id;
+        }
+
+        $this->updated_at = date('Y-m-d'); 
+        $this->updated_by = \Yii::$app->user->id;
+        
+        return true;
+    }
+
     public function beforeSave($insert){        
         if (!parent::beforeSave($insert)) {
             return false;
