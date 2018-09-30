@@ -91,8 +91,9 @@ class Payments extends \yii\db\ActiveRecord
         $modelParty->save();
         unset($modelParty);
         unset($modelPayments);
-        //reset due for changed party again
-        if($changedAttributes['party_id'] != $this->party_id){
+        // reset due for changed party again.
+        // check for null and empty string.
+        if(!empty($changedAttributes['party_id']) && ($changedAttributes['party_id'] != $this->party_id)){
             $modelParty = Party::find()->where(['id' => $changedAttributes['party_id']])->one();
             $modelPayments = Payments::find()->select('amount, payment_mode')->where(['party_id' => $changedAttributes['party_id']])->asArray()->all();;
         

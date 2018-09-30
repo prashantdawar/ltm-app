@@ -111,6 +111,7 @@ class Order extends \yii\db\ActiveRecord
             $modelPaymentsCredit->setAttributes($this->attributes);
             $modelPaymentsCredit->payment_mode = 1;
             $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $this->oid;
+            $modelPaymentsCredit->Save();
             if($modelPaymentsCredit->save()){
                 if($this->payment_mode != 1){
                     $modelPaymentsDebit = new Payments();
