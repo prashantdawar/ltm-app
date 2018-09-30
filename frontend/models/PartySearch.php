@@ -16,7 +16,6 @@ class PartySearch extends Party{
             [['phone', 'pincode', 'due', 'status', 'created_at', 'updated_at'], 'integer'],
             // ['phone', 'string', 'min' => 10, 'max' => 10 ],
             [['name', 'due_condition','contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
-            [['name'], 'unique'],
         ];
     }
 
