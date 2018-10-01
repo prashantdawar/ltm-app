@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=> 'raw',
                 'value' => (strlen($model->notes) > 0) ? $model->notes : '--- Click Update to enter notes. ---'
             ],
+            'activity_log:raw',
             'created_at',
             'updated_at',
             // 'created_by',

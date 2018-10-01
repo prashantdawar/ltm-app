@@ -11,6 +11,8 @@ use Yii;
  * @property int $party_id
  * @property int $payment_mode
  * @property int $amount
+ * @property string $notes
+ * @property string $activity_log
  * @property string $created_at
  * @property string $updated_at
  * @property int $created_by
@@ -36,7 +38,7 @@ class Payments extends \yii\db\ActiveRecord
         return [
             [['party_id', 'payment_mode', 'amount', 'created_at', 'updated_at'], 'required'],
             [['party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at', 'notes'], 'safe'],
+            [['created_at', 'updated_at', 'notes', 'activity_log'], 'safe'],
         ];
     }
 
@@ -51,6 +53,7 @@ class Payments extends \yii\db\ActiveRecord
             'payment_mode' => 'Payment Mode',
             'amount' => 'Amount',
             'notes' => 'Notes',
+            'activity_log' => 'Activity Log',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
@@ -70,6 +73,25 @@ class Payments extends \yii\db\ActiveRecord
             $this->created_by = \Yii::$app->user->id;
         }
         
+
+        // var_dump($this->attributes);
+        // var_dump($this->oldAttributes);
+        if(!empty($this->oldAttributes)){
+            if($this->oldAttributes['party_id'] != $this->party_id){
+                $modelOldParty = Party::find()->select('name')->where(['id' => $this->oldAttributes['party_id']])->one();
+                $modelNewParty = Party::find()->select('name')->where(['id' => $this->party_id])->one();
+                $log = 'Party Name Changed from '. $modelOldParty['name']. ' to '. $modelNewParty['name'];
+                $this->activity_log = $log.'<br>'.$this->activity_log;
+            }
+            if($this->oldAttributes['amount'] != $this->amount){
+                $log = 'Changed Amount from '.$this->currencySymbol.' '.$this->oldAttributes['amount'].' to '.$this->currencySymbol.' '.$this->amount;
+                $this->activity_log = $log.'<br>'.$this->activity_log;
+            }
+            
+        } else {
+            $this->activity_log = 'Payment of '.$this->currencySymbol.' '.$this->amount.' added.';
+        }
+
         $this->updated_by = \Yii::$app->user->id;
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
         $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
