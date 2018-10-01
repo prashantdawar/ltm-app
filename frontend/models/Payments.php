@@ -89,7 +89,7 @@ class Payments extends \yii\db\ActiveRecord
             }
             
         } else {
-            $this->activity_log = 'Payment of '.$this->currencySymbol.' '.$this->amount.' added.';
+            $this->activity_log = 'Amount of '.$this->currencySymbol.' '.$this->amount.' added.';
         }
 
         $this->updated_by = \Yii::$app->user->id;
