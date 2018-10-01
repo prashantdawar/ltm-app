@@ -81,11 +81,11 @@ class Payments extends \yii\db\ActiveRecord
                 $modelOldParty = Party::find()->select('name')->where(['id' => $this->oldAttributes['party_id']])->one();
                 $modelNewParty = Party::find()->select('name')->where(['id' => $this->party_id])->one();
                 $log = 'Party Name Changed from '. $modelOldParty['name']. ' to '. $modelNewParty['name'];
-                $this->activity_log = $log.'<br>'.$this->activity_log;
+                $this->activity_log = $log.'.<br>'.$this->activity_log;
             }
             if($this->oldAttributes['amount'] != $this->amount){
                 $log = 'Changed Amount from '.$this->currencySymbol.' '.$this->oldAttributes['amount'].' to '.$this->currencySymbol.' '.$this->amount;
-                $this->activity_log = $log.'<br>'.$this->activity_log;
+                $this->activity_log = $log.'.<br>'.$this->activity_log;
             }
             
         } else {
