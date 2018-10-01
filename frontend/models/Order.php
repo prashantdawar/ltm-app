@@ -184,10 +184,12 @@ class Order extends \yii\db\ActiveRecord
                 $modelPaymentsCredit = Payments::find()->where(['id' => $this->payment_id[0]])->one();
                 // var_dump($this->party_id);die;
                 $modelPaymentsCredit->party_id = $this->party_id;
+                $modelPaymentsCredit->amount = $this->amount;
                 $modelPaymentsCredit->save();
                 if(count($this->payment_id) == 2 ){
                     $modelPaymentsDebit = Payments::find()->where(['id' => $this->payment_id[1]])->one();
                     $modelPaymentsDebit->party_id = $this->party_id;
+                    $modelPaymentsDebit->amount = $this->amount;
                     $modelPaymentsDebit->save();
                 }
             }
