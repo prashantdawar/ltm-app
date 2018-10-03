@@ -29,6 +29,10 @@
             <?php if(strlen($model->phone) == 10) {?>
                 <a class="btn btn-primary" href="tel:+91<?= $model->phone; ?>" target="_blank"> Call</a>        
             <?php } ?>
+
+            <?php if(strlen($model->phone) == 10) {?>
+                <a class="btn btn-primary" href="sms:+91<?= $model->phone; ?>" target="_blank">Sms</a>
+            <?php } ?>            
             <?php if(strlen($model->whatsapp) == 10) {?>
                 <a class="btn btn-success" href="https://wa.me/91<?= $model->whatsapp; ?>" target="_blank"> Whatsapp</a>
             <?php } ?>
