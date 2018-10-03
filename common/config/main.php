@@ -5,7 +5,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'timeZone' => '+05:30',
+    'timeZone' => 'Asia/Calcutta',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
