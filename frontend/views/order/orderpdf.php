@@ -1,4 +1,3 @@
-
 <style>
     body {
         width: 210mm;
@@ -61,8 +60,8 @@
 </style>
 <body onload="window.print()" style="width: 210mm;">
     <div>
-        <h1 class="brand-header" style="display: inline-block;float: left;margin-top: 0;">Saugat Computers</h1>
-        <h1 class="brand-location" style="display: inline-block;float: right;margin-top: 0;">Hansi</h1>
+        <h1 class="brand-header" style="display: inline-block;float: left;margin-top: 0;"><?= ucwords($firmModel->name);  ?></h1>
+        <h1 class="brand-location" style="display: inline-block;float: right;margin-top: 0;"><?= ucwords($firmModel->city); ?></h1>
     </div>
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
@@ -73,19 +72,19 @@
     </table>
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-        <td style="width: 100%;vertical-align: baseline;font-size: 12px;">Shipped From: 3, ganesh market,Hansi,Hansi - 125033,Haryana </td>
+        <td style="width: 100%;vertical-align: baseline;font-size: 12px;">Shipped From: <?= $firmModel->address . ',' . ucwords($firmModel->city) . ',' . ucwords($firmModel->location) . ' - ' . $firmModel->pincode .','. ucwords($firmModel->state);?> </td>
         </tr>
     </table>
     <table style="width: 100%;border-collapse: collapse;">        
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">State: Haryana</td>
-            <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">Pin Code: 125033</td>
+            <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">State: <?= ucwords($firmModel->state); ?></td>
+            <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">Pin Code: <?= $firmModel->pincode; ?></td>
             <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">GSTIN Number: ----</td>
         </tr>
     </table>
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <th class="w33" style="width: 33%;vertical-align: baseline;">Invoice No. 267</th>
+            <th class="w33" style="width: 33%;vertical-align: baseline;">Invoice No. <?= $model->oid; ?></th>
             <th class="w70 left-line" style="width: 70%;vertical-align: baseline;border-left: 1px solid black;"></th>
             <!-- <th class="w33 left-line"></th> -->
         </tr>
@@ -94,7 +93,7 @@
                 <table style="width: 100%;border-collapse: collapse;">
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">Invoice Date:</td>
-                        <td style="width: 100%;vertical-align: baseline;font-size: 12px;"> 01-10-2018 </td>
+                        <td style="width: 100%;vertical-align: baseline;font-size: 12px;"> <?= $model->created_at; ?> </td>
                     </tr>
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">Doc Ref:</td>
@@ -106,7 +105,7 @@
                     </tr>
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">Payment Mode:</td>
-                        <td style="width: 100%;vertical-align: baseline;font-size: 12px;">Cash</td>
+                        <td style="width: 100%;vertical-align: baseline;font-size: 12px;"><?= $model->paymentMode[$model->payment_mode]; ?></td>
                     </tr>
                 </table>
             </td>
@@ -140,20 +139,27 @@
             <td class="w70 left-line" style="width: 70%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">
             <table style="width: 100%;border-collapse: collapse;">
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
-                        <th class="w50" style="width: 50%;vertical-align: baseline;">Bill to Address: Saf</th>
+                        <th class="w50" style="width: 50%;vertical-align: baseline;">Bill to Address: <?= $partyModel->name; ?></th>
                     </tr>
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">
                             <table style="width: 100%;border-collapse: collapse;">
                                 <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
-                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;">Address: sadf, Sagg, Saga, Sadgfs,                                     Pincode: 324324                                </td>  
+                                    <td style="width: 100%;vertical-align: baseline;font-size: 12px;">
+                                        Address: <?= 
+                                            $partyModel->street_address .', '. 
+                                            $partyModel->city.', '. 
+                                            $partyModel->location.', '.
+                                            $partyModel->state.', '?>
+                                        Pincode: <?= $partyModel->pincode ?>
+                                    </td>  
                                 </tr>
                                 <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                                     <td style="width: 100%;vertical-align: baseline;font-size: 12px;">
                                         <table style="width: 100%;border-collapse: collapse;">
                                             <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                                                 <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">State:</td>
-                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;"> Sadgfs</td>
+                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;"> <?= $partyModel->state; ?></td>
                                             </tr>
                                             <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                                                 <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">PAN No.:</td>
@@ -161,11 +167,11 @@
                                             </tr>
                                             <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                                                 <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">Contact:</td>
-                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;">0</td>
+                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;"><?= $partyModel->phone; ?></td>
                                             </tr>
                                             <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                                                 <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">Email:</td>
-                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;">sdadf</td>
+                                                <td style="width: 100%;vertical-align: baseline;font-size: 12px;"><?= $partyModel->email; ?></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -187,24 +193,20 @@
             <th class="w5" style="width: 5%;vertical-align: baseline;"></th>
             <th style="width: 100%;vertical-align: baseline;">Gross Amount</th>
         </tr>
-                            <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;">1</td>
-            <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">mouse 123 456</td>
-            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;">1</td>
+        <?php $subTotal = 0; ?>
+        <?php foreach($dataAmount as $index => $amount) { ?>
+            <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
+            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"><?= $index+1;  ?></td>
+            <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;"><?= $dataItem[$index*2]; ?></td>
+            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"><?= $dataItem[$index*2+1]; ?></td>
             <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"></td>
             <td class="w5" style="width: 5%;vertical-align: baseline;font-size: 12px;"></td>
-            <td style="width: 100%;vertical-align: baseline;font-size: 12px;">100</td>
-                    </tr>
-                     <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;">2</td>
-            <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;">charger</td>
-            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;">1</td>
-            <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"></td>
-            <td class="w5" style="width: 5%;vertical-align: baseline;font-size: 12px;"></td>
-            <td style="width: 100%;vertical-align: baseline;font-size: 12px;">530</td>
-                    </tr>
-                 
-        <tr style="height: 30px;width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
+            <td style="width: 100%;vertical-align: baseline;font-size: 12px;"><?= $dataItem[$index*2+1]* $amount; ?></td>
+            <?php $subTotal += $dataItem[$index*2+1]* $amount; ?>
+        </tr>
+         <?php } ?>
+        
+         <tr style="height: 30px;width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
             <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"></td>
             <td class="w50" style="width: 50%;vertical-align: baseline;font-size: 12px;"></td>
             <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"></td>
@@ -219,7 +221,7 @@
             <td class="w10" style="width: 10%;vertical-align: baseline;font-size: 12px;"></td>
             <td class="w10 left-line" style="width: 10%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;"></td>
             <td class="w5" style="width: 5%;vertical-align: baseline;font-size: 12px;"></td>
-            <td style="width: 100%;vertical-align: baseline;font-size: 12px;">&#x20B9; 630</td>
+            <td style="width: 100%;vertical-align: baseline;font-size: 12px;">&#x20B9; <?= $subTotal; ?></td>
         </tr>
     </table>
     
@@ -245,13 +247,15 @@
                         <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;"><br></td>
                         <td class="w30" style="width: 30%;vertical-align: baseline;font-size: 12px;"><br></td>
                     </tr>
-                                        <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
+                    <?php if($subTotal-$model->amount) {?>
+                        <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;"><span>Discount</span></td>
-                        <td class="w30" style="width: 30%;vertical-align: baseline;font-size: 12px;"><span>- &#x20B9; 30</span></td>
+                        <td class="w30" style="width: 30%;vertical-align: baseline;font-size: 12px;"><span>- <?= $model->currencySymbol; ?> <?= $subTotal-$model->amount;?></span></td>
                     </tr>
-                                        <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
+                    <?php } ?>
+                    <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;"><h3>Invoice Total</h3></td>
-                        <td class="w30" style="width: 30%;vertical-align: baseline;font-size: 12px;"><h3>&#x20B9; 600</h3></td>
+                        <td class="w30" style="width: 30%;vertical-align: baseline;font-size: 12px;"><h3><?= $model->currencySymbol; ?> <?= $model->amount; ?></h3></td>
                     </tr>
                 </table>
             </td>
@@ -260,7 +264,8 @@
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
             <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;">
-                Customer Care: 9996807592, Email: nishantdawar2009@gmail.com                <br>
+                Customer Care: <?= $firmModel->phone; ?>, Email: <?= $firmModel->email; ?>
+                <br>
                 Good Shipped / sold under this invoice are for personal use and for resale..
                 <br>
                 Declaration: Certified that the particulars given above are true and correct.
