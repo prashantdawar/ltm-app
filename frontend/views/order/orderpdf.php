@@ -1,4 +1,65 @@
 
+<style>
+    body {
+        width: 210mm;
+        /* height: 297mm;         */
+    }
+
+    table {
+        width: 100%;
+        /* border: 1px solid black; */
+        border-collapse: collapse;
+        /* border-top: 0px; */
+    }
+
+    th,tr,td {
+        width: 100%;
+        /* border: 1px solid black; */
+        vertical-align: baseline;
+    }
+
+    tr {
+        border: 1px solid black;
+        border-bottom: 0;
+    }
+
+    td > table  tr {
+        border: 0;
+    }
+
+    .left-line {
+        border-left: 1px solid black;
+    }
+
+    td{
+        font-size: 12px;
+    }
+
+    .w5  { width: 5%;  }
+    .w10 { width: 10%; }
+    .w20 { width: 20%; }
+    .w30 { width: 30%; }
+    .w33 { width: 33%; }
+    .w50 { width: 50%; }
+    .w70 { width: 70%; }
+
+    h1 {
+        display: inline-block;
+    }
+
+    .brand-header {
+        float: left;
+    }
+
+    .brand-location {
+        float: right;   
+    }
+
+    .brand-header, .brand-location {
+        margin-top: 0;
+    }
+</style>
+<body onload="window.print()" style="width: 210mm;">
     <div>
         <h1 class="brand-header" style="display: inline-block;float: left;margin-top: 0;">Saugat Computers</h1>
         <h1 class="brand-location" style="display: inline-block;float: right;margin-top: 0;">Hansi</h1>
@@ -218,3 +279,4 @@
             <td style="width: 100%;vertical-align: baseline;font-size: 12px;"></td>
         </tr>
     </table>
+</body>
