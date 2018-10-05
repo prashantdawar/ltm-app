@@ -58,7 +58,7 @@
         margin-top: 0;
     }
 </style>
-<body style="width: 210mm;">
+<body onload="window.print()" style="width: 210mm;">
     <div>
         <h1 class="brand-header" style="display: inline-block;float: left;margin-top: 0;"><?= ucwords($firmModel->name);  ?></h1>
         <h1 class="brand-location" style="display: inline-block;float: right;margin-top: 0;"><?= ucwords($firmModel->city); ?></h1>
