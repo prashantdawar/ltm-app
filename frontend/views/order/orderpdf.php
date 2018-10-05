@@ -58,7 +58,7 @@
         margin-top: 0;
     }
 </style>
-<body onload="window.print()" style="width: 210mm;">
+<body style="width: 210mm;">
     <div>
         <h1 class="brand-header" style="display: inline-block;float: left;margin-top: 0;"><?= ucwords($firmModel->name);  ?></h1>
         <h1 class="brand-location" style="display: inline-block;float: right;margin-top: 0;"><?= ucwords($firmModel->city); ?></h1>
@@ -78,7 +78,7 @@
     <table style="width: 100%;border-collapse: collapse;">        
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
             <td class="w33" style="width: 33%;vertical-align: baseline;font-size: 12px;">State: <?= ucwords($firmModel->state); ?></td>
-            <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">Pin Code: <?= $firmModel->pincode; ?></td>
+            <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black; display:block;">Pin Code: <?= $firmModel->pincode; ?></td>
             <td class="w33 left-line" style="width: 33%;vertical-align: baseline;font-size: 12px;border-left: 1px solid black;">GSTIN Number: ----</td>
         </tr>
     </table>
@@ -227,7 +227,7 @@
     
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;">
+            <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;display: block; width: 552px;">
                 <table style="width: 100%;border-collapse: collapse;">
                     <tr style="width: 100%;vertical-align: baseline;border: 0;border-bottom: 0;">
                         <!-- <td>Net Amount Payable (In Words): INR Eight Hundred Five and 0 Paise Only</td> -->
@@ -263,7 +263,7 @@
     </table>
     <table style="width: 100%;border-collapse: collapse;">
         <tr style="width: 100%;vertical-align: baseline;border: 1px solid black;border-bottom: 0;">
-            <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px;">
+            <td class="w70" style="width: 70%;vertical-align: baseline;font-size: 12px; width: 552px; display: block;">
                 Customer Care: <?= $firmModel->phone; ?>, Email: <?= $firmModel->email; ?>
                 <br>
                 Good Shipped / sold under this invoice are for personal use and for resale..
