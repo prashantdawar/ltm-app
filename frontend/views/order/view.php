@@ -53,6 +53,7 @@
                 [
                     'attribute' => 'item_id',
                     'label' => 'Item Name',
+                    'format' =>'raw',
                     'value' => $data
                  ],
                 [
@@ -84,4 +85,4 @@
         ]);    
     ?>
 </div>
-<?php $this->registerJs('$(document).ready(function(){ window.open("/order/pdf?id='.$model->id.'","_blank");});'); ?>
+<?php //$this->registerJs('$(document).ready(function(){ window.open("/order/pdf?id='.$model->id.'","_blank");});'); ?>

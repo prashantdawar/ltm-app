@@ -130,7 +130,7 @@ class OrderController extends \yii\web\Controller
             $email->send(); 
             //  $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
         }
-        return '<script>window.close();</script>';
+        return 'Email Sent Successfully. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
     }
 
     /**
@@ -160,8 +160,14 @@ class OrderController extends \yii\web\Controller
         //     $data[] = $value['name'];
         // }
         // $data = implode(' | ', $data);
-        
-        $data = implode(' | ', $dataItem);
+        $data = '';
+        foreach($dataItem as $key=>$value){            
+            if($key%2 == 0 && $key!=0){
+               $data.='<br>';
+            }
+            $data .= $value.(($key%2 ==0) ? ' | ':'');
+        }
+        // $data = implode(' | ', $dataItem);
 
         return $this->render('view',[
             'model' => $model,
