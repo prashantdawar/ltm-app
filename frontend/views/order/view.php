@@ -70,7 +70,10 @@
                     'value' => $model->orderStatus[$model->status],
 
                 ],  
-                'notes',              
+                [
+                    'attribute' => 'notes',
+                    'value' => (strlen($model->notes) > 0) ? $model->notes : '--- Click Update to enter notes. ---'
+                ],              
                 'created_at', //managed in model
                 // [
                 //     'attribute' => 'created_at',
