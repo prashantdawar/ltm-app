@@ -226,25 +226,25 @@ class Order extends \yii\db\ActiveRecord
      *
      * @return bool whether the email was send
      */
-    public function sendEmail($model, $firmModel, $partyModel, $dataItem, $dataAmount)
-    {
-        $userModel = \frontend\models\PrimaryIds::find()->select('email')->where(['created_by' => \Yii::$app->user->id])->asArray()->one();
-        // var_dump($userModel['email']); die;
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => '/order/orderpdf'],
-                [
-                    'model' => $model,
-                    'firmModel' => $firmModel,
-                    'partyModel' => $partyModel,
-                    'dataItem' => $dataItem,
-                    'dataAmount' => $dataAmount                            
-                ])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($partyModel->email)
-            ->setBcc(['sales@datapacks.in', $userModel['email']])
-            ->setSubject('Order Details for: ' . $this->oid . ' from ltm web app')
-            ->send();
-    }
+    // public function sendEmail($model, $firmModel, $partyModel, $dataItem, $dataAmount)
+    // {
+    //     $userModel = \frontend\models\PrimaryIds::find()->select('email')->where(['created_by' => \Yii::$app->user->id])->asArray()->one();
+    //     // var_dump($userModel['email']); die;
+    //     return Yii::$app
+    //         ->mailer
+    //         ->compose(
+    //             ['html' => '/order/orderpdf'],
+    //             [
+    //                 'model' => $model,
+    //                 'firmModel' => $firmModel,
+    //                 'partyModel' => $partyModel,
+    //                 'dataItem' => $dataItem,
+    //                 'dataAmount' => $dataAmount                            
+    //             ])
+    //         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+    //         ->setTo($partyModel->email)
+    //         ->setBcc(['sales@datapacks.in', $userModel['email']])
+    //         ->setSubject('Order Details for: ' . $this->oid . ' from ltm web app')
+    //         ->send();
+    // }
 }
