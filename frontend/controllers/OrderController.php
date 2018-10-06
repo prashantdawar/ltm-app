@@ -112,8 +112,23 @@ class OrderController extends \yii\web\Controller
             // $amount = \frontend\models\Items::find()->select('amount')->where(['id' => $itemIdQuantity])->asArray()->one();
             array_push($dataAmount,$item['amount']);
         }
-        if(strlen($partyModel->email) > 11) { 
-             $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
+        if(strlen($partyModel->email) > 11) {
+            $email = new \frontend\models\Email(
+                    [
+                        'to' => $partyModel->email,
+                    ],
+                    'Order Details for: ' . $model->oid . ' from ltm web app',
+                    '/order/orderpdf',
+                    [
+                        'model' => $model,
+                        'firmModel' => $firmModel,
+                        'partyModel' => $partyModel,
+                        'dataItem' => $dataItem,
+                        'dataAmount' => $dataAmount
+                    ]
+                );
+            $email->send(); 
+            //  $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
         }
         return '<script>window.close();</script>';
     }
