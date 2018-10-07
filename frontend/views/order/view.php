@@ -18,13 +18,10 @@
         ?>
         <?= \yii\helpers\Html::a('Generate PDF', ['pdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php if(strlen($model->party->email) > 11) {?>
-            <?= \yii\helpers\Html::a('Send Email to client', ['send-email', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
+            <?= \yii\helpers\Html::a('Send Email', ['send-email', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php } ?>
         
         
-        
-        
-        <?= \yii\helpers\Html::a('Send Email for record', ['send-email', 'id' => $model->id, 'record' =>''], ['class' => 'btn btn-primary', 'target' => '_blank']); ?>
         <?php if(strlen($model->party->phone) == 10) {?>
             <a class="btn btn-primary" href="sms:+91<?= $model->party->phone; ?>?body=Your order no.<?= $model->oid?> of amount INR<?= $model->amount?> has been created. For more info contact." target="_blank">Send Sms</a>
         <?php } ?>

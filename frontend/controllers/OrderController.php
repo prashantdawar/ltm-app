@@ -113,12 +113,6 @@ class OrderController extends \yii\web\Controller
             array_push($dataAmount,$item['amount']);
         }
         $to = $partyModel->email;
-
-        // if(!empty(\Yii::$app->request->get('record'))){
-        //     $userModel = \frontend\models\PrimaryIds::find()->select('email')->where(['created_by' => \Yii::$app->user->id])->asArray()->one();
-            
-        //     $to = $userModel['email'];
-        // }
         
         if(strlen($partyModel->email) > 11) {
             $email = new \frontend\models\Email(
