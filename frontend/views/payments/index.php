@@ -79,6 +79,19 @@ $this->params['breadcrumbs'][] = $this->title;
                             \yii\helpers\Url::to(['/payments', 'PaymentsSearch[party_id]' => $model->party_id, 'PaymentsSearch[party_name]' => $model->party->name]));
                         }
             ],
+            [
+                'attribute' => 'pid',
+                'headerOptions' => ['style' => 'width:11%;'],
+                'contentOptions' =>['style' => 'text-align: center;'],
+                'format' => 'raw',
+                'value' => function($model) {
+                            
+                            return \yii\helpers\Html::a(
+                                $model->pid,
+                                \yii\helpers\Url::to(['payments/view', 'id' => $model->id]),
+                                ['style' => 'display:block; width: 100%; height: 100%;']);
+                            }                    
+            ],
             'amount',
             [   'attribute' => 'payment_mode',
                 'filter' =>  \kartik\select2\Select2::widget([

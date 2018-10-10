@@ -12,7 +12,7 @@ class PaymentsSearch extends \frontend\models\Payments
     public function rules()
     {
         return [
-            [['id', 'party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'pid', 'party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
             [['party_name','created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -51,6 +51,7 @@ class PaymentsSearch extends \frontend\models\Payments
         // grid filtering conditions
         $query->andFilterWhere([
             // 'id' => $this->id,
+            '`payments`.`pid`' => $this->pid,
             '`payments`.`party_id`' => $this->party_id,
             '`payments`.`payment_mode`' => $this->payment_mode,
             '`payments`.`amount`' => $this->amount,

@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             // 'id',
             // 'party_id',
+            'pid',
             [
                 'attribute' => 'party.name',
                 'label' => 'Party Name'

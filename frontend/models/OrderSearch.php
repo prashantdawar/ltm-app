@@ -36,7 +36,7 @@ class OrderSearch extends \frontend\models\Order {
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['oid' => SORT_DESC]]
+            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $dataProvider->sort->attributes['party_name'] = [

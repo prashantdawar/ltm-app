@@ -37,7 +37,7 @@ class Payments extends \yii\db\ActiveRecord
     {
         return [
             [['party_id', 'payment_mode', 'amount', 'created_at', 'updated_at'], 'required'],
-            [['party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
+            [['pid', 'party_id', 'payment_mode', 'amount', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at', 'notes', 'activity_log'], 'safe'],
         ];
     }
@@ -49,6 +49,7 @@ class Payments extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'pid' => 'Voucher No.',
             'party_id' => 'Party Name',
             'payment_mode' => 'Payment Mode',
             'amount' => 'Amount',
@@ -71,6 +72,8 @@ class Payments extends \yii\db\ActiveRecord
         }
         if($insert){
             $this->created_by = \Yii::$app->user->id;
+            $modelPrimaryIds = PrimaryIds::find()->where(['created_by' => \Yii::$app->user->id])->one();
+            $this->pid = $modelPrimaryIds->payments_id;
         }
         
 
@@ -126,6 +129,12 @@ class Payments extends \yii\db\ActiveRecord
             
             $modelParty->due = $debit - $credit;        
             $modelParty->save();
+        }
+
+        if($insert){
+            $modelPrimaryIds = PrimaryIds::find()->where(['created_by' => \Yii::$app->user->id])->one();
+            $modelPrimaryIds->payments_id = $modelPrimaryIds->payments_id + 1;
+            $modelPrimaryIds->save();
         }
     }
 
