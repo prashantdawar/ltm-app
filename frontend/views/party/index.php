@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'state',
                 // 'pincode',
                 [
-                    'label' => 'Orders',
+                    'label' => 'Orders (Count)',
                     'format' => 'raw',
                     'value' => function($model) {                                
                                 return \yii\helpers\Html::a(
