@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'value' => function($model) {                                
                                 return \yii\helpers\Html::a(
-                                    'Show Details',
+                                    'Show Details ('. $model->total_orders.')',
                                     \yii\helpers\Url::to(['order/', 'OrderSearch[party_id]' => $model->id, 'OrderSearch[party_name]' => $model->name]));
                                 }
                 ],

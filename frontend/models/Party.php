@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property int $total_orders // as modal property only
  * @property string $contact_name
  * @property int $phone
  * @property int $whatsapp
@@ -28,6 +29,8 @@ use Yii;
  */
 class Party extends \yii\db\ActiveRecord
 {
+
+    public $total_orders;
     /**
      * {@inheritdoc}
      */
@@ -43,7 +46,7 @@ class Party extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'contact_name', 'phone','whatsapp', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'created_at', 'updated_at'], 'required'],
-            [['whatsapp','phone', 'pincode', 'due', 'status',], 'integer'],
+            [['whatsapp','phone', 'pincode', 'due', 'status','total_orders'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['phone','whatsapp'], 'string', 'max' => 10 ],
             [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
@@ -59,6 +62,7 @@ class Party extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Party Name',
+            'total_orders' => 'Total Orders',
             'contact_name' => 'Contact Name',
             'phone' => 'Phone',
             'email' => 'Email',
@@ -119,6 +123,8 @@ class Party extends \yii\db\ActiveRecord
         
         $this->created_at = date('d-m-Y', strtotime($this->created_at));
         $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
+        
+        $this->total_orders = Order::find()->where(['party_id' => $this->id])->count();
 
         return true;
     }
