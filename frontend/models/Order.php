@@ -188,9 +188,12 @@ class Order extends \yii\db\ActiveRecord
                 $modelPaymentsCredit->save();
                 if(count($this->payment_id) == 2 ){
                     $modelPaymentsDebit = Payments::find()->where(['id' => $this->payment_id[1]])->one();
-                    $modelPaymentsDebit->party_id = $this->party_id;
-                    $modelPaymentsDebit->amount = $this->amount;
-                    $modelPaymentsDebit->save();
+                    // "!empty($modelPaymentsDebit)" check of empty object is required if client deleted corresponding debit value in payments.
+                    if(!empty($modelPaymentsDebit)){
+                        $modelPaymentsDebit->party_id = $this->party_id;
+                        $modelPaymentsDebit->amount = $this->payment_mode != 1 ? $this->amount : '0';
+                        $modelPaymentsDebit->save();
+                    }
                 }
             }
         }        
