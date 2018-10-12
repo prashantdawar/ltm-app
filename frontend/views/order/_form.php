@@ -39,6 +39,7 @@
             ?>
             <div class="col-md-6" style="clear:left;">
                 <?php   echo $form->field($modelItem, '['.$index.']'.'name')->widget(\kartik\select2\Select2::classname(), [
+                    'hideSearch' => empty($data['allItems']['id_name']) ? true : (count($data['allItems']['id_name']) > 7 ? false : true),
                     'data' => empty($data['allItems']['id_name']) ? []:$data['allItems']['id_name'],
                     'options' => ['placeholder' => 'Select an Item ...'],
                     'pluginOptions' => [
