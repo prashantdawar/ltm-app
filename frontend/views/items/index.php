@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'status',
             //'created_at',
             
-            'tax_rate',
+            // 'tax_rate',
             [   
                 'attribute' => 'updated_at', //managed in model
                     'filter' =>  \dosamigos\datepicker\DatePicker::widget([
