@@ -94,7 +94,7 @@
                 
                 <?= \yii\helpers\Html::hiddenInput('ah', ($modelItem->name) ? $data['allItems']['id_amount'][$modelItem->name] : null, ['id' => strtolower($modelItem->formName()).'-'.$index.'-amount-hidden']) ?>
                 <?= $form->field($modelItem,'['.$index.']'.'quantity')
-                        ->textInput(['onchange' => ' 
+                        ->textInput(['type' => 'number','onchange' => ' 
                                             // var modelIdAmount = '.$modelIdAmount.';
                                             // console.log(Array.isArray(modelIdAmount));
                                             // console.log($(this).parent().parent().find("input").val());
