@@ -138,10 +138,11 @@
             <br>
         <?php } ?>
        
-        <?=$form->field($model,'amount')->textInput(); ?>
+        <?=$form->field($model,'amount')->textInput(['type' => 'number']); ?>
 
         <?php if(!$model->payment_mode) $model->payment_mode = 0; // see order model $paymentMode[]?>
         <?= $form->field($model,'payment_mode')->widget(\kartik\select2\Select2::classname(), [
+                'hideSearch' => true,
                 'data' =>$model->paymentMode,
                 'options' => ['placeholder' => 'Select Payment Mode'],
                 'pluginOptions' => [
@@ -151,6 +152,7 @@
         ?>
         <?php if(!$model->status) $model->status = 0; // set default to completed for kartik-v select2 widget // see order model $orderStatus[] for value?>
         <?= $form->field($model,'status')->widget(\kartik\select2\Select2::classname(), [
+                'hideSearch' => true,
                 'data' =>$model->orderStatus,
                 'options' => ['placeholder' => 'Select order status'],
                 'pluginOptions' => [

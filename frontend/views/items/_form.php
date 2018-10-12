@@ -14,11 +14,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'amount')->textInput() ?>
+    <?= $form->field($model, 'amount')->textInput(['type' => 'number']) ?>
 
-    <?= $form->field($model, 'mrp')->textInput() ?>
+    <?= $form->field($model, 'mrp')->textInput([ 'type' => 'number']) ?>
     
-    <?= $form->field($model, 'tax_rate')->textInput() ?>
+    <?= $form->field($model, 'tax_rate')->textInput([ 'type' => 'number']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

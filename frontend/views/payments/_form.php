@@ -23,6 +23,7 @@ use yii\widgets\ActiveForm;
     
     
     <?= $form->field($model, 'payment_mode')->widget(\kartik\select2\Select2::classname(), [
+            'hideSearch' => true,
             'data' => $model->paymentMode,
             'options' => ['placeholder' => 'Select payment mode ...'],
             'pluginOptions' => [
@@ -30,7 +31,7 @@ use yii\widgets\ActiveForm;
             ],
         ]); ?>
 
-    <?= $form->field($model, 'amount')->textInput() ?>
+    <?= $form->field($model, 'amount')->textInput(['type' => 'number']) ?>
 
     <?= $form->field($model, 'notes')->textArea() ?>
 

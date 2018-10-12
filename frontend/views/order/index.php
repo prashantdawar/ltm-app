@@ -71,6 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [   'attribute' => 'status',
                     'filter' =>  \kartik\select2\Select2::widget([
                         'model' => $searchModel,
+                        'hideSearch' => true,
                         'data' => $searchModel->orderStatus,
                         'attribute' => 'status',
                         'options' => ['placeholder' => ''],
@@ -87,6 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [   'attribute' => 'payment_mode',
                     'filter' =>  \kartik\select2\Select2::widget([
                         'model' => $searchModel,
+                        'hideSearch' => true,
                         'data' => $searchModel->paymentMode,
                         'attribute' => 'payment_mode',
                         'options' => ['placeholder' => ''],

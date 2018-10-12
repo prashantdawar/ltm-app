@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'due',
                     'filter' =>  \kartik\select2\Select2::widget([
                         'model' => $searchModel,
+                        'hideSearch' => true,
                         'data' => $searchModel->due_condition_options,
                         'attribute' => 'due_condition',
                         'options' => ['placeholder' => ''],
