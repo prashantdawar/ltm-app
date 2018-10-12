@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
             ],
         ]); ?>
 
-    <?= $form->field($model, 'amount')->textInput(['type' => 'number']) ?>
+    <?= $form->field($model, 'amount')->textInput(['type' => 'number', 'autocomplete' => 'off']) ?>
 
     <?= $form->field($model, 'notes')->textArea() ?>
 

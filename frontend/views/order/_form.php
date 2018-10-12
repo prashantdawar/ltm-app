@@ -94,7 +94,7 @@
                 
                 <?= \yii\helpers\Html::hiddenInput('ah', ($modelItem->name) ? $data['allItems']['id_amount'][$modelItem->name] : null, ['id' => strtolower($modelItem->formName()).'-'.$index.'-amount-hidden']) ?>
                 <?= $form->field($modelItem,'['.$index.']'.'quantity')
-                        ->textInput(['type' => 'number','onchange' => ' 
+                        ->textInput(['type' => 'number', 'autocomplete' => 'off','onchange' => ' 
                                             // var modelIdAmount = '.$modelIdAmount.';
                                             // console.log(Array.isArray(modelIdAmount));
                                             // console.log($(this).parent().parent().find("input").val());
@@ -138,7 +138,7 @@
             <br>
         <?php } ?>
        
-        <?=$form->field($model,'amount')->textInput(['type' => 'number']); ?>
+        <?=$form->field($model,'amount')->textInput(['type' => 'number', 'autocomplete' => 'off']); ?>
 
         <?php if(!$model->payment_mode) $model->payment_mode = 0; // see order model $paymentMode[]?>
         <?= $form->field($model,'payment_mode')->widget(\kartik\select2\Select2::classname(), [

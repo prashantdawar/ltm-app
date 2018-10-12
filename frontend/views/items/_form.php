@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
 
-    <?= $form->field($model, 'amount')->textInput(['type' => 'number']) ?>
+    <?= $form->field($model, 'amount')->textInput(['type' => 'number', 'autocomplete' => 'off']) ?>
 
-    <?= $form->field($model, 'mrp')->textInput([ 'type' => 'number']) ?>
+    <?= $form->field($model, 'mrp')->textInput([ 'type' => 'number', 'autocomplete' => 'off']) ?>
     
-    <?= $form->field($model, 'tax_rate')->textInput([ 'type' => 'number']) ?>
+    <?= $form->field($model, 'tax_rate')->textInput([ 'type' => 'number', 'autocomplete' => 'off']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
