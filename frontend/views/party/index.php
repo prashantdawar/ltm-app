@@ -51,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
-                    ]), 
+                    ]),
+                    'headerOptions' => ['style' => ' min-width:150px;  '], 
                 ],
                 [
                     'attribute' => 'phone',
