@@ -11,7 +11,7 @@ $this->title = 'ltm web app';
 
         <p class="lead">Get ready for a hassle free experience</p>
 
-        <p><a class="btn btn-lg btn-success" href="/site/login">Lets Get Started</a></p>
+        <p><a class="btn btn-lg btn-success" href="/order">Lets Get Started</a></p>
     </div>
 
     <div class="body-content">
