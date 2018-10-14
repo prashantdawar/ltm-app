@@ -99,7 +99,7 @@ class Payments extends \yii\db\ActiveRecord
 
         $this->updated_by = \Yii::$app->user->id;
         $this->updated_at = date('Y-m-d');
-        // $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
         // $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
         return true;
     }
