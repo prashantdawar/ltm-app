@@ -92,7 +92,6 @@ class Order extends \yii\db\ActiveRecord
             $modelPaymentsCredit->setAttributes($this->attributes);
             $modelPaymentsCredit->payment_mode = 1;
             $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $this->oid;
-            $modelPaymentsCredit->Save();
             if($modelPaymentsCredit->save()){
                 if($this->payment_mode != 1){
                     $modelPaymentsDebit = new Payments();
@@ -100,15 +99,59 @@ class Order extends \yii\db\ActiveRecord
                     $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
                     $modelPaymentsDebit->save();
                 }
+
                 $payment_id = [];
                 if(!isset($modelPaymentsDebit)){
                     array_push($payment_id, $modelPaymentsCredit->id);
                 } else {
                     array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
                 }
+
                 $this->payment_id = $payment_id;
                 // $this->save();
             }            
+        }
+
+        
+        /*
+        * Runs on update.
+        * Here party, amount and payment_mode is updated in payments , if it is changed in order.
+        */
+        if(!$insert){
+            //$this->payment_id[0] = 0 for all orders created before 'auto order-payments matching' feature is introduced.
+            // so below section will run for all orders created after 'auto order-payments matching' feature release.
+            // for older orders, manual entry in payments is needed.
+            if(((int)$this->payment_id[0] != 0)){            
+                $modelPaymentsCredit = Payments::find()->andWhere(['id' => $this->payment_id[0]])->one();
+                $modelPaymentsCredit->party_id = $this->party_id;
+                $modelPaymentsCredit->amount = $this->amount;
+                $modelPaymentsCredit->save();
+                if(count($this->payment_id) == 2 ){
+                    $modelPaymentsDebit = Payments::find()->andWhere(['id' => $this->payment_id[1]])->one();
+                    // "!empty($modelPaymentsDebit)" check of empty object is required if client deleted corresponding debit value in payments.
+                    if(!empty($modelPaymentsDebit)){
+                        $modelPaymentsDebit->party_id = $this->party_id;
+                        if($this->payment_mode != 1){
+                            $modelPaymentsDebit->payment_mode = $this->payment_mode;
+                        }                        
+                        $modelPaymentsDebit->amount = $this->payment_mode != 1 ? $this->amount : '0';
+                        $modelPaymentsDebit->save();
+                    }
+                } else {
+                    
+                    if($this->payment_mode !=1 ){
+                        // this debit may be created long after credit entry if payment mode changed from credit to cash and other debits.
+                        $modelPaymentsDebit = new Payments();
+                        $modelPaymentsDebit->setAttributes($this->attributes);
+                        $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
+                        $modelPaymentsDebit->save();
+
+                        $payments = $this->payment_id;
+                        array_push($payments, $modelPaymentsDebit->id);
+                        $this->payment_id = $payments;                        
+                    }
+                }
+            }
         }
 
         $this->payment_id = implode(',', $this->payment_id);
@@ -152,7 +195,7 @@ class Order extends \yii\db\ActiveRecord
             //     // $this->save();
             // }
             $primary_ids = PrimaryIds::find()->one();
-            $primary_ids->order_id = $primary_ids->order_id +1;
+            $primary_ids->order_id += 1;
             $primary_ids->save();
             // $this->save();
         }
@@ -198,43 +241,7 @@ class Order extends \yii\db\ActiveRecord
         //     return $this->redirect(['view', 'id' => $model->id]);         
         // }
 
-        /*
-        * Runs on update.
-        * Here party, amount and payment_mode is updated in payments , if it is changed in order.
-        */
-        if(!$insert){
-            //$this->payment_id[0] = 0 for all orders created before 'auto order-payments matching' feature is introduced.
-            // so below section will run for all orders created after 'auto order-payments matching' feature release.
-            // for older orders, manual entry in payments is needed.
-            if(((int)$this->payment_id[0] != 0)){            
-                $modelPaymentsCredit = Payments::find()->andWhere(['id' => $this->payment_id[0]])->one();
-                $modelPaymentsCredit->party_id = $this->party_id;
-                $modelPaymentsCredit->amount = $this->amount;
-                $modelPaymentsCredit->save();
-                if(count($this->payment_id) == 2 ){
-                    $modelPaymentsDebit = Payments::find()->andWhere(['id' => $this->payment_id[1]])->one();
-                    // "!empty($modelPaymentsDebit)" check of empty object is required if client deleted corresponding debit value in payments.
-                    if(!empty($modelPaymentsDebit)){
-                        $modelPaymentsDebit->party_id = $this->party_id;
-                        $modelPaymentsDebit->amount = $this->payment_mode != 1 ? $this->amount : '0';
-                        $modelPaymentsDebit->save();
-                    }
-                } else {
-                    // this debit may be created long after credit entry if payment mode changed from credit to cash and other debits.
-                    $modelPaymentsDebit = new Payments();
-                    $modelPaymentsDebit->setAttributes($this->attributes);
-                    $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
-                    // $modelPaymentsDebit->created_at = date('Y-m-d');
-                    // $modelPaymentsDebit->updated_at = date('Y-m-d');
-                    $modelPaymentsDebit->save();
-                    
-                    $payments = $this->payment_id;
-                    array_push($payments, $modelPaymentsDebit->id);
-                    $this->payment_id = $payments;
-                    $this->save();
-                }
-            }
-        }        
+                
     }
 
     public function afterFind(){
