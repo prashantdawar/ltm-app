@@ -200,17 +200,19 @@ class Order extends \yii\db\ActiveRecord
 
         /*
         * Runs on update.
-        * Here party is updated in payments , if it is changed in order.
+        * Here party, amount and payment_mode is updated in payments , if it is changed in order.
         */
         if(!$insert){
+            //$this->payment_id[0] = 0 for all orders created before 'auto order-payments matching' feature is introduced.
+            // so below section will run for all orders created after 'auto order-payments matching' feature release.
+            // for older orders, manual entry in payments is needed.
             if(((int)$this->payment_id[0] != 0)){            
-                $modelPaymentsCredit = Payments::find()->where(['id' => $this->payment_id[0]])->one();
-                // var_dump($this->party_id);die;
+                $modelPaymentsCredit = Payments::find()->andWhere(['id' => $this->payment_id[0]])->one();
                 $modelPaymentsCredit->party_id = $this->party_id;
                 $modelPaymentsCredit->amount = $this->amount;
                 $modelPaymentsCredit->save();
                 if(count($this->payment_id) == 2 ){
-                    $modelPaymentsDebit = Payments::find()->where(['id' => $this->payment_id[1]])->one();
+                    $modelPaymentsDebit = Payments::find()->andWhere(['id' => $this->payment_id[1]])->one();
                     // "!empty($modelPaymentsDebit)" check of empty object is required if client deleted corresponding debit value in payments.
                     if(!empty($modelPaymentsDebit)){
                         $modelPaymentsDebit->party_id = $this->party_id;
@@ -222,8 +224,8 @@ class Order extends \yii\db\ActiveRecord
                     $modelPaymentsDebit = new Payments();
                     $modelPaymentsDebit->setAttributes($this->attributes);
                     $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
-                    $modelPaymentsDebit->created_at = date('Y-m-d');
-                    $modelPaymentsDebit->updated_at = date('Y-m-d');
+                    // $modelPaymentsDebit->created_at = date('Y-m-d');
+                    // $modelPaymentsDebit->updated_at = date('Y-m-d');
                     $modelPaymentsDebit->save();
                     
                     $payments = $this->payment_id;

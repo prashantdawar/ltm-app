@@ -71,9 +71,11 @@ class Payments extends \yii\db\ActiveRecord
             return false;
         }
         if($insert){
-            $this->created_by = \Yii::$app->user->id;
-            $modelPrimaryIds = PrimaryIds::find()->andWhere(['created_by' => \Yii::$app->user->id])->one();
+            $modelPrimaryIds = PrimaryIds::find()->one();
             $this->pid = $modelPrimaryIds->payments_id;
+
+            $this->created_at = date('Y-m-d');
+            $this->created_by = \Yii::$app->user->id;
         }
         
 
@@ -96,8 +98,9 @@ class Payments extends \yii\db\ActiveRecord
         }
 
         $this->updated_by = \Yii::$app->user->id;
-        $this->created_at = date('Y-m-d', strtotime($this->created_at));
-        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+        $this->updated_at = date('Y-m-d');
+        // $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        // $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
         return true;
     }
 
