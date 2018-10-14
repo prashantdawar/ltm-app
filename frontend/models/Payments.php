@@ -97,9 +97,9 @@ class Payments extends \yii\db\ActiveRecord
             $this->activity_log = 'Amount of '.$this->currencySymbol.' '.$this->amount.' added.';
         }
 
-        $this->updated_by = \Yii::$app->user->id;
-        $this->updated_at = date('Y-m-d');
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_by = \Yii::$app->user->id;
+        $this->updated_at = date('Y-m-d');        
         // $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
         return true;
     }
