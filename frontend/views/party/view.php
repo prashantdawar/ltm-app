@@ -31,10 +31,10 @@
             <?php } ?>
 
             <?php if(strlen($model->phone) == 10) {?>
-                <a class="btn btn-primary" href="sms:+91<?= $model->phone; ?>?body=Your due balance is &#x20B9; <?= -$model->due ?>  . For more info contact." target="_blank">Send Sms</a>
+                <a class="btn btn-primary" href="sms:+91<?= $model->phone; ?>?body=Your due balance is &#x20B9; <?= -$model->due ?>  . For more info contact <?= ucwords($modelPrimaryIds->name); ?>." target="_blank">Send Sms</a>
             <?php } ?>            
             <?php if(strlen($model->whatsapp) == 10) {?>
-                <a class="btn btn-success" href="https://wa.me/91<?= $model->phone; ?>?text=Your due balance is &#x20B9; <?= -$model->due ?>  . For more info contact." target="_blank">Send Whatsapp</a>
+                <a class="btn btn-success" href="https://wa.me/91<?= $model->phone; ?>?text=Your due balance is &#x20B9; <?= -$model->due ?>  . For more info contact <?= ucwords($modelPrimaryIds->name); ?>." target="_blank">Send Whatsapp</a>
             <?php } ?>
         </p>
     </div>

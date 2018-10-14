@@ -51,10 +51,12 @@ class PartyController extends \yii\web\Controller {
 
         $modelPayments = new \frontend\models\Payments;
         $netAmount['credit'] = (float)($modelPayments->find()->andWhere('party_id=:partyId')->addParams([':partyId' => $id])->andwhere(['payment_mode' => '1'])->sum('amount'));
-        $netAmount['debit'] = (float)($modelPayments->find()->andWhere('party_id=:partyId')->addParams([':partyId' => $id])->andwhere(['not',['payment_mode' => '1']])->sum('amount'));        
-        
+        $netAmount['debit'] = (float)($modelPayments->find()->andWhere('party_id=:partyId')->addParams([':partyId' => $id])->andwhere(['not',['payment_mode' => '1']])->sum('amount'));
+        $modelPrimaryIds = \frontend\models\PrimaryIds::find()->one();
+
         return $this->render('view',[
             'model' => $this->findModel($id),
+            'modelPrimaryIds' => $modelPrimaryIds,
             'netAmount' => $netAmount
         ]);
     }
