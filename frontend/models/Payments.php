@@ -72,7 +72,7 @@ class Payments extends \yii\db\ActiveRecord
         }
         if($insert){
             $this->created_by = \Yii::$app->user->id;
-            $modelPrimaryIds = PrimaryIds::find()->where(['created_by' => \Yii::$app->user->id])->one();
+            $modelPrimaryIds = PrimaryIds::find()->andWhere(['created_by' => \Yii::$app->user->id])->one();
             $this->pid = $modelPrimaryIds->payments_id;
         }
         
@@ -81,8 +81,8 @@ class Payments extends \yii\db\ActiveRecord
         // var_dump($this->oldAttributes);
         if(!empty($this->oldAttributes)){
             if($this->oldAttributes['party_id'] != $this->party_id){
-                $modelOldParty = Party::find()->select('name')->where(['id' => $this->oldAttributes['party_id']])->one();
-                $modelNewParty = Party::find()->select('name')->where(['id' => $this->party_id])->one();
+                $modelOldParty = Party::find()->select('name')->andWhere(['id' => $this->oldAttributes['party_id']])->one();
+                $modelNewParty = Party::find()->select('name')->andWhere(['id' => $this->party_id])->one();
                 $log = 'Party Name Changed from '. $modelOldParty['name']. ' to '. $modelNewParty['name'];
                 $this->activity_log = $log.'.<br>'.$this->activity_log;
             }
@@ -104,23 +104,25 @@ class Payments extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes){
 
         // var_dump($changedAttributes); die;
-        $modelParty = \frontend\models\Party::find()->where(['id' => $this->party_id])->one();
-        $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->where(['party_id' => $this->party_id])->asArray()->all();;
+        $modelParty = \frontend\models\Party::find()->andWhere(['id' => $this->party_id])->one();
+        $modelPayments = \frontend\models\Payments::find()->select('amount, payment_mode')->andWhere(['party_id' => $this->party_id])->asArray()->all();;
         
         $credit =0; $debit = 0;
         foreach($modelPayments as $payments){
+            // var_dump($payments); 
             ($payments['payment_mode'] == 1) ? $credit += $payments['amount'] : $debit += $payments['amount'];
         }
-        
-        $modelParty->due = $debit - $credit;        
+        // die;
+        $modelParty->due = $debit - $credit;
+                
         $modelParty->save();
         unset($modelParty);
         unset($modelPayments);
         // reset due for changed party again.
         // check for null and empty string.
         if(!empty($changedAttributes['party_id']) && ($changedAttributes['party_id'] != $this->party_id)){
-            $modelParty = Party::find()->where(['id' => $changedAttributes['party_id']])->one();
-            $modelPayments = Payments::find()->select('amount, payment_mode')->where(['party_id' => $changedAttributes['party_id']])->asArray()->all();;
+            $modelParty = Party::find()->andWhere(['id' => $changedAttributes['party_id']])->one();
+            $modelPayments = Payments::find()->select('amount, payment_mode')->andWhere(['party_id' => $changedAttributes['party_id']])->asArray()->all();;
         
             $credit =0; $debit = 0;
             foreach($modelPayments as $payments){
@@ -132,7 +134,7 @@ class Payments extends \yii\db\ActiveRecord
         }
 
         if($insert){
-            $modelPrimaryIds = PrimaryIds::find()->where(['created_by' => \Yii::$app->user->id])->one();
+            $modelPrimaryIds = PrimaryIds::find()->andWhere(['created_by' => \Yii::$app->user->id])->one();
             $modelPrimaryIds->payments_id = $modelPrimaryIds->payments_id + 1;
             $modelPrimaryIds->save();
         }

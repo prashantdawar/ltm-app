@@ -106,6 +106,10 @@ class Party extends \yii\db\ActiveRecord
             return false;
         }
 
+        if($insert){
+            $this->created_at = date('Y-m-d');    
+        }
+        
         $this->name = ucwords(strtolower($this->name));
         $this->contact_name = ucwords($this->contact_name);
         $this->city = ucwords($this->city);
@@ -114,7 +118,7 @@ class Party extends \yii\db\ActiveRecord
         $this->phone = (float)$this->phone;
         $this->whatsapp = (float)$this->whatsapp;
         $this->created_at = date('Y-m-d', strtotime($this->created_at));
-        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+        $this->updated_at = date('Y-m-d');
 
         return true;
     }
@@ -124,7 +128,7 @@ class Party extends \yii\db\ActiveRecord
         $this->created_at = date('d-m-Y', strtotime($this->created_at));
         $this->updated_at = date('d-m-Y', strtotime($this->updated_at));
         
-        $this->total_orders = Order::find()->where(['party_id' => $this->id])->count();
+        $this->total_orders = Order::find()->andWhere(['party_id' => $this->id])->count();
 
         return true;
     }
@@ -135,7 +139,7 @@ class Party extends \yii\db\ActiveRecord
     protected function getDueBalance(){
         // var_dump($this->id);
         // var_dump($this->hasMany(Order::className(), ['party_id' => 'id'])->asArray()->all());
-        $party_payments = Payments::find()->select('amount,payment_mode')->where(['party_id' => $this->id])->asArray()->all();
+        $party_payments = Payments::find()->select('amount,payment_mode')->andWhere(['party_id' => $this->id])->asArray()->all();
 
         $credit =0; $debit = 0;
         foreach($party_payments as $payments){

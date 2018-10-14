@@ -77,36 +77,17 @@ class Order extends \yii\db\ActiveRecord
         
         if (!parent::beforeSave($insert)) {
             return false;
-        }
-        
+        }        
+
+        $this->created_at = date('Y-m-d', strtotime($this->created_at));
+        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
+
         // $insert is true when model entry is new!
        if($insert){
             // var_dump(\frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one()); die;
             $primary_ids = \frontend\models\PrimaryIds::find()->select('order_id')->asArray()->one();
             $this->oid =  $primary_ids['order_id'];
-        }
-        // var_dump($this->payment_id); die;
-        $this->payment_id = implode(',', $this->payment_id);
-        $this->item_id = implode(',', $this->item_id);
-        $this->created_at = date('Y-m-d', strtotime($this->created_at));
-        $this->updated_at = date('Y-m-d', strtotime($this->updated_at));
-        
-        return true;
-    }
 
-    public function afterSave($insert, $changedAttributes){
-        // $insert is true when model entry is new!
-        // $changedAttributes are empty when model entry is new!
-        /*
-        var_dump($insert);
-        var_dump($changedAttributes); die;
-        bool(true) array(12) { ["created_at"]=> NULL ["updated_at"]=> NULL ["created_by"]=> NULL ["updated_by"]=> NULL ["item_id"]=> NULL ["party_id"]=> NULL ["amount"]=> NULL ["payment_mode"]=> NULL ["status"]=> NULL ["notes"]=> NULL ["oid"]=> NULL ["id"]=> NULL }
-        */        
-        // die;
-        $this->item_id = explode(',', $this->item_id);
-        $this->payment_id = explode(',', $this->payment_id);
-        
-        if($insert){
             $modelPaymentsCredit = new Payments();
             $modelPaymentsCredit->setAttributes($this->attributes);
             $modelPaymentsCredit->payment_mode = 1;
@@ -127,11 +108,53 @@ class Order extends \yii\db\ActiveRecord
                 }
                 $this->payment_id = $payment_id;
                 // $this->save();
-            }
+            }            
+        }
+
+        $this->payment_id = implode(',', $this->payment_id);
+        $this->item_id = implode(',', $this->item_id);
+
+        return true;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        // $insert is true when model entry is new!
+        // $changedAttributes are empty when model entry is new!
+        /*
+        var_dump($insert);
+        var_dump($changedAttributes); die;
+        bool(true) array(12) { ["created_at"]=> NULL ["updated_at"]=> NULL ["created_by"]=> NULL ["updated_by"]=> NULL ["item_id"]=> NULL ["party_id"]=> NULL ["amount"]=> NULL ["payment_mode"]=> NULL ["status"]=> NULL ["notes"]=> NULL ["oid"]=> NULL ["id"]=> NULL }
+        */        
+        // die;
+        $this->item_id = explode(',', $this->item_id);
+        $this->payment_id = explode(',', $this->payment_id);
+        
+        if($insert){
+            // $modelPaymentsCredit = new Payments();
+            // $modelPaymentsCredit->setAttributes($this->attributes);
+            // $modelPaymentsCredit->payment_mode = 1;
+            // $modelPaymentsCredit->notes = 'Credited for Order No. : ' . $this->oid;
+            // $modelPaymentsCredit->Save();
+            // if($modelPaymentsCredit->save()){
+            //     if($this->payment_mode != 1){
+            //         $modelPaymentsDebit = new Payments();
+            //         $modelPaymentsDebit->setAttributes($this->attributes);
+            //         $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
+            //         $modelPaymentsDebit->save();
+            //     }
+            //     $payment_id = [];
+            //     if(!isset($modelPaymentsDebit)){
+            //         array_push($payment_id, $modelPaymentsCredit->id);
+            //     } else {
+            //         array_push($payment_id, $modelPaymentsCredit->id, $modelPaymentsDebit->id);
+            //     }
+            //     $this->payment_id = $payment_id;
+            //     // $this->save();
+            // }
             $primary_ids = PrimaryIds::find()->one();
             $primary_ids->order_id = $primary_ids->order_id +1;
             $primary_ids->save();
-            $this->save();
+            // $this->save();
         }
         //  $modelPaymentsCredit = new \frontend\models\Payments();                 
         //  $modelPaymentsCredit->setAttributes($model->attributes);
@@ -194,6 +217,19 @@ class Order extends \yii\db\ActiveRecord
                         $modelPaymentsDebit->amount = $this->payment_mode != 1 ? $this->amount : '0';
                         $modelPaymentsDebit->save();
                     }
+                } else {
+                    // this debit may be created long after credit entry if payment mode changed from credit to cash and other debits.
+                    $modelPaymentsDebit = new Payments();
+                    $modelPaymentsDebit->setAttributes($this->attributes);
+                    $modelPaymentsDebit->notes = 'Debited for Order No. : ' . $this->oid;
+                    $modelPaymentsDebit->created_at = date('Y-m-d');
+                    $modelPaymentsDebit->updated_at = date('Y-m-d');
+                    $modelPaymentsDebit->save();
+                    
+                    $payments = $this->payment_id;
+                    array_push($payments, $modelPaymentsDebit->id);
+                    $this->payment_id = $payments;
+                    $this->save();
                 }
             }
         }        

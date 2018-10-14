@@ -153,7 +153,7 @@ class OrderController extends \yii\web\Controller
                 continue;
             }
 
-            $item = \frontend\models\Items::find()->select('name')->where(['id' => $itemIdQuantity])->asArray()->one();
+            $item = \frontend\models\Items::find()->select('name')->andWhere(['id' => $itemIdQuantity])->asArray()->one();
             array_push($dataItem, $item['name']);
             
         }
