@@ -129,9 +129,12 @@ class OrderController extends \yii\web\Controller
                         'dataAmount' => $dataAmount
                     ]
                 );
-            $email->send(); 
-            //  $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
-            return 'Email Sent Successfully. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
+            if($email->send()) {
+                //  $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
+                return 'Email Sent Successfully. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
+            } else {
+                return 'Some error occured! We are working on it. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
+            }
         } else {
             return 'Update Email linked with party account. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
         }
