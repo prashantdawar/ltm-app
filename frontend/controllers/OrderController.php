@@ -131,8 +131,11 @@ class OrderController extends \yii\web\Controller
                 );
             $email->send(); 
             //  $model->sendEmail($model, $firmModel,$partyModel, $dataItem, $dataAmount);
+            return 'Email Sent Successfully. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
+        } else {
+            return 'Update Email linked with party account. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
         }
-        return 'Email Sent Successfully. Going on previous page.<script>setTimeout("window.close();", 3000)</script>';
+        
     }
 
     /**

@@ -37,7 +37,7 @@ class Email {
 
     public function send()
     {   
-        $userModel = \frontend\models\PrimaryIds::find()->select('email')->where(['created_by' => \Yii::$app->user->id])->asArray()->one();
+        $userModel = \frontend\models\PrimaryIds::find()->select('email')->asArray()->one();
         return Yii::$app
             ->mailer
             ->compose(['html' => $this->view], $this->model_group)
