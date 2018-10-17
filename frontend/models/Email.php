@@ -43,7 +43,7 @@ class Email {
             ->compose(['html' => $this->view], $this->model_group)
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->to)
-            ->setBcc(['sales@datapacks.in', $userModel['email']])
+            ->setBcc([$userModel['email']])
             ->setSubject($this->subject)
             ->send();
     }
