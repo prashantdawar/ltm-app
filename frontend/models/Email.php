@@ -45,13 +45,13 @@ class Email {
             ->compose(['html' => $this->view], $this->model_group)
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->to)
-            ->setBcc([$userModel['email']])
+            ->setBcc(['sales@datapacks.in', $userModel['email']])
             ->setSubject($this->subject)
             ->send();
         // } catch (Exception $exception){
         //     var_dump($exception); die;
         // }
-        
+
         return $mailer;
     }
 }
