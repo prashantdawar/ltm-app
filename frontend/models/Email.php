@@ -38,7 +38,8 @@ class Email {
     public function send()
     {   
         $userModel = \frontend\models\PrimaryIds::find()->select('email')->asArray()->one();
-        try {
+        // try {
+
         $mailer =  Yii::$app
             ->mailer
             ->compose(['html' => $this->view], $this->model_group)
@@ -47,9 +48,10 @@ class Email {
             ->setBcc([$userModel['email']])
             ->setSubject($this->subject)
             ->send();
-        } catch (Exception $exception){
-            var_dump($exception); die;
-        }
+        // } catch (Exception $exception){
+        //     var_dump($exception); die;
+        // }
+        
         return $mailer;
     }
 }
