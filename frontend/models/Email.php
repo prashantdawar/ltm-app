@@ -38,7 +38,7 @@ class Email {
     public function send()
     {   
         $userModel = \frontend\models\PrimaryIds::find()->select('email')->asArray()->one();
-        return Yii::$app
+        $mailer =  Yii::$app
             ->mailer
             ->compose(['html' => $this->view], $this->model_group)
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
@@ -46,5 +46,7 @@ class Email {
             ->setBcc([$userModel['email']])
             ->setSubject($this->subject)
             ->send();
+            echo $mailer; die;
+        return $mailer;
     }
 }
