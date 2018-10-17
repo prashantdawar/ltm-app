@@ -18,22 +18,22 @@ return [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => false,
-            // 'transport' => [
-            //     'class'      => 'Swift_SmtpTransport',
-            //     'host'       => 'smtp.datapacks.in',
-            //     'username'   => 'support@datapacks.in',
-            //     'password'   => 'Qwertydp#123', // your password
-            //     'port'       => '25',
-            // //    'encryption' => 'tls',
-            // ],
             'transport' => [
                 'class'      => 'Swift_SmtpTransport',
-                'host'       => 'smtp.mailtrap.io',
-                'username'   => '62e9ee46743f47',
-                'password'   => '9241a8a1eaebea', // your password
+                'host'       => 'smtp.datapacks.in',
+                'username'   => 'support@datapacks.in',
+                'password'   => 'Qwertydp#123', // your password
                 'port'       => '25',
             //    'encryption' => 'tls',
-            ]           
+            ],
+            // 'transport' => [
+            //     'class'      => 'Swift_SmtpTransport',
+            //     'host'       => 'smtp.mailtrap.io',
+            //     'username'   => '62e9ee46743f47',
+            //     'password'   => '9241a8a1eaebea', // your password
+            //     'port'       => '25',
+            // //    'encryption' => 'tls',
+            // ]           
         ]
     ],
 ];
