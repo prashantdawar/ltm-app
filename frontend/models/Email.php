@@ -35,11 +35,9 @@ class Email {
         $this->model_group = !(empty($model_group)) ? $model_group:[]; 
     }
 
-    public function send()
-    {   
+    public function send() {   
         $userModel = \frontend\models\PrimaryIds::find()->select('email')->asArray()->one();
         // try {
-
         $mailer =  Yii::$app
             ->mailer
             ->compose(['html' => $this->view], $this->model_group)
