@@ -47,7 +47,7 @@ class Email {
             ->setBcc([$userModel['email']])
             ->setSubjct($this->subject)
             ->send();
-        } catch (\yii\base\Exception $exception){
+        } catch (Exception $exception){
             var_dump($exception); die;
         }
         return $mailer;
