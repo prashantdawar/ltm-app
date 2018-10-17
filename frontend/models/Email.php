@@ -45,7 +45,7 @@ class Email {
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->to)
             ->setBcc([$userModel['email']])
-            ->setSubjct($this->subject)
+            ->setSubject($this->subject)
             ->send();
         } catch (Exception $exception){
             var_dump($exception); die;
