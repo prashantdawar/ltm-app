@@ -12,6 +12,7 @@ use Yii;
  * @property int $party_id
  * @property int $payments_id
  * @property int $order_id
+ * @property int $uuid 
  * @property string $created_at
  * @property string $updated_at
  * @property int $created_by
@@ -43,7 +44,7 @@ class PrimaryIds extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-           [['item_id', 'party_id', 'payments_id', 'order_id', 'created_by', 'updated_by', 'pincode'], 'integer'],
+           [['item_id', 'party_id', 'payments_id', 'order_id', 'uuid', 'created_by', 'updated_by', 'pincode'], 'integer'],
            [['created_at', 'updated_at', 'created_by', 'updated_by', 'name', 'address', 'city', 'location', 'state', 'pincode', 'contact_name', 'phone', 'whatsapp', 'email'], 'required'],
            [['created_at', 'updated_at'], 'safe'],
            [['name', 'address', 'city', 'location', 'state', 'contact_name', 'email'], 'string', 'max' => 255],
@@ -62,6 +63,7 @@ class PrimaryIds extends \yii\db\ActiveRecord
             'party_id' => 'Party ID',
             'payments_id' => 'Payments ID',
             'order_id' => 'Order ID',
+            'uuid' => 'UUID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
@@ -69,7 +71,7 @@ class PrimaryIds extends \yii\db\ActiveRecord
             'name' => 'Name',
             'address' => 'Address',
             'city' => 'City',
-            'location' => 'Location',
+            'location' => 'District',
             'state' => 'State',
             'pincode' => 'Pincode',
             'contact_name' => 'Contact Name',
