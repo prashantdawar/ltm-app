@@ -92,7 +92,7 @@
             'model' => $model,
             'attributes' => [
                 'name',
-                'contact_name',
+                'contact_name',               
                 'phone',
                 'whatsapp',
                 'email',
@@ -102,6 +102,7 @@
                 'state',
                 'pincode',
                 'gst',
+                'uuid',
                 'created_at', //managed in model
                 // [
                 //     'attribute' => 'created_at',

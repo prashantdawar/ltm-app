@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "party".
  *
  * @property int $id
+ * @property int $uuid
  * @property string $name
  * @property int $total_orders // as modal property only
  * @property string $contact_name
@@ -45,8 +46,8 @@ class Party extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'contact_name', 'phone','whatsapp', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'created_at', 'updated_at'], 'required'],
-            [['whatsapp','phone', 'pincode', 'due', 'status','total_orders'], 'integer'],
+            [['name', 'contact_name', 'phone','whatsapp', 'email', 'street_address', 'city', 'location', 'state', 'pincode', 'gst', 'uuid', 'created_at', 'updated_at'], 'required'],
+            [['uuid', 'whatsapp','phone', 'pincode', 'due', 'status','total_orders'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['phone','whatsapp'], 'string', 'max' => 10 ],
             [['name', 'contact_name', 'email', 'street_address', 'city', 'location', 'state', 'gst'], 'string', 'max' => 255],
@@ -61,6 +62,7 @@ class Party extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'uuid' => 'UUID',
             'name' => 'Party Name',
             'total_orders' => 'Total Orders',
             'contact_name' => 'Contact Name',

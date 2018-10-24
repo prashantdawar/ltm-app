@@ -7,14 +7,18 @@ $this->title = ucwords($model->name) . ' Business Profile';
 // $this->params['breadcrumbs'][] = ['label' => 'Primary Ids', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="primary-ids-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <p>
+        <?= \yii\helpers\Html::a('Third Party Invoices', ['primary-ids/third-party-invoices'], ['class' => 'btn btn-primary']); ?>
+    </p>   
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            // 'uuid',            
+            'uuid',            
             'name',
             'address',
             'city',
