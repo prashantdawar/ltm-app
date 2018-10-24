@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = ucwords($model->name) . ' Business Profile';
-$this->params['breadcrumbs'][] = ['label' => 'Primary Ids', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => 'Primary Ids', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="primary-ids-view">
