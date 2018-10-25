@@ -14,10 +14,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th><a href="#">Party Name</a></th>
-                <th><a href="#">Amount</a></th>
-                <th><a href="#">Invoice No.</a></th>
-                <th><a href="#">Created At</a></th>            
+                <th>Party Name</th>
+                <th>Amount</th>
+                <th>Invoice No.</th>
+                <th>Created At</th>            
         </thead>
         
         <tbody>
