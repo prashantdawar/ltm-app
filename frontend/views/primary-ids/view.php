@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             [
                 'attribute' => 'uuid',
-                'value' => $model->uuid < 70000 ? $model->uuid = 'New UUID Required': '0'
+                'value' => $model->uuid < 70000 ? $model->uuid = 'New UUID Required': $model->uuid
             ],
             'name',
             'address',
