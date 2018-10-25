@@ -18,7 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'uuid',            
+            // 'uuid',
+            
+            
+            [
+                'attribute' => 'uuid',
+                'value' => $model->uuid < 70000 ? $model->uuid = 'New UUID Required': '0'
+            ],
             'name',
             'address',
             'city',
