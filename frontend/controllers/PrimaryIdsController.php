@@ -69,6 +69,7 @@ class PrimaryIdsController extends Controller
                 $orderArray = \frontend\models\Order::find()
                                     ->select('oid, amount, created_at, created_by')
                                     ->where(['party_id' => $partyModel->id, 'created_by' => $partyModel->created_by])
+                                    ->orderBy('created_at DESC')
                                     ->asArray()->all();
 
                 foreach($orderArray as $order){
