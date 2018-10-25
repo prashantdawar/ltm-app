@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'ltm web app';
+$this->title = \yii\helpers\Html::encode(Yii::$app->name);
 ?>
 <div class="site-index">
 
