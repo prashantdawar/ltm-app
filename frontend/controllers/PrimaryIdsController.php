@@ -77,28 +77,16 @@ class PrimaryIdsController extends Controller
                     $thirdPartyInvoice->oid = $order['oid'];
                     $thirdPartyInvoice->amount = $order['amount'];
                     $thirdPartyInvoice->created_at = date('d-m-Y', strtotime($order['created_at']));
-                    $modelPrimaryIds = \frontend\models\PrimaryIds::find()->select('name')->where(['created_by' => $order['created_by']])->asArray()->one();
+                    $modelPrimaryIds = \frontend\models\PrimaryIds::find()
+                                            ->select('name')
+                                            ->where(['created_by' => $order['created_by']])
+                                            ->asArray()->one();
                     $thirdPartyInvoice->created_by = $modelPrimaryIds['name'];
-                    // var_dump($thirdPartyInvoice->validate()); die;
-                    // \frontend\models\OrderItem::loadMultiple($thirdPartyInvoices, $thirdPartyInvoice);
-                    // $thirdPartyInvoices[] = $thirdPartyInvoice;
+
                     array_push($thirdPartyInvoices, $thirdPartyInvoice);
                 }
             }       
         }
-        // for( $i =0; $i < count($thirdPartyInvoices); $i++){
-        //     $invoices[] = new \frontend\models\ThirdPartyInvoices();
-        // }
-        
-        // foreach($thirdPartyInvoices as $invoice){
-        //     // var_dump($invoice->validate()); die;
-        //     array_push($invoices, $invoice);
-        // }
-
-        // $invoices = [new \frontend\models\ThirdPartyInvoices()];
-        
-        // var_dump(\frontend\models\ThirdPartyInvoices::loadMultiple($invoices, $thirdPartyInvoices));
-        // var_dump(\frontend\models\ThirdPartyInvoices::validateMultiple($invoices));die;
         
         return $this->render('thirdPartyInvoices',[
             'invoices' => $thirdPartyInvoices,
