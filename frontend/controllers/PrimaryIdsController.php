@@ -76,7 +76,7 @@ class PrimaryIdsController extends Controller
                     $thirdPartyInvoice = new \frontend\models\ThirdPartyInvoices();
                     $thirdPartyInvoice->oid = $order['oid'];
                     $thirdPartyInvoice->amount = $order['amount'];
-                    $thirdPartyInvoice->created_at = $order['created_at'];
+                    $thirdPartyInvoice->created_at = date('d-m-Y', strtotime($order['created_at']));
                     $modelPrimaryIds = \frontend\models\PrimaryIds::find()->select('name')->where(['created_by' => $order['created_by']])->asArray()->one();
                     $thirdPartyInvoice->created_by = $modelPrimaryIds['name'];
                     // var_dump($thirdPartyInvoice->validate()); die;
