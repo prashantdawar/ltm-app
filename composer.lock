@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de9c24fbcce90ac8a50a6b6fe64bf339",
-    "content-hash": "769bb5c38ecae9eb2780ed271841672b",
+    "hash": "b1713a4ff01b2155b784c8f8af75dad1",
+    "content-hash": "2b514219d25e2d9801a7e2296ee73e0e",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -192,22 +192,6 @@
             "type": "bower-asset"
         },
         {
-            "name": "bower-asset/vue",
-            "version": "v2.3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vuejs/vue.git",
-                "reference": "1f9416d514d80a99eb45184459fdf390405967ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vuejs/vue/zipball/1f9416d514d80a99eb45184459fdf390405967ec",
-                "reference": "1f9416d514d80a99eb45184459fdf390405967ec",
-                "shasum": null
-            },
-            "type": "bower-asset"
-        },
-        {
             "name": "bower-asset/yii2-pjax",
             "version": "2.0.7.1",
             "source": {
@@ -288,50 +272,6 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16 21:13:23"
-        },
-        {
-            "name": "cenotia/yii2-calculator-widget",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Cenotia/yii2-calculator-widget.git",
-                "reference": "a25692c73836d4cbee9e3a9e82bf200ff5710860"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Cenotia/yii2-calculator-widget/zipball/a25692c73836d4cbee9e3a9e82bf200ff5710860",
-                "reference": "a25692c73836d4cbee9e3a9e82bf200ff5710860",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/vue": "~2.3.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "cenotia\\components\\calculatorWidget\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "villamuera",
-                    "email": "xavier.villamuera@gmail.com",
-                    "homepage": "http://cenotia.com"
-                }
-            ],
-            "description": "A calculator widget operated by vueJs",
-            "keywords": [
-                "extension",
-                "vuejs",
-                "widget",
-                "yii2"
-            ],
-            "time": "2017-11-23 16:42:11"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -3268,9 +3208,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "cenotia/yii2-calculator-widget": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
