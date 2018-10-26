@@ -40,6 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-<?php require '/home/devp/Projects/ltm-app/vendor/cenotia/yii2-calculator-widget/calculatorWidget.php'; ?>
+<?php require '/var/www/datapacks.in/dev/vendor/cenotia/yii2-calculator-widget/calculatorWidget.php'; ?>
 <?php echo \cenotia\components\calculatorWidget\CalculatorWidget::widget(); ?>
 </div>
