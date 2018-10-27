@@ -27,35 +27,106 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             <div class="alert alert-success" role="alert">
                 <table style="display: inline;">
-                <tbody>
-                    <tr>
-                        <th>
-                            <span>Net Debit:</span>
-                        </th>
-                        <td>
-                            <span> &#x20B9;</span>
-                            <span><?= $debitBalance?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <span> Net Credit: </span>
-                        </th>
-                        <td>
-                            <span> &#x20B9;</span>
-                            <span><?= $creditBalance?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <span>Due Balance:</span>
-                        </th>
-                        <td>
-                            <span> &#x20B9;</span>
-                            <span><?=  $netBalance ?></span>
-                        </td>
-                    </tr>
-                </tbody>
+                    <tbody>
+                        <tr>
+                            <th><span style="color: #337ab7;">Total</span></th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span>Net Debit:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $debitBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span> Net Credit: </span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $creditBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span>Due Balance:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?=  $netBalance ?></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="display: inline;  margin-left: 25px;">
+                    <tbody>
+                        <tr>
+                            <th><span style="color: #337ab7;">This Week</span></th>
+                        </tr>                    
+                        <tr>
+                            <th>
+                                <span>Net Debit:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $debitBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span> Net Credit: </span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $creditBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span>Due Balance:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?=  $netBalance ?></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="display: inline; margin-left: 25px;">
+                    <tbody>
+                        <tr>
+                            <th><span style="color: #337ab7;">Today</span></th>
+                        </tr>                    
+                        <tr>
+                            <th>
+                                <span>Net Debit:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $debitBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span> Net Credit: </span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?= $creditBalance?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span>Due Balance:</span>
+                            </th>
+                            <td>
+                                <span> &#x20B9;</span>
+                                <span><?=  $netBalance ?></span>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </p>
