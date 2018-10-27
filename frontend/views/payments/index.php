@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-6">
         <p>
             <div class="alert alert-success" role="alert">
-                <table style="display: inline;">
+                <table style="display: inline; margin-right: 25px;">
                     <tbody>
                         <tr>
                             <th><span style="color: #337ab7;">Total</span></th>
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </tr>
                     </tbody>
                 </table>
-                <table style="display: inline;  margin-left: 25px;">
+                <table style="display: inline;  margin-right: 25px;">
                     <tbody>
                         <tr>
                             <th><span style="color: #337ab7;">This Week</span></th>
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </tr>
                     </tbody>
                 </table>
-                <table style="display: inline; margin-left: 25px;">
+                <table style="display: inline;">
                     <tbody>
                         <tr>
                             <th><span style="color: #337ab7;">Today</span></th>
