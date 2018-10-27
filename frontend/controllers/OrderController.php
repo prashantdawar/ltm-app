@@ -119,7 +119,7 @@ class OrderController extends \yii\web\Controller
                     [
                         'to' => $to
                     ],
-                    'Order Details for: ' . $model->oid . ' from ltm web app',
+                    'Order Details for: ' . $model->oid . ' from ' . \Yii::$app->name,
                     '/order/orderpdf',
                     [
                         'model' => $model,
