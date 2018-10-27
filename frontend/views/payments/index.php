@@ -29,9 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= \yii\helpers\Html::a('Create Payments', ['create'], ['class' => 'btn btn-success']) ?>
+
+        <?= \yii\helpers\Html::a('Show Report', ['#tablepayments'], ['class' => 'btn btn-primary hidden-md hidden-lg ', 'data-toggle' =>'collapse']) ?>
     </p>
     </div>
-    <div class="col-md-6">
+    <div class="collapse col-md-6" id="tablepayments">
         <p>
             <div class="alert alert-success" role="alert">
                 <table style="display: inline; margin-right: 25px;">
@@ -140,6 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
     
     </div>
+    <div style="clear:both;"></div>
     <?= \yii\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
