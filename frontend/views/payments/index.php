@@ -9,9 +9,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php
-  $creditBalance = ($netAmount['credit']) ? $netAmount['credit'] : 0;
-  $debitBalance = ($netAmount['debit']) ? $netAmount['debit'] : 0;
-  $netBalance = $debitBalance - $creditBalance;
+  $totalCredit = ($netAmount['totalCredit']) ? $netAmount['totalCredit'] : 0;
+  $totalDebit = ($netAmount['totalDebit']) ? $netAmount['totalDebit'] : 0;
+  $totalNet = $totalDebit - $totalCredit;
+
+  $thisWeekCredit = ($netAmount['thisWeekCredit']) ? $netAmount['thisWeekCredit'] : 0;
+  $thisWeekDebit = ($netAmount['thisWeekDebit']) ? $netAmount['thisWeekDebit'] : 0;
+  $thisWeekNet = $thisWeekDebit - $thisWeekCredit;
+
+  $todayCredit = ($netAmount['todayCredit']) ? $netAmount['todayCredit'] : 0;
+  $todayDebit = ($netAmount['todayDebit']) ? $netAmount['todayDebit'] : 0;
+  $todayNet = $todayDebit - $todayCredit;
 ?>
 
 <div class="payments-index">
@@ -37,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $debitBalance?></span>
+                                <span><?= $totalDebit?></span>
                             </td>
                         </tr>
                         <tr>
@@ -46,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $creditBalance?></span>
+                                <span><?= $totalCredit?></span>
                             </td>
                         </tr>
                         <tr>
@@ -55,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?=  $netBalance ?></span>
+                                <span><?=  $totalNet ?></span>
                             </td>
                         </tr>
                     </tbody>
@@ -63,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <table style="display: inline;  margin-right: 25px;">
                     <tbody>
                         <tr>
-                            <th><span style="color: #337ab7;">This Week</span></th>
+                            <th><span style="color: #337ab7;">Last 7 Days</span></th>
                         </tr>                    
                         <tr>
                             <th>
@@ -71,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $debitBalance?></span>
+                                <span><?= $thisWeekDebit; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -80,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $creditBalance?></span>
+                                <span><?= $thisWeekCredit; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -89,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?=  $netBalance ?></span>
+                                <span><?= $thisWeekNet; ?></span>
                             </td>
                         </tr>
                     </tbody>
@@ -105,7 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $debitBalance?></span>
+                                <span><?= $todayDebit; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?= $creditBalance?></span>
+                                <span><?= $todayCredit; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </th>
                             <td>
                                 <span> &#x20B9;</span>
-                                <span><?=  $netBalance ?></span>
+                                <span><?=  $todayNet; ?></span>
                             </td>
                         </tr>
                     </tbody>

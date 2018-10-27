@@ -47,8 +47,14 @@ class PaymentsController extends Controller
         $searchModel = new PaymentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $netAmount['credit'] = (float)(PaymentsSearch::find()->andWhere(['payment_mode' => '1'])->sum('amount'));
-        $netAmount['debit'] = (float)(PaymentsSearch::find()->andWhere(['not',['payment_mode' => '1']])->sum('amount'));
+        $netAmount['totalCredit'] = (float)(PaymentsSearch::find()->andWhere(['payment_mode' => '1'])->sum('amount'));
+        $netAmount['totalDebit'] = (float)(PaymentsSearch::find()->andWhere(['not',['payment_mode' => '1']])->sum('amount'));
+
+        $netAmount['thisWeekCredit'] = (float)(PaymentsSearch::find()->andWhere(['payment_mode' => '1'])->andWhere(['between', 'created_at', date('Y-m-d', strtotime('-7 days')), date('Y-m-d')])->sum('amount'));
+        $netAmount['thisWeekDebit'] = (float)(PaymentsSearch::find()->andWhere(['not',['payment_mode' => '1']])->andWhere(['between', 'created_at', date('Y-m-d', strtotime('-7 days')), date('Y-m-d')])->sum('amount'));
+
+        $netAmount['todayCredit'] = (float)(PaymentsSearch::find()->andWhere(['payment_mode' => '1'])->andWhere(['created_at' => date('Y-m-d')])->sum('amount'));
+        $netAmount['todayDebit'] = (float)(PaymentsSearch::find()->andWhere(['not',['payment_mode' => '1']])->andWhere(['created_at' => date('Y-m-d')])->sum('amount'));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
