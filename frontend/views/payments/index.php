@@ -28,12 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= \yii\helpers\Html::a($this->title, ['/payments']); ?></h1>
 
     <p>
-        <?= \yii\helpers\Html::a('Create Payments', ['create'], ['class' => 'btn btn-success']) ?>
-
-        <?= \yii\helpers\Html::a('Show Report', ['#tablepayments'], ['class' => 'btn btn-primary hidden-md hidden-lg ', 'data-toggle' =>'collapse']) ?>
+        <?= \yii\helpers\Html::a('Create Payments', ['create'], ['class' => 'btn btn-success']) ?>        
     </p>
     </div>
-    <div class="collapse col-md-6" id="tablepayments">
+    <div class="col-md-6">
         <p>
             <div class="alert alert-success" role="alert">
                 <table style="display: inline; margin-right: 25px;">
