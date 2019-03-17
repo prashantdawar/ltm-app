@@ -1,6 +1,6 @@
 <?php
 return [
-    'adminEmail' => 'sales@datapacks.in',
-    'supportEmail' => 'support@datapacks.in',
+    'adminEmail' => 'sales@saugatcomputers.com',
+    'supportEmail' => 'support@saugatcomputers.com',
     'user.passwordResetTokenExpire' => 3600,
 ];

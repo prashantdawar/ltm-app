@@ -291,7 +291,7 @@ class Order extends \yii\db\ActiveRecord
     //             ])
     //         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
     //         ->setTo($partyModel->email)
-    //         ->setBcc(['sales@datapacks.in', $userModel['email']])
+    //         ->setBcc(['sales@saugatcomputers.com', $userModel['email']])
     //         ->setSubject('Order Details for: ' . $this->oid . ' from ltm web app')
     //         ->send();
     // }

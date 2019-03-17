@@ -20,8 +20,9 @@ return [
             'useFileTransport' => false,
             'transport' => [
                 'class'      => 'Swift_SmtpTransport',
-                'host'       => 'smtp.datapacks.in',
-                'username'   => 'support@datapacks.in',
+
+                'host'       => 'smtp.saugatcomputers.com',
+                'username'   => 'support@saugatcomputers.com',
                 'password'   => 'Qwertydp#123', // your password
                 'port'       => '25',
             //    'encryption' => 'tls',
